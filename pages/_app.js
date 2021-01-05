@@ -1,0 +1,32 @@
+import Head from "next/head";
+import Navbar from "../components/Navbar";
+import "../styles/globals.css";
+import "../styles/Navbar.css"; // may want to refactor to use the styles object
+
+function MyApp({ Component, pageProps }) {
+  return (
+    <>
+      <Head>
+        <meta charset="utf-8" />
+        <link rel="icon" href="./public/favicon.ico" />
+        <script
+          src="https://kit.fontawesome.com/216d5e86f9.js"
+          crossorigin="anonymous"
+        ></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="theme-color" content="#000000" />
+        <meta
+          name="description"
+          content="Web site created using create-react-app"
+        />
+        <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+        <title>Cartagena Decor</title>
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+      <Navbar />
+      <Component {...pageProps} />
+    </>
+  );
+}
+
+export default MyApp;

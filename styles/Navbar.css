@@ -1,0 +1,212 @@
+header {
+  background-color: var(--background);
+  text-align: center;
+  position: fixed;
+  z-index: 999;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.banner {
+  font-size: clamp(1.3rem, 6vw, 3rem);
+  padding: 1rem 0rem 1rem 0rem;
+}
+.banner a {
+    color: black;
+    text-decoration: none;
+}
+nav {
+  position: absolute;
+  text-align: left;
+  top: 100%;
+  left: 0;
+  background: var(--background);
+  width: 100%;
+  transform: scale(1, 0);
+  transform-origin: top;
+  transition: transform 400ms ease-in-out;
+}
+nav ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+nav li {
+  margin-bottom: 1rem;
+  margin-left: 1rem;
+  font-family: "Montserrat", sans-serif;
+}
+nav a {
+  color: black;
+  text-decoration: none;
+  font-size: 1.2rem;
+  opacity: 0;
+  transition: opacity 150ms ease-in-out;
+}
+.headline {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+@media screen and (max-width: 500px) {
+  header {
+    justify-content: flex-end;
+  }
+  .banner {
+    padding-right: 1em;
+  }
+}
+.headline img {
+  height: 1em;
+  padding-right: 0.2em;
+  opacity: 0.7;
+}
+.nav-toggle:checked ~ nav {
+  transform: scale(1, 1);
+}
+.nav-toggle:checked ~ nav a {
+  opacity: 1;
+  transition: opacity 250ms ease-in-out 250ms;
+}
+.nav-toggle {
+  display: none;
+}
+.nav-toggle-label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin-left: 1rem;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+.hamburger {
+  cursor: pointer;
+  transition-property: opacity, filter;
+  transition-duration: 0.15s;
+  transition-timing-function: linear;
+  font: inherit;
+  color: inherit;
+  text-transform: none;
+  background-color: transparent;
+  border: 0;
+  margin: 0;
+  overflow: visible;
+  display: flex;
+  align-items: center;
+}
+.hamburger:hover {
+  opacity: 0.7;
+}
+.hamburger.is-active:hover {
+  opacity: 0.7;
+}
+.hamburger.is-active .hamburger-inner,
+.hamburger.is-active .hamburger-inner::before,
+.hamburger.is-active .hamburger-inner::after {
+  background-color: #000;
+}
+
+.hamburger-box {
+  width: 30px;
+  height: 24px;
+  display: inline-block;
+  position: relative;
+}
+
+.hamburger-inner {
+  display: block;
+  top: 50%;
+  margin-top: -2px;
+}
+.hamburger-inner,
+.hamburger-inner::before,
+.hamburger-inner::after {
+  width: 30px;
+  height: 2px;
+  background-color: #000;
+  border-radius: 4px;
+  position: absolute;
+  transition-property: transform;
+  transition-duration: 0.15s;
+  transition-timing-function: ease;
+}
+.hamburger-inner::before,
+.hamburger-inner::after {
+  content: "";
+  display: block;
+}
+.hamburger-inner::before {
+  top: -10px;
+}
+.hamburger-inner::after {
+  bottom: -10px;
+}
+.hamburger--squeeze .hamburger-inner {
+  transition-duration: 0.075s;
+  transition-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+}
+.hamburger--squeeze .hamburger-inner::before {
+  transition: top 0.075s 0.12s ease, opacity 0.075s ease;
+}
+.hamburger--squeeze .hamburger-inner::after {
+  transition: bottom 0.075s 0.12s ease,
+    transform 0.075s cubic-bezier(0.55, 0.055, 0.675, 0.19);
+}
+
+.hamburger--squeeze.is-active .hamburger-inner {
+  transform: rotate(45deg);
+  transition-delay: 0.12s;
+  transition-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+}
+.hamburger--squeeze.is-active .hamburger-inner::before {
+  top: 0;
+  opacity: 0;
+  transition: top 0.075s ease, opacity 0.075s 0.12s ease;
+}
+.hamburger--squeeze.is-active .hamburger-inner::after {
+  bottom: 0;
+  transform: rotate(-90deg);
+  transition: bottom 0.075s ease,
+    transform 0.075s 0.12s cubic-bezier(0.215, 0.61, 0.355, 1);
+}
+@media screen and (min-width: 800px) {
+  .nav-toggle-label {
+    display: none;
+  }
+  header {
+    display: grid;
+    grid-template-rows: auto auto;
+  }
+  .banner {
+    grid-row: 1 / span 1;
+    justify-self: center;
+  }
+  nav {
+    all: unset;
+    grid-row: 2 / span 1;
+    justify-self: center;
+  }
+  nav ul {
+    display: flex;
+    justify-content: space-around;
+  }
+  nav li {
+    margin-left: 1rem;
+    margin-right: 1rem;
+  }
+  nav a {
+    opacity: 1;
+  }
+  nav a::after {
+    content: "";
+    display: block;
+    height: 3px;
+    background: var(--accent);
+    transform: scale(0, 1);
+    transition: transform ease-in-out 250ms;
+  }
+  nav a:hover::after {
+    transform: scale(1, 1);
+  }
+}
