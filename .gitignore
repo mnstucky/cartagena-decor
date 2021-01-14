@@ -12,6 +12,9 @@
 /.next/
 /out/
 
+# dev tools
+/dev
+
 # production
 /build
 
