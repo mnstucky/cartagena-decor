@@ -1,5 +1,4 @@
-import React, {useState} from "react";
-import styles from "./Contact.module.css";
+import React, { useState } from "react";
 
 function Contact() {
   const [nameValue, setNameValue] = useState("");
@@ -21,41 +20,69 @@ function Contact() {
       method: "POST",
       body: JSON.stringify({
         name: nameValue,
-        subject: subjectValue
+        subject: subjectValue,
       }),
       headers: {
-        "Accept": "application/json",
-        "Content-Type": "application/json"
+        Accept: "application/json",
+        "Content-Type": "application/json",
       },
-    }).then(res => res.json())
-    .then(res => {
-      // if (res.status === "success") {
-      //   alert("It worked!");
-      // } else {
-      //   alert("Oh no...");
-      // }
     })
+      .then((res) => res.json())
+      .then((res) => {
+        // if (res.status === "success") {
+        //   alert("It worked!");
+        // } else {
+        //   alert("Oh no...");
+        // }
+      });
   }
   return (
-    <div className="wrapper">
-      <h2>Contact Us</h2>
-      <p>
+    <div className="container">
+      <h1 class="title is-4 mt-2">Contact Us</h1>
+      <p className="block">
         Have a question? Don't hesitate to reach out to us using the below form!
       </p>
-      <form className={styles.contactForm} onSubmit={handleSubmit}>
-        <label className={styles.nameLabel} htmlFor="name">
-          Full Name
-        </label>
-        <input className={styles.nameInput} type="text" id="name" value={nameValue} onChange={handleNameChange} required></input>
-        <label className={styles.emailLabel} htmlFor="email">
-          Email Address
-        </label>
-        <input className={styles.emailInput} type="email" id="email" value={emailValue} onChange={handleEmailChange} required></input>
-        <label className={styles.subjectLabel}> 
-          Subject
-        </label>
-        <textarea id="subject" name="subject" rows="10" value={subjectValue} onChange={handleSubjectChange} required></textarea>
-        <input className={styles.submitButton} type="submit" value="Submit"></input>
+      <form onSubmit={handleSubmit}>
+        <div className="field">
+          <label className="label" htmlFor="name">
+            Full Name
+          </label>
+          <input
+            className="input"
+            type="text"
+            id="name"
+            value={nameValue}
+            onChange={handleNameChange}
+            required
+          ></input>
+        </div>
+        <div className="field">
+          <label className="label" htmlFor="email">
+            Email Address
+          </label>
+          <input
+            className="input"
+            type="email"
+            id="email"
+            value={emailValue}
+            onChange={handleEmailChange}
+            required
+          ></input>
+        </div>
+        <div className="field">
+          <label className="label">Message</label>
+          <textarea
+            className="textarea"
+            id="subject"
+            name="subject"
+            rows="10"
+            value={subjectValue}
+            onChange={handleSubjectChange}
+            required
+          ></textarea>
+        </div>
+
+        <input className="button is-info" type="submit" value="Submit"></input>
       </form>
     </div>
   );

@@ -1,7 +1,6 @@
 import Head from "next/head";
 import Navbar from "../components/Navbar";
-import "../styles/globals.css";
-import "../styles/Navbar.css"; // may want to refactor to use the styles object
+import "../styles/mystyles.css";
 
 function MyApp({ Component, pageProps }) {
   return (

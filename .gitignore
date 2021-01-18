@@ -12,8 +12,8 @@
 /.next/
 /out/
 
-# dev tools
-/dev
+# images
+/public/images/
 
 # production
 /build

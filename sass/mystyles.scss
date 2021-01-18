@@ -1,0 +1,17 @@
+@charset "utf-8";
+
+// Import a Google Font
+@import url('https://fonts.googleapis.com/css?family=Nunito:400,700');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Raleway&display=swap');
+
+// Set your brand colors
+
+// Update Bulma's global variables
+$family-primary: "Raleway", sans-serif;
+$family-secondary: "Montserrat", sans-serif;
+
+// Update some of Bulma's component variables
+
+// Import only what you need from Bulma
+@import "../node_modules/bulma/bulma.sass";

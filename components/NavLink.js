@@ -1,13 +1,13 @@
 import React from "react";
 import Link from "next/link";
 
-function NavLink({ destination, toggleActive }) {
+function NavLink({ destination }) {
   return (
-    <li>
-      <Link href={"/" + destination}>
-        <a onClick={function() { toggleActive(); }}>{destination.toUpperCase()}</a>
-      </Link>
-    </li>
+    <Link href={"/" + destination}>
+      <a>
+        {destination.toUpperCase()}
+      </a>
+    </Link>
   );
 }
 

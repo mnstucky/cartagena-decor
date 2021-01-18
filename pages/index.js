@@ -1,7 +1,7 @@
 export default function Home() {
   return (
-<div className="wrapper">
-      <h2>Home</h2>
+<div className="container">
+  <h1 class="title is-4 mt-2">Welcome to Cartagena Decor</h1>
       <p>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris a
         molestie velit. Praesent dictum blandit sapien. Interdum et malesuada

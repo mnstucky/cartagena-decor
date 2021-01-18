@@ -3,16 +3,22 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "css-build": "node-sass --omit-source-map-url sass/mystyles.scss styles/mystyles.css",
+    "css-watch": "npm run css-build -- --watch",
     "dev": "next dev",
     "build": "next build",
     "start": "next start"
   },
   "dependencies": {
     "@sendgrid/mail": "^7.4.0",
+    "bulma": "^0.9.1",
     "mongodb": "^3.6.3",
     "mongoose": "^5.11.11",
     "next": "10.0.4",
     "react": "17.0.1",
     "react-dom": "17.0.1"
+  },
+  "devDependencies": {
+    "node-sass": "^5.0.0"
   }
 }

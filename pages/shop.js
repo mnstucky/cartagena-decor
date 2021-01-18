@@ -3,8 +3,8 @@ import ItemGrid from "../components/ItemGrid";
 
 function Shop() {
   return (
-    <div className="wrapper">
-      <h2>Shop</h2>
+    <div className="container">
+      <h1 className="title is-4 mt-2">Shop</h1>
       <ItemGrid />
     </div>
   );
