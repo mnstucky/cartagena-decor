@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import ItemPane from "./ItemPane";
 
 function ItemGrid() {
@@ -7,6 +7,20 @@ function ItemGrid() {
     flexWrap: "wrap",
     justifyContent: "space-evenly"
   }
+  const [itemList, setItemList] = useState([]);
+  useEffect(() => {
+    console.log("useEffect triggered");
+    fetch("/api/db")
+    .then(res => {
+      if (!res.ok) {
+        console.error("Network response wasn't ok");
+      }
+      res.json().then(function(data) {
+        console.log(data);
+	console.log(data[0].category);
+      });
+    });
+  });
   return (
     <div style={gridStyles}>
       {/* <div>  */}

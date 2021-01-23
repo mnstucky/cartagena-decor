@@ -15,6 +15,9 @@
 # images
 /public/images/
 
+# dev tools to seed database
+/dev
+
 # production
 /build
 
