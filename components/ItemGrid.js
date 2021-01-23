@@ -7,7 +7,8 @@ function ItemGrid() {
     flexWrap: "wrap",
     justifyContent: "space-evenly"
   }
-  const [itemList, setItemList] = useState([]);
+  const [items, setItems] = useState([]);
+// Load in-stock items from database on component load
   useEffect(() => {
     console.log("useEffect triggered");
     fetch("/api/db")
@@ -16,33 +17,13 @@ function ItemGrid() {
         console.error("Network response wasn't ok");
       }
       res.json().then(function(data) {
-	setItemList(data);
+	setItems(data);
       });
     });
   }, []);
   return (
     <div style={gridStyles}>
-      {/* <div>  */}
-        {/* <div className="column"> */}
-          <ItemPane source="/IMG_9384.JPG" />
-          <ItemPane source="/IMG_9462.JPG" />
-          <ItemPane source="/IMG_9476.JPG" />
-          <ItemPane source="/IMG_9384.JPG" />
-          <ItemPane source="/IMG_9462.JPG" />
-        {/* </div>
-        <div className="column"> */}
-          <ItemPane source="/IMG_9476.JPG" />
-          <ItemPane source="/IMG_9384.JPG" />
-          <ItemPane source="/IMG_9462.JPG" />
-          <ItemPane source="/IMG_9476.JPG" />
-        {/* </div>
-        <div className="column"> */}
-          <ItemPane source="/IMG_9476.JPG" />
-          <ItemPane source="/IMG_9384.JPG" />
-          <ItemPane source="/IMG_9462.JPG" />
-          <ItemPane source="/IMG_9476.JPG" />
-        {/* </div> */}
-      {/* </div> */}
+      {items.map(item => <ItemPane image="IMG_9384.JPG" name={item.name} price={item.price}/>)}
     </div>
   );
 }

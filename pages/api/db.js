@@ -13,6 +13,7 @@ export default async function handler(req, res) {
 		// If no REST parameters are used, return the entire inventory
 		if (Object.keys(query).length === 0) {
 			Item.find({}).
+			where("stock").gte(0).
 			exec(function(err, items) {
 				const formattedItems = JSON.stringify(items);	
 				console.log(formattedItems);

@@ -2,7 +2,7 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 
-function ItemPane({ source }) {
+function ItemPane({ image, name, price }) {
   const boxStyle = {
     width: 300
   }
@@ -10,13 +10,13 @@ function ItemPane({ source }) {
     <div className="card m-2" style={boxStyle}>
       <div className="card-image">
         <div className="image is-3by2">
-          <img src={source}></img>
+          <img src={image}></img>
         </div>
       </div>
 
       <div className="card-content">
-        <p className="title is-5">Item Name</p>
-        <p className="subtitle is-6">$50</p>
+        <p className="name is-5">{name}</p>
+        <p className="subname is-6">${price}</p>
       </div>
       <div className="card-footer">
         <div className="card-footer-item">
