@@ -16,11 +16,10 @@ function ItemGrid() {
         console.error("Network response wasn't ok");
       }
       res.json().then(function(data) {
-        console.log(data);
-	console.log(data[0].category);
+	setItemList(data);
       });
     });
-  });
+  }, []);
   return (
     <div style={gridStyles}>
       {/* <div>  */}
