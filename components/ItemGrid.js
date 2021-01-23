@@ -23,7 +23,7 @@ function ItemGrid() {
   }, []);
   return (
     <div style={gridStyles}>
-      {items.map(item => <ItemPane image="IMG_9384.JPG" name={item.name} price={item.price}/>)}
+      {items.map(item => <ItemPane image={"images/" + item.images[0]} name={item.name} price={item.price}/>)}
     </div>
   );
 }

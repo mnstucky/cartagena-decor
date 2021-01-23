@@ -43,6 +43,10 @@ const itemSchema = new Schema({
 	},
 	rating: {
 		type: Number
+	},
+	images: {
+		type: [String],
+		required: true
 	}
 });			
 

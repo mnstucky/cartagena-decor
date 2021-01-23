@@ -15,7 +15,7 @@ function Navbar() {
       <div className="navbar-brand">
         <Link href={"/"}>
           <a className="navbar-item">
-            <img src="/logo.jpg" width="28" height="28" />
+            <img src="/images/logo.jpg" width="28" height="28" />
             <h1 className="is-size-4 is-uppercase is-family-secondary ml-2">
               Cartagena Decor
             </h1>
