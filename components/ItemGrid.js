@@ -23,7 +23,7 @@ function ItemGrid({ cart, setCart }) {
   }, []);
   return (
     <div style={gridStyles}>
-      {items.map(item => <ItemPane cart={cart} setCart={setCart} image={"images/" + item.images[0]} name={item.name} price={item.price}/>)}
+      {items.map(item => <ItemPane cart={cart} setCart={setCart} image={"images/" + item.images[0]} name={item.name} price={item.price} url={item.url}/>)}
     </div>
   );
 }

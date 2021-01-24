@@ -56,9 +56,11 @@ function Navbar() {
         <div className="navbar-end">
           <div className="navbar-item">
             <div className="buttons">
-              <a className="button is-primary">
-                <strong>Cart</strong>
-              </a>
+              <Link href={"/cart/"}>
+                <a className="button is-primary">
+                  <strong>Cart</strong>
+                </a>
+              </Link>
             </div>
           </div>
         </div>
