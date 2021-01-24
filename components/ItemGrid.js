@@ -10,14 +10,13 @@ function ItemGrid({ cart, setCart }) {
   const [items, setItems] = useState([]);
 // Load in-stock items from database on component load
   useEffect(() => {
-    console.log("useEffect triggered");
     fetch("/api/db")
     .then(res => {
       if (!res.ok) {
         console.error("Network response wasn't ok");
       }
       res.json().then(function(data) {
-	setItems(data);
+	      setItems(data);
       });
     });
   }, []);
