@@ -41,16 +41,16 @@ function Navbar() {
       >
         <div className="navbar-start">
           <Link href={"/"}>
-            <a className="navbar-item">Home</a>
+            <a className="navbar-item" onClick={toggleActive}>Home</a>
           </Link>
           <Link href={"/shop/"}>
-            <a className="navbar-item">Shop</a>
+            <a className="navbar-item" onClick={toggleActive}>Shop</a>
           </Link>
           <Link href={"/contact/"}>
-            <a className="navbar-item">Contact</a>
+            <a className="navbar-item" onClick={toggleActive}>Contact</a>
           </Link>
           <Link href={"/about/"}>
-            <a className="navbar-item">About</a>
+            <a className="navbar-item" onClick={toggleActive}>About</a>
           </Link>
         </div>
         <div className="navbar-end">
