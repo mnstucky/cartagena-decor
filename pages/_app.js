@@ -1,8 +1,11 @@
 import Head from "next/head";
 import Navbar from "../components/Navbar";
 import "../styles/mystyles.css";
+import { useState } from "react";
+import { set } from "mongoose";
 
 function MyApp({ Component, pageProps }) {
+  const [cart, setCart] = useState([]);
   return (
     <>
       <Head>
@@ -23,7 +26,7 @@ function MyApp({ Component, pageProps }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Navbar />
-      <Component {...pageProps} />
+      <Component cart={cart} setCart={setCart} {...pageProps} />
     </>
   );
 }

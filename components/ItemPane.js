@@ -13,18 +13,9 @@ function ItemPane({ image, name, price }) {
           <img src={image}></img>
         </div>
       </div>
-
       <div className="card-content">
         <p className="name is-5">{name}</p>
         <p className="subname is-6">${price}</p>
-      </div>
-      <div className="card-footer">
-        <div className="card-footer-item">
-          Details
-        </div>
-        <div className="card-footer-item">
-          Add to Cart
-        </div>
       </div>
     </div>
   );

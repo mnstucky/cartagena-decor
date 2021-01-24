@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import ItemPane from "./ItemPane";
 
-function ItemGrid() {
+function ItemGrid({ cart, setCart }) {
   const gridStyles = {
     display: "flex",
     flexWrap: "wrap",
@@ -23,7 +23,7 @@ function ItemGrid() {
   }, []);
   return (
     <div style={gridStyles}>
-      {items.map(item => <ItemPane image={"images/" + item.images[0]} name={item.name} price={item.price}/>)}
+      {items.map(item => <ItemPane cart={cart} setCart={setCart} image={"images/" + item.images[0]} name={item.name} price={item.price}/>)}
     </div>
   );
 }
