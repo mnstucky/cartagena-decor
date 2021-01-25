@@ -12,8 +12,8 @@ export default function Home() {
     <div className="container">
       <div className="hero">
         <div className="hero-body" style={heroStyles}>
-          <h1 className="title is-2 mt-2 has-text-light">
-            Welcome to Cartagena Decor
+          <h1 className="title is-2 mt-2 has-text-light is-family-secondary">
+            CARTAGENA DECOR
           </h1>
         </div>
       </div>

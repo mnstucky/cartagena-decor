@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import Link from "next/link";
+import NavbarBrand from "./NavbarBrand";
+import NavbarMenu from "./NavbarMenu";
 
 function Navbar() {
   const [isActive, setIsActive] = useState(false);
@@ -12,59 +14,8 @@ function Navbar() {
       role="navigation"
       aria-label="main navigation"
     >
-      <div className="navbar-brand">
-        <Link href={"/"}>
-          <a className="navbar-item">
-            <img src="/images/logo.jpg" width="28" height="28" />
-            <h1 className="is-size-4 is-uppercase is-family-secondary ml-2">
-              Cartagena Decor
-            </h1>
-          </a>
-        </Link>
-        <a
-          role="button"
-          className={`navbar-burger ${isActive ? "is-active" : ""}`}
-          aria-label="menu"
-          aria-expanded="false"
-          data-target="navbarBasicExample"
-          onClick={toggleActive}
-        >
-          <span aria-hidden="true"></span>
-          <span aria-hidden="true"></span>
-          <span aria-hidden="true"></span>
-        </a>
-      </div>
-
-      <div
-        id="navbarBasicExample"
-        className={`navbar-menu ${isActive ? "is-active" : ""}`}
-      >
-        <div className="navbar-start">
-          <Link href={"/"}>
-            <a className="navbar-item" onClick={toggleActive}>Home</a>
-          </Link>
-          <Link href={"/shop/"}>
-            <a className="navbar-item" onClick={toggleActive}>Shop</a>
-          </Link>
-          <Link href={"/contact/"}>
-            <a className="navbar-item" onClick={toggleActive}>Contact</a>
-          </Link>
-          <Link href={"/about/"}>
-            <a className="navbar-item" onClick={toggleActive}>About</a>
-          </Link>
-        </div>
-        <div className="navbar-end">
-          <div className="navbar-item">
-            <div className="buttons">
-              <Link href={"/cart/"}>
-                <a className="button is-primary">
-                  <strong>Cart</strong>
-                </a>
-              </Link>
-            </div>
-          </div>
-        </div>
-      </div>
+      <NavbarBrand isActive={isActive} toggleActive={toggleActive} />
+      <NavbarMenu isActive={isActive} toggleActive={toggleActive} />
     </nav>
   );
 }
