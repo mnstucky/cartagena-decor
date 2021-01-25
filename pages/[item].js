@@ -6,6 +6,7 @@ function ItemPage({ cart, setCart }) {
   let itemUrl = router.query.item;
   const [item, setItem] = useState(undefined);
   const [options, setOptions] = useState(undefined);
+  const [selection, setSelection] = useState('default');
   useEffect(() => {
     // Handle edge case where Next router isn't ready on complete app refresh
     if (itemUrl === undefined) {
@@ -29,7 +30,10 @@ function ItemPage({ cart, setCart }) {
       });
     });
   }, []);
-
+  function handleSelection(event) {
+    setSelection(event.target.value);
+    event.preventDefault();
+  }
   return item === undefined || options === undefined ? (
     <div />
   ) : (
@@ -38,7 +42,7 @@ function ItemPage({ cart, setCart }) {
       <div className="columns">
         <div className="column">
           <figure className="image box">
-            <img src={`/images/${item.images[0]}`} alt="Product for sale" />
+            <img src={selection === undefined || selection === 'default' ? `/images/${item.images[0]}` : `/images/${itemUrl}_${selection.replace(' ', '').toLowerCase()}.JPG`} alt="Product for sale" />
           </figure>
         </div>
         <div className="column">
@@ -46,11 +50,12 @@ function ItemPage({ cart, setCart }) {
             <p>{item.description}</p>
             <p className="has-text-weight-bold">{item.highlights}</p>
             <div className="select">
-              <select>
-                {options.map((selection) => <option>{selection}</option>)}
+              <select value={selection} onChange={handleSelection}>
+                <option value="default"> </option>
+                {options.map((productType) => <option value={productType}>{productType}</option>)}
               </select>
             </div>
-            <button className="button is-primary">Add to Cart</button>
+            <button className="button is-primary ml-2">Add to Cart</button>
           </section>
         </div>
       </div>
