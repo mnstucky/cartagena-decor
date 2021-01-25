@@ -20,7 +20,9 @@ function ItemPage({ cart, setCart }) {
         const optionsToSet = [];
         for (const [key, value] of Object.entries(data[0].multiples.options)) {
           if (value > 0) {
-            optionsToSet.push(key);
+            const keyWithSpacesAdded = key.replace(/([A-Z])/g, ' $1');
+	    const formattedOption = keyWithSpacesAdded.charAt(0).toUpperCase() + keyWithSpacesAdded.slice(1);
+            optionsToSet.push(formattedOption);
           }
         }
         setOptions(optionsToSet);
