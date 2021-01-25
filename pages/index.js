@@ -1,9 +1,22 @@
-import React from 'react';
+import React from "react";
 
 export default function Home() {
+  const heroStyles = {
+    backgroundImage: `url("/images/hero.JPG")`,
+    backgroundSize: "cover",
+    backgroundPosition: "center center",
+    webkitTextStroke: "1px black",
+    textShadow: "3px 3px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000"
+  };
   return (
     <div className="container">
-      <h1 className="title is-4 mt-2">Welcome to Cartagena Decor</h1>
+      <div className="hero">
+        <div className="hero-body" style={heroStyles}>
+          <h1 className="title is-2 mt-2 has-text-light">
+            Welcome to Cartagena Decor
+          </h1>
+        </div>
+      </div>
       <p>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris a
         molestie velit. Praesent dictum blandit sapien. Interdum et malesuada

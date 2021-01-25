@@ -48,6 +48,7 @@ function ItemPage({ cart, setCart }) {
         <div className="column">
           <section className="box content">
             <p>{item.description}</p>
+            <p>{item.features}</p>
             <p className="has-text-weight-bold">{item.highlights}</p>
             <div className="select">
               <select value={selection} onChange={handleSelection}>
