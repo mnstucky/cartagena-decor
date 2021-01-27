@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
+import ItemSelector from "../components/ItemSelector";
 
 function ItemPage({ cart, setCart }) {
   const router = useRouter();
@@ -30,10 +31,6 @@ function ItemPage({ cart, setCart }) {
       });
     });
   }, []);
-  function handleSelection(event) {
-    setSelection(event.target.value);
-    event.preventDefault();
-  }
   return item === undefined || options === undefined ? (
     <div />
   ) : (
@@ -50,12 +47,7 @@ function ItemPage({ cart, setCart }) {
             <p>{item.description}</p>
             <p>{item.features}</p>
             <p className="has-text-weight-bold">{item.highlights}</p>
-            <div className="select">
-              <select value={selection} onChange={handleSelection}>
-                <option value="default"> </option>
-                {options.map((productType) => <option value={productType}>{productType}</option>)}
-              </select>
-            </div>
+            <ItemSelector options={options} selection={selection} setSelection={setSelection} />
             <button className="button is-primary ml-2">Add to Cart</button>
           </section>
         </div>

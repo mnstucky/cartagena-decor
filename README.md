@@ -1,34 +1,27 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+This is a fully custom e-commerce platform for Cartagena Decor, a seller of handmade Colombian art. The project is in development. If you'd like to see the project live, please reach out; the project's media isn't on GitHub, so you won't get a full experience with npm install and npm run dev.
 
-## Getting Started
+# Features
 
-First, run the development server:
+As of 1/27/21, implemented features include the following:
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+### 1. A fully responsive design.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Desktop Layout:
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+![Desktop Layout](./docs/desktop.png?raw=true "Desktop")
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+Mobile Layout:
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+![Mobile Layout](./docs/mobile.png?raw=true "Mobile")
 
-## Learn More
+### 2. A contact page, coupled with a backend API, that emails the shop owner with customer questions.
 
-To learn more about Next.js, take a look at the following resources:
+### 3. Dynamically generated shop and item pages, with content fetched asynchronously from MongoDB.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Shop Page:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+![Shop](./docs/shop.png?raw=true "Shop")
 
-## Deploy on Vercel
+Sample Item Page:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/import?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+![Item](./docs/coasters.png?raw=true "Item")
