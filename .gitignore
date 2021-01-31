@@ -40,3 +40,10 @@ yarn-error.log*
 
 # vercel
 .vercel
+/.idea/cartegena-decor.iml
+/.idea/codeStyles/codeStyleConfig.xml
+/.idea/modules.xml
+/.idea/codeStyles/Project.xml
+/.idea/inspectionProfiles/Project_Default.xml
+/.idea/vcs.xml
+/.idea/.gitignore
