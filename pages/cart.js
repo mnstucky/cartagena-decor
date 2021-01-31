@@ -1,6 +1,7 @@
 import React from 'react';
 import DecrementButton from '../components/DecrementButton';
 import IncrementButton from '../components/IncrementButton';
+import Subtotal from '../components/Subtotal';
 
 function Cart({
   cart,
@@ -9,8 +10,6 @@ function Cart({
   const imgStyle = {
     height: 150,
   };
-  let subtotal = 0;
-  cart.forEach(cartItem => { subtotal += (cartItem.price * cartItem.quantity)})
   let cartContents = cart.map((item) =>
     <div className="columns">
       <div className="column">
@@ -49,7 +48,7 @@ function Cart({
       <div className="box">
         {cartContents}
         <div className="is-flex is-justify-content-flex-end">
-          <p>Subtotal: ${subtotal}</p>
+          <Subtotal cart={cart}/>
         </div>
       </div>
     </div>
