@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import ItemSelector from '../components/ItemSelector';
+import AddToCartButton from '../components/AddToCartButton';
 
 function ItemPage({
   cart,
@@ -93,9 +94,7 @@ function ItemPage({
             <p>{item.features}</p>
             <p className="has-text-weight-bold">{item.highlights}</p>
             <ItemSelector options={options} selection={selection} setSelection={setSelection}/>
-            <button type="button" className="button is-primary ml-2" onClick={addToCart}>
-              Add to Cart
-            </button>
+            <AddToCartButton cart={cart} setCart={setCart} itemUrl={itemUrl} selection={selection} item={item} />
           </section>
         </div>
       </div>
