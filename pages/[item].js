@@ -16,6 +16,7 @@ function ItemPage({
     if (itemUrl === undefined) {
       itemUrl = window.location.pathname.slice(1);
     }
+    // Get item from DB by itemUrl
     fetch(`/api/db?id=${itemUrl}`)
       .then((res) => {
         if (!res.ok) {
@@ -23,7 +24,9 @@ function ItemPage({
         }
         res.json()
           .then((data) => {
+            // Store the retrieved item
             setItem(data[0]);
+            // Format and store the options available for the item
             const optionsToSet = [];
             for (const [key, value] of Object.entries(data[0].multiples.options)) {
               if (value > 0) {
@@ -37,16 +40,38 @@ function ItemPage({
           });
       });
   }, []);
+
   function addToCart() {
-    const itemToAdd = {
-      name: item.name,
-      price: item.price,
-      option: selection,
-      images: item.images,
-      itemUrl,
-    };
-    setCart([...cart, itemToAdd]);
+    let updatedItem = false;
+    const newCart = cart.map((cartItem) => {
+      if (cartItem.name === item.name && cartItem.option === selection) {
+        const itemToAdd = {
+          name: item.name,
+          price: item.price,
+          option: selection,
+          images: item.images,
+          itemUrl,
+          quantity: cartItem ? cartItem.quantity + 1 : 1,
+        };
+        updatedItem = true;
+        return itemToAdd;
+      }
+      return cartItem;
+    });
+    if (!updatedItem) {
+      const itemToAdd = {
+        name: item.name,
+        price: item.price,
+        option: selection,
+        images: item.images,
+        itemUrl,
+        quantity: 1,
+      };
+      newCart.push(itemToAdd);
+    }
+    setCart(newCart);
   }
+
   return item === undefined || options === undefined ? (
     <div />
   ) : (
@@ -67,8 +92,10 @@ function ItemPage({
             <p>{item.description}</p>
             <p>{item.features}</p>
             <p className="has-text-weight-bold">{item.highlights}</p>
-            <ItemSelector options={options} selection={selection} setSelection={setSelection} />
-            <button type="button" className="button is-primary ml-2" onClick={addToCart}>Add to Cart</button>
+            <ItemSelector options={options} selection={selection} setSelection={setSelection}/>
+            <button type="button" className="button is-primary ml-2" onClick={addToCart}>
+              Add to Cart
+            </button>
           </section>
         </div>
       </div>
