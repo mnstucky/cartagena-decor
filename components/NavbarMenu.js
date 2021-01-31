@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
 
-function NavbarBrand({ isActive, toggleActive }) {
+function NavbarBrand({ isActive, toggleActive, cart }) {
   return (
     <div
       id="navbarBasicExample"
@@ -33,8 +33,8 @@ function NavbarBrand({ isActive, toggleActive }) {
         <div className="navbar-item">
           <div className="buttons">
             <Link href={"/cart/"}>
-              <a className="button is-primary">
-                <strong>Cart</strong>
+              <a className="button is-primary" onClick={toggleActive}>
+                <strong>{`Cart (${cart.reduce((acc, ele) => acc + ele.quantity, 0)})`}</strong>
               </a>
             </Link>
           </div>

@@ -20,7 +20,7 @@ function MyApp({ Component, pageProps }) {
         <title>Cartagena Decor</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Navbar />
+      <Navbar cart={cart} />
       <Component cart={cart} setCart={setCart} {...pageProps} />
     </>
   );

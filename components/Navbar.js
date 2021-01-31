@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import NavbarBrand from "./NavbarBrand";
 import NavbarMenu from "./NavbarMenu";
 
-function Navbar() {
+function Navbar({ cart }) {
   const [isActive, setIsActive] = useState(false);
   function toggleActive() {
     setIsActive(!isActive);
@@ -14,7 +14,7 @@ function Navbar() {
       aria-label="main navigation"
     >
       <NavbarBrand isActive={isActive} toggleActive={toggleActive} />
-      <NavbarMenu isActive={isActive} toggleActive={toggleActive} />
+      <NavbarMenu isActive={isActive} toggleActive={toggleActive} cart={cart} />
     </nav>
   );
 }
