@@ -41,38 +41,7 @@ function ItemPage({
           });
       });
   }, []);
-
-  function addToCart() {
-    let updatedItem = false;
-    const newCart = cart.map((cartItem) => {
-      if (cartItem.name === item.name && cartItem.option === selection) {
-        const itemToAdd = {
-          name: item.name,
-          price: item.price,
-          option: selection,
-          images: item.images,
-          itemUrl,
-          quantity: cartItem ? cartItem.quantity + 1 : 1,
-        };
-        updatedItem = true;
-        return itemToAdd;
-      }
-      return cartItem;
-    });
-    if (!updatedItem) {
-      const itemToAdd = {
-        name: item.name,
-        price: item.price,
-        option: selection,
-        images: item.images,
-        itemUrl,
-        quantity: 1,
-      };
-      newCart.push(itemToAdd);
-    }
-    setCart(newCart);
-  }
-
+  // If fetch from DB is still pending, return an empty div
   return item === undefined || options === undefined ? (
     <div />
   ) : (
@@ -93,7 +62,7 @@ function ItemPage({
             <p>{item.description}</p>
             <p>{item.features}</p>
             <p className="has-text-weight-bold">{item.highlights}</p>
-            <ItemSelector options={options} selection={selection} setSelection={setSelection}/>
+            <ItemSelector options={options} selection={selection} setSelection={setSelection} />
             <AddToCartButton cart={cart} setCart={setCart} itemUrl={itemUrl} selection={selection} item={item} />
           </section>
         </div>
