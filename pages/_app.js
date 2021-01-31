@@ -1,10 +1,16 @@
-import Head from "next/head";
-import Navbar from "../components/Navbar";
-import "../styles/mystyles.css";
-import { useState } from "react";
+import Head from 'next/head';
+import React, { useState, useEffect } from 'react';
+import Navbar from '../components/Navbar';
+import '../styles/mystyles.css';
 
 function MyApp({ Component, pageProps }) {
   const [cart, setCart] = useState([]);
+  // Load saved cart from localStorage
+  useEffect(() => {
+    const storedCart = JSON.parse(window.localStorage.getItem('cart'));
+    console.log(storedCart);
+    setCart(storedCart || []);
+  }, []);
   return (
     <>
       <Head>

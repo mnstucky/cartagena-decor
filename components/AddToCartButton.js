@@ -35,6 +35,7 @@ function AddToCartButton({
       };
       newCart.push(itemToAdd);
     }
+    localStorage.setItem('cart', JSON.stringify(newCart));
     setCart(newCart);
   }
 

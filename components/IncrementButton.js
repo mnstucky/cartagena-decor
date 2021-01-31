@@ -21,6 +21,7 @@ function IncrementButton({
       }
       return cartItem;
     });
+    localStorage.setItem('cart', JSON.stringify(newCart));
     setCart(newCart);
   }
   return (
