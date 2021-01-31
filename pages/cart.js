@@ -1,4 +1,6 @@
 import React from 'react';
+import DecrementButton from '../components/DecrementButton';
+import IncrementButton from '../components/IncrementButton';
 
 function Cart({
   cart,
@@ -7,6 +9,25 @@ function Cart({
   const imgStyle = {
     height: 150,
   };
+
+  function incrementQuantity(name, option) {
+    const newCart = cart.map((cartItem) => {
+      if (cartItem.name === name && cartItem.option === option) {
+        const updatedItem = {
+          name: cartItem.name,
+          price: cartItem.price,
+          option: cartItem.option,
+          images: cartItem.images,
+          itemUrl: cartItem.itemUrl,
+          quantity: cartItem.quantity + 1,
+        };
+        return updatedItem;
+      }
+      return cartItem;
+    });
+    setCart(newCart);
+  }
+
   let cartContents = cart.map((item) =>
     <div className="columns">
       <div className="column">
@@ -28,9 +49,9 @@ function Cart({
       <div className="column">
         <p>{`Price: $${item.price}`}</p>
         <span className="is-flex is-justify-flex-start is-align-content-center">
-          <button type="button" className="button is-primary is-light pr-4">-</button>
+          <DecrementButton name={item.name} option={item.option} quantity={item.quantity} cart={cart} setCart={setCart}/>
           <p>{item.quantity}</p>
-          <button type="button" className="button is-primary is-light pl-4">+</button>
+          <IncrementButton name={item.name} option={item.option} cart={cart} setCart={setCart}/>
         </span>
       </div>
     </div>
