@@ -9,7 +9,8 @@ function Cart({
   const imgStyle = {
     height: 150,
   };
-
+  let subtotal = 0;
+  cart.forEach(cartItem => { subtotal += (cartItem.price * cartItem.quantity)})
   let cartContents = cart.map((item) =>
     <div className="columns">
       <div className="column">
@@ -47,6 +48,9 @@ function Cart({
       <h1 className="title is-4 mt-2">Cart</h1>
       <div className="box">
         {cartContents}
+        <div className="is-flex is-justify-content-flex-end">
+          <p>Subtotal: ${subtotal}</p>
+        </div>
       </div>
     </div>
   );
