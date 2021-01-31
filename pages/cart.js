@@ -10,24 +10,6 @@ function Cart({
     height: 150,
   };
 
-  function incrementQuantity(name, option) {
-    const newCart = cart.map((cartItem) => {
-      if (cartItem.name === name && cartItem.option === option) {
-        const updatedItem = {
-          name: cartItem.name,
-          price: cartItem.price,
-          option: cartItem.option,
-          images: cartItem.images,
-          itemUrl: cartItem.itemUrl,
-          quantity: cartItem.quantity + 1,
-        };
-        return updatedItem;
-      }
-      return cartItem;
-    });
-    setCart(newCart);
-  }
-
   let cartContents = cart.map((item) =>
     <div className="columns">
       <div className="column">
@@ -40,17 +22,17 @@ function Cart({
         />
       </div>
       <div className="column">
-        <p>{item.name}</p>
+        <p className={"has-text-weight-bold"}>{item.name}</p>
         <p>{`Selected Option: ${item.option}`}</p>
+        <p>{`$${item.price}`}</p>
       </div>
       <div className="column">
 
       </div>
       <div className="column">
-        <p>{`Price: $${item.price}`}</p>
         <span className="is-flex is-justify-flex-start is-align-content-center">
           <DecrementButton name={item.name} option={item.option} quantity={item.quantity} cart={cart} setCart={setCart}/>
-          <p>{item.quantity}</p>
+          <p className={'is-size-6 pt-1 pb-1 pl-3 pr-3'}>{item.quantity}</p>
           <IncrementButton name={item.name} option={item.option} cart={cart} setCart={setCart}/>
         </span>
       </div>
