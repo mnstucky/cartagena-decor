@@ -1,5 +1,5 @@
-import React from "react";
-import ItemGrid from "../components/ItemGrid";
+import React from 'react';
+import ItemGrid from '../components/ItemGrid';
 
 function Shop({ cart, setCart }) {
   return (
