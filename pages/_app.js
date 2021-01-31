@@ -10,10 +10,6 @@ function MyApp({ Component, pageProps }) {
       <Head>
         <meta charset="utf-8" />
         <link rel="icon" href="./public/favicon.ico" />
-        <script
-          src="https://kit.fontawesome.com/216d5e86f9.js"
-          crossorigin="anonymous"
-        ></script>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="theme-color" content="#000000" />
         <meta

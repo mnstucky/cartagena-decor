@@ -25,6 +25,7 @@ export default async function handler(req, res) {
       // If an id parameter is used, return a single item
     } else {
       Item.find({ url: query.id })
+        .select({ _id: 0 })
         .exec((err, item) => {
           const formattedItem = JSON.stringify(item);
           res.json(formattedItem);
