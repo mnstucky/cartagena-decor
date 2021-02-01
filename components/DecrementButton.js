@@ -29,7 +29,7 @@ function DecrementButton({
   return (
     <button
       onClick={decrementQuantity}
-      disabled={quantity <= 0}
+      disabled={quantity <= 1}
       type="button"
       className="button is-primary is-light pr-4"
     >

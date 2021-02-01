@@ -2,6 +2,7 @@ import React from 'react';
 import DecrementButton from '../components/DecrementButton';
 import IncrementButton from '../components/IncrementButton';
 import Subtotal from '../components/Subtotal';
+import RemoveButton from '../components/RemoveButton';
 
 function Cart({
   cart,
@@ -26,13 +27,15 @@ function Cart({
         <p>{`Selected Option: ${item.option}`}</p>
         <p>{`$${item.price}`}</p>
       </div>
-      <div className="column" />
+      <div className="column"/>
       <div className="column">
         <span className="is-flex is-justify-flex-start is-align-content-center">
-          <DecrementButton name={item.name} option={item.option} quantity={item.quantity} cart={cart} setCart={setCart} />
+          <DecrementButton name={item.name} option={item.option} quantity={item.quantity}
+                           cart={cart} setCart={setCart}/>
           <p className={'is-size-6 pt-1 pb-1 pl-3 pr-3'}>{item.quantity}</p>
-          <IncrementButton name={item.name} option={item.option} cart={cart} setCart={setCart} />
+          <IncrementButton name={item.name} option={item.option} cart={cart} setCart={setCart}/>
         </span>
+        <RemoveButton name={item.name} option={item.option} cart={cart} setCart={setCart} />
       </div>
     </div>
   ));
