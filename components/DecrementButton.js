@@ -31,7 +31,7 @@ function DecrementButton({
       onClick={decrementQuantity}
       disabled={quantity <= 1}
       type="button"
-      className="button is-primary is-light pr-4"
+      className="button is-link is-light"
     >
       -
     </button>

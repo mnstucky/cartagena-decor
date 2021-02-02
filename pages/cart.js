@@ -32,7 +32,7 @@ function Cart({
         <span className="is-flex is-justify-flex-start is-align-content-center">
           <DecrementButton name={item.name} option={item.option} quantity={item.quantity}
                            cart={cart} setCart={setCart}/>
-          <p className={'is-size-6 pt-1 pb-1 pl-3 pr-3'}>{item.quantity}</p>
+          <p className="is-size-6 pt-1 pb-1 pl-3 pr-3">{item.quantity}</p>
           <IncrementButton name={item.name} option={item.option} cart={cart} setCart={setCart}/>
         </span>
         <RemoveButton name={item.name} option={item.option} cart={cart} setCart={setCart} />

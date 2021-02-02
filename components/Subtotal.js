@@ -6,7 +6,7 @@ function Subtotal({ cart }) {
     subtotal += (cartItem.price * cartItem.quantity);
   });
   return (
-    <p>
+    <p className="has-text-weight-bold">
       Subtotal: $
       {subtotal}
     </p>

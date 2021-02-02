@@ -25,7 +25,7 @@ function IncrementButton({
     setCart(newCart);
   }
   return (
-    <button onClick={incrementQuantity} type="button" className="button is-primary is-light pr-4">
+    <button onClick={incrementQuantity} type="button" className="button is-link is-light">
       +
     </button>
   );
