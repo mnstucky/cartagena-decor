@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import ItemSelector from '../components/ItemSelector';
 import AddToCartButton from '../components/AddToCartButton';
+import ItemImage from '../components/ItemImage';
 
 function ItemPage({
   cart,
@@ -49,13 +50,7 @@ function ItemPage({
       <h1 className="title is-4 mt-2 has-text-centered">{item.name}</h1>
       <div className="columns">
         <div className="column">
-          <figure className="image box">
-            <img
-              src={selection === undefined || selection === 'default' ? `/images/${item.images[0]}` : `/images/${itemUrl}_${selection.replace(' ', '')
-                .toLowerCase()}.JPG`}
-              alt="Product for sale"
-            />
-          </figure>
+          <ItemImage selection={selection} item={item} itemUrl={itemUrl}/>
         </div>
         <div className="column">
           <section className="box content">

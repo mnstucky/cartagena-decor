@@ -1,4 +1,7 @@
-import Document, { Html, Head, Main, NextScript } from "next/document";
+import Document, {
+  Html, Head, Main, NextScript,
+} from 'next/document';
+import React from 'react';
 
 class MyDocument extends Document {
   static async getInitialProps(ctx) {
@@ -8,9 +11,10 @@ class MyDocument extends Document {
 
   render() {
     return (
-      <Html >
+      // eslint-disable-next-line react/jsx-filename-extension
+      <Html>
         <Head />
-        <body class="has-navbar-fixed-top">
+        <body className="has-navbar-fixed-top">
           <Main />
           <NextScript />
         </body>

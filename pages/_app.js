@@ -8,7 +8,6 @@ function MyApp({ Component, pageProps }) {
   // Load saved cart from localStorage
   useEffect(() => {
     const storedCart = JSON.parse(window.localStorage.getItem('cart'));
-    console.log(storedCart);
     setCart(storedCart || []);
   }, []);
   return (
