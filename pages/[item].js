@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import ItemSelector from '../components/ItemSelector';
-import AddToCartButton from '../components/AddToCartButton';
-import ItemImage from '../components/ItemImage';
+import ItemContainer from '../components/ItemContainer'
 
 function ItemPage({
   cart,
@@ -46,23 +44,7 @@ function ItemPage({
   return item === undefined || options === undefined ? (
     <div />
   ) : (
-    <div className="container">
-      <h1 className="title is-4 mt-2 has-text-centered">{item.name}</h1>
-      <div className="columns">
-        <div className="column">
-          <ItemImage selection={selection} item={item} itemUrl={itemUrl}/>
-        </div>
-        <div className="column">
-          <section className="box content">
-            <p>{item.description}</p>
-            <p>{item.features}</p>
-            <p className="has-text-weight-bold">{item.highlights}</p>
-            <ItemSelector options={options} selection={selection} setSelection={setSelection} />
-            <AddToCartButton cart={cart} setCart={setCart} itemUrl={itemUrl} selection={selection} item={item} />
-          </section>
-        </div>
-      </div>
-    </div>
+    <ItemContainer selection={selection} setSelection={setSelection} item={item} itemUrl={itemUrl} options={options} cart={cart} setCart={setCart} />
   );
 }
 
