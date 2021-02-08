@@ -23,8 +23,8 @@ describe("Database GET Tests on Entire Stock", function() {
                 for (resItem of res.body) {
                     expect(resItem.multiples.hasMultiples).to.be.a('boolean');
                     if (resItem.multiples.hasMultiples) {
-                        expect(resItem.multiples.options).to.be.a('array');
-                        for (opt of resItem.multiples.options) {
+                        expect(resItem.multiples.options).to.be.a('object');
+                        for (opt in resItem.multiples.options) {
                             expect(opt).to.be.a('string');
                         }
                     }
