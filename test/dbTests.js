@@ -12,6 +12,7 @@ describe("Database GET Tests on Entire Stock", function() {
             .end(function(err, res) {
                 expect(res.status).to.equal(200);
                 expect(res.body).to.be.a('array');
+                expect(res.body).to.have.lengthOf.greaterThan(0);
                 done();
             });
     });
@@ -27,6 +28,9 @@ describe("Database GET Tests on Entire Stock", function() {
                         for (opt in resItem.multiples.options) {
                             expect(opt).to.be.a('string');
                         }
+                    } else {
+                        expect(resItem.multiples.options).to.be.a('object');
+                        expect(resItem.multiples.options).to.be.empty;
                     }
                 }
                 done();
@@ -39,6 +43,7 @@ describe("Database GET Tests on Entire Stock", function() {
             .end(function(err, res) {
                 for (resItem of res.body) {
                     expect(resItem.name).to.be.a('string');
+                    expect(resItem.name).to.not.be.empty;
                 }
                 done();
             });
@@ -50,6 +55,7 @@ describe("Database GET Tests on Entire Stock", function() {
             .end(function(err, res) {
                 for (resItem of res.body) {
                     expect(resItem.category).to.be.a('string');
+                    expect(resItem.category).to.not.be.empty;
                 }
                 done();
             });
@@ -61,17 +67,20 @@ describe("Database GET Tests on Entire Stock", function() {
             .end(function(err, res) {
                 for (resItem of res.body) {
                     expect(resItem.stock).to.be.a('number');
+                    expect(resItem.stock).to.be.greaterThan(0);
                 }
                 done();
             });
     });
-    it("/api/db should return items with prices", function(done) {
+    it("/api/db should return items with valid prices", function(done) {
         chai
             .request("http://localhost:3000")
             .get("/api/db")
             .end(function(err, res) {
                 for (resItem of res.body) {
                     expect(resItem.price).to.be.a('number');
+                    expect(resItem.price).to.be.greaterThan(0);
+                    expect(resItem.price).to.be.lessThan(300);
                 }
                 done();
             });
@@ -83,6 +92,7 @@ describe("Database GET Tests on Entire Stock", function() {
             .end(function(err, res) {
                 for (resItem of res.body) {
                     expect(resItem.highlights).to.be.a('string');
+                    expect(resItem.highlights).to.not.be.empty;
                 }
                 done();
             });
@@ -94,8 +104,10 @@ describe("Database GET Tests on Entire Stock", function() {
             .end(function(err, res) {
                 for (resItem of res.body) {
                     expect(resItem.description).to.be.a('array');
+                    expect(resItem.description).to.not.be.empty;
                     for (desc of resItem.description) {
                         expect(desc).to.be.a('string');
+                        expect(desc).to.not.be.empty;
                     }
                 }
                 done();
@@ -108,8 +120,10 @@ describe("Database GET Tests on Entire Stock", function() {
             .end(function(err, res) {
                 for (resItem of res.body) {
                     expect(resItem.features).to.be.a('array');
+                    expect(resItem.features).to.not.be.empty;
                     for (feat of resItem.features) {
                         expect(feat).to.be.a('string');
+                        expect(feat).to.not.be.empty;
                     }
                 }
                 done();
@@ -157,5 +171,19 @@ describe("Database GET Tests on Individual Items", function() {
                 done();
             });
         
+    });
+    it("/api/db?id=url should return item with a default main image url at index 0", function(done) {
+        for (const testUrl of urls) {
+            chai
+            .request("http://localhost:3000")
+            .get(`/api/db?id=${testUrl}`)
+            .end(function(err, res) {
+                expect(res.status).to.equal(200);
+                expect(res.body[0].images).to.not.be.empty;
+                expect(res.body[0].images).to.include(`${testUrl}_main.JPG`);
+                expect(res.body[0].images[0]).to.equal(`${testUrl}_main.JPG`);
+            });
+        }
+        done();
     });
 });
