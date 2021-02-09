@@ -115,6 +115,9 @@ describe("Database GET Tests on Entire Stock", function() {
                 done();
             });
     });
+
+// TODO: other fields in docs
+
     it("/api/db should not return any out-of-stock items", function(done) {
         chai
             .request("http://localhost:3000")
@@ -125,5 +128,34 @@ describe("Database GET Tests on Entire Stock", function() {
                 }
                 done();
             });
+    });
+});
+
+const urls = ['cc', 'ls', 'ch', 'st', 'bt', 'wt', 'mt'];
+
+describe("Database GET Tests on Individual Items", function() {
+    it("/api/db?id=url should return item with the requested url/id", function(done) {
+        for (const testUrl of urls) {
+            chai
+            .request("http://localhost:3000")
+            .get(`/api/db?id=${testUrl}`)
+            .end(function(err, res) {
+                expect(res.status).to.equal(200);
+                expect(res.body[0].url).to.equal(testUrl);
+            });
+        }
+        done();
+    });
+    it("if the url is invalid, /api/db?id=url should return an empty array", function(done) {
+        chai
+            .request("http://localhost:3000")
+            .get("/api/db?id=thisiswrong")
+            .end(function(err, res) {
+                expect(res.status).to.equal(200);
+                expect(res.body).to.be.an("array");
+                expect(res.body).to.have.lengthOf(0);
+                done();
+            });
+        
     });
 });
