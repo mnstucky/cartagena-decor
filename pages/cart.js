@@ -24,7 +24,7 @@ function Cart({
       </div>
       <div className="column">
         <p className="has-text-weight-bold">{item.name}</p>
-        <p>{`Selected Option: ${item.option}`}</p>
+        <p>{item.option != 'default' && `Selected Option: ${item.option}`}</p>
         <p>{`$${item.price}`}</p>
       </div>
       <div className="column"/>
