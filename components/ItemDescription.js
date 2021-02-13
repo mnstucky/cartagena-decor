@@ -1,11 +1,13 @@
 import React from "react";
 
 function ItemDescription({ description }) {
-  const formattedDescription = description.map((para) => <p>{para}</p>);
+  const formattedDescription = description.map((para) => <li>{para}</li>);
   return (
-    <section>
+    <section className="block">
       <h6>Description</h6>
-      <p>{formattedDescription}</p>
+      <ul>
+        {formattedDescription}
+      </ul>
     </section>
   );
 }

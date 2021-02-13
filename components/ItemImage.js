@@ -5,11 +5,11 @@ function ItemImage({ selection, item, itemUrl }) {
     <figure className="image box">
       <img
         src={
-          selection === undefined || selection === "default"
+          selection === undefined || selection === 'default'
             ? `/images/${item.images[0]}`
             : `/images/${itemUrl}_${selection
-                .replaceAll(" ", "")
-                .toLowerCase()}.JPG`
+              .replaceAll(" ", "")
+              .toLowerCase()}.JPG`
         }
         alt="Product for sale"
       />

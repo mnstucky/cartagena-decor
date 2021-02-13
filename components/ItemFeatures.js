@@ -1,11 +1,11 @@
 import React from "react";
 
 function ItemFeatures({ features }) {
-  const formattedFeatures = features.map((para) => <p>{para}</p>);
+  const formattedFeatures = features.map((para) => <li>{para}</li>);
   return (
-    <section>
+    <section className="block">
       <h6>Features</h6>
-      <p>{formattedFeatures}</p>
+      <ul>{formattedFeatures}</ul>
     </section>
   );
 }
