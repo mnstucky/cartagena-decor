@@ -3,6 +3,7 @@ import ItemSelector from './ItemSelector';
 import AddToCartButton from './AddToCartButton';
 import ItemImage from './ItemImage';
 import ItemDescription from './ItemDescription';
+import ItemFeatures from './ItemFeatures';
 
 function ItemContainer({ selection, setSelection, item, itemUrl, options, cart, setCart }) {
   return (
@@ -15,7 +16,7 @@ function ItemContainer({ selection, setSelection, item, itemUrl, options, cart, 
         <div className="column">
           <section className="box content">
             <ItemDescription description={item.description} />
-            <p>{item.features}</p>
+            <ItemFeatures features={item.features} />
             <p className="has-text-weight-bold">{item.highlights}</p>
             <ItemSelector options={options} selection={selection} setSelection={setSelection} />
             <AddToCartButton cart={cart} setCart={setCart} itemUrl={itemUrl} selection={selection} item={item} />
