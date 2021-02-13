@@ -145,7 +145,7 @@ describe("Database GET Tests on Entire Stock", function() {
     });
 });
 
-const urls = ['cc', 'ls', 'ch', 'st', 'bt', 'wt', 'mt'];
+const urls = ['cc', 'ls', 'ch', 'st', 'bt', 'wt', 'mt', 'wc'];
 
 describe("Database GET Tests on Individual Items", function() {
     it("/api/db?id=url should return item with the requested url/id", function(done) {
