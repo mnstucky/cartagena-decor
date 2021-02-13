@@ -2,6 +2,7 @@ import React from 'react';
 import ItemSelector from './ItemSelector';
 import AddToCartButton from './AddToCartButton';
 import ItemImage from './ItemImage';
+import ItemDescription from './ItemDescription';
 
 function ItemContainer({ selection, setSelection, item, itemUrl, options, cart, setCart }) {
   return (
@@ -13,7 +14,7 @@ function ItemContainer({ selection, setSelection, item, itemUrl, options, cart, 
         </div>
         <div className="column">
           <section className="box content">
-            <p>{item.description}</p>
+            <ItemDescription description={item.description} />
             <p>{item.features}</p>
             <p className="has-text-weight-bold">{item.highlights}</p>
             <ItemSelector options={options} selection={selection} setSelection={setSelection} />
