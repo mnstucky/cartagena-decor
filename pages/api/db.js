@@ -13,6 +13,7 @@ export default async function handler(req, res) {
   mongoose.connection.on('error', console.error.bind(console, 'MongoDB connection error: '));
   // Handle requests
   const { query } = req;
+  console.log(query);
   if (req.method === 'GET') {
     // If no id parameter is used, return the entire in-stock inventory
     if (Object.keys(query).length === 0) {
