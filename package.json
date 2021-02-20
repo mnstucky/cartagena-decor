@@ -7,7 +7,7 @@
     "css-watch": "npm run css-build -- --watch",
     "dev": "next dev",
     "build": "next build",
-    "start": "next start",
+    "start": "next start -p $PORT",
     "test": "nyc mocha"
   },
   "dependencies": {
