@@ -16,7 +16,7 @@ export default async function handler(req, res) {
   console.log(query);
   if (req.method === 'GET') {
     // If no id parameter is used, return the entire in-stock inventory
-    if (Object.keys(query).length === 0) {
+    if (query === null || Object.keys(query).length === 0) {
       Item.find({})
         .where('stock')
         .gte(0)
