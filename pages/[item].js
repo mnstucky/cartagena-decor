@@ -4,7 +4,7 @@ import ItemContainer from '../components/ItemContainer'
 
 function ItemPage({
   cart,
-  setCart
+  setCart,
 }) {
   const router = useRouter();
   let itemUrl = router.query.item;
