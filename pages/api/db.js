@@ -3,6 +3,7 @@ const Item = require('../../mongoose/items.js');
 
 export default async function handler(req, res) {
   // Connect to DB
+  console.log(process.env.MONGO_URL);
   await mongoose.connect(process.env.MONGO_URL, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
