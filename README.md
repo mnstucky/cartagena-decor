@@ -1,4 +1,4 @@
-This is a fully custom e-commerce platform for Cartagena Decor, a seller of handmade Colombian art. The project is in development. If you'd like to see the project live, please reach out; the project's media isn't on GitHub, so you won't get a full experience with npm install and npm run dev.
+This is a fully custom e-commerce platform for Cartagena Decor, a seller of handmade Colombian art. The project is in development, but you can see the current version live here: https://cartagena-decor.vercel.app/.
 
 # Features
 
