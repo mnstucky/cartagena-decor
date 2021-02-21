@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 function AddToCartButton({
   cart,
@@ -7,6 +7,8 @@ function AddToCartButton({
   selection,
   itemUrl,
 }) {
+  const [buttonContent, setButtonContent] = useState('Add to Cart');
+  const [isDisabled, setIsDisabled] = useState(false);
   function addToCart() {
     let updatedItem = false;
     const newCart = cart.map((cartItem) => {
@@ -37,11 +39,13 @@ function AddToCartButton({
     }
     localStorage.setItem('cart', JSON.stringify(newCart));
     setCart(newCart);
+    setButtonContent('Item Added');
+    setIsDisabled(true);
   }
 
   return (
-    <button type="button" className="button is-primary ml-2" onClick={addToCart}>
-      Add to Cart
+    <button type="button" className="button is-primary ml-2" onClick={addToCart} disabled={isDisabled}>
+      {buttonContent}
     </button>
   );
 }

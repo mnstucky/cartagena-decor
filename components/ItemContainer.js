@@ -1,9 +1,9 @@
-import React from "react";
-import ItemSelector from "./ItemSelector";
-import AddToCartButton from "./AddToCartButton";
-import ItemImage from "./ItemImage";
-import ItemDescription from "./ItemDescription";
-import ItemFeatures from "./ItemFeatures";
+import React from 'react';
+import ItemSelector from './ItemSelector';
+import AddToCartButton from './AddToCartButton';
+import ItemImage from './ItemImage';
+import ItemDescription from './ItemDescription';
+import ItemFeatures from './ItemFeatures';
 
 function ItemContainer({
   selection,
