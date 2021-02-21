@@ -1,3 +1,8 @@
+html,
+body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
 .carousel-wrapper {
   height: 400px;
   position: relative;
@@ -6,7 +11,7 @@
 }
 @media (max-width: 480px) {
   .carousel-wrapper {
-      height: 200px;
+    height: 200px;
   }
 }
 .carousel-item {
