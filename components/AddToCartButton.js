@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 function AddToCartButton({
   cart,
@@ -8,7 +8,14 @@ function AddToCartButton({
   itemUrl,
 }) {
   const [buttonContent, setButtonContent] = useState('Add to Cart');
-  const [isDisabled, setIsDisabled] = useState(false);
+  const [isDisabled, setIsDisabled] = useState(item.multiples.hasMultiples && selection === 'default');
+  useEffect(() => {
+    if (selection !== 'default') {
+      setIsDisabled(false);
+    } else if (item.multiples.hasMultiples) {
+      setIsDisabled(true);
+    }
+  }, [selection]);
   function addToCart() {
     let updatedItem = false;
     const newCart = cart.map((cartItem) => {
