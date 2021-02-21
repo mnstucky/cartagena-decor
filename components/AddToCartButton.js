@@ -6,6 +6,7 @@ function AddToCartButton({
   item,
   selection,
   itemUrl,
+  setCartButtonVisibility,
 }) {
   const [buttonContent, setButtonContent] = useState('Add to Cart');
   const [isDisabled, setIsDisabled] = useState(item.multiples.hasMultiples && selection === 'default');
@@ -48,6 +49,7 @@ function AddToCartButton({
     setCart(newCart);
     setButtonContent('Item Added');
     setIsDisabled(true);
+    setCartButtonVisibility(true);
   }
 
   return (

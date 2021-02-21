@@ -1,6 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import NavbarLink from './NavbarLink';
+import GoToCartButton from "./GoToCartButton";
 
 function NavbarBrand({ isActive, toggleActive, cart }) {
   return (
@@ -17,11 +18,7 @@ function NavbarBrand({ isActive, toggleActive, cart }) {
       <div className="navbar-end">
         <div className="navbar-item">
           <div className="buttons">
-            <Link href="/cart/">
-              <a className="button is-primary" onClick={toggleActive}>
-                <strong>{`Cart (${cart.reduce((acc, ele) => acc + ele.quantity, 0)})`}</strong>
-              </a>
-            </Link>
+            <GoToCartButton toggleActive={toggleActive} cart={cart} cartButtonVisibility />
           </div>
         </div>
       </div>

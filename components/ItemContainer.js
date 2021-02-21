@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ItemSelector from './ItemSelector';
 import AddToCartButton from './AddToCartButton';
 import ItemImage from './ItemImage';
 import ItemDescription from './ItemDescription';
 import ItemFeatures from './ItemFeatures';
+import GoToCartButton from './GoToCartButton';
 
 function ItemContainer({
   selection,
@@ -14,6 +15,7 @@ function ItemContainer({
   cart,
   setCart,
 }) {
+  const [cartButtonVisibility, setCartButtonVisibility] = useState(false);
   return (
     <div className="container">
       <h1 className="title is-4 mt-2 has-text-centered">{item.name}</h1>
@@ -38,8 +40,10 @@ function ItemContainer({
                 itemUrl={itemUrl}
                 selection={selection}
                 item={item}
+                setCartButtonVisibility={setCartButtonVisibility}
               />
-              <p className="has-text-weight-bold mt-2 ml-3">${item.price}</p>
+              <p className="has-text-weight-bold mt-2 ml-3 mr-3">${item.price}</p>
+              <GoToCartButton cart={cart} cartButtonVisibility={cartButtonVisibility} />
             </div>
           </section>
         </div>
