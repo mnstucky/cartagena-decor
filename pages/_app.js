@@ -2,6 +2,7 @@ import Head from 'next/head';
 import React, { useState, useEffect } from 'react';
 import Navbar from '../components/Navbar';
 import '../styles/mystyles.css';
+import '../styles/customStyles.css';
 
 function MyApp({ Component, pageProps }) {
   const [cart, setCart] = useState([]);

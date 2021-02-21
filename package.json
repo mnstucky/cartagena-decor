@@ -13,6 +13,7 @@
   "dependencies": {
     "@sendgrid/mail": "^7.4.0",
     "bulma": "^0.9.1",
+    "flickity": "^2.2.2",
     "mongodb": "^3.6.3",
     "mongoose": "^5.11.11",
     "next": "10.0.4",

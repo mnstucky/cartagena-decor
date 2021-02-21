@@ -1,19 +1,29 @@
-import React from 'react';
+import React from "react";
 
 function Hero() {
-  const heroStyles = {
-    backgroundImage: 'url("/images/hero.JPG")',
-    backgroundSize: 'cover',
-    backgroundPosition: 'center center',
-    webkitTextStroke: '1px black',
-    textShadow: '3px 3px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000',
-  };
   return (
-    <div className="hero">
-      <div className="hero-body" style={heroStyles}>
-        <h1 className="title is-2 mt-2 has-text-light is-family-secondary">
-          CARTAGENA DECOR
-        </h1>
+    <div className="box">
+      <div className="carousel-wrapper">
+        <span id="item-1" />
+        <span id="item-2" />
+        <span id="item-3" />
+        <div className="carousel-item item-1">
+          <h2></h2>
+          <a className="arrow arrow-prev" href="#item-3"></a>
+          <a className="arrow arrow-next" href="#item-2"></a>
+        </div>
+
+        <div className="carousel-item item-2">
+          <h2></h2>
+          <a className="arrow arrow-prev" href="#item-1"></a>
+          <a className="arrow arrow-next" href="#item-3" />
+        </div>
+
+        <div className="carousel-item item-3">
+          <h2></h2>
+          <a className="arrow arrow-prev" href="#item-2" />
+          <a className="arrow arrow-next" href="#item-1" />
+        </div>
       </div>
     </div>
   );

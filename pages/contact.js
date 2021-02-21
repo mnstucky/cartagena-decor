@@ -37,7 +37,7 @@ function Contact() {
       });
   }
   return (
-    <div className="container">
+    <div className="container pr-3 pl-3">
       <h1 class="title is-4 mt-2">Contact Us</h1>
       <p className="block">
         Have a question? Don't hesitate to reach out to us using the below form!
