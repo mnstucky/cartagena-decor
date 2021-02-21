@@ -28,6 +28,7 @@ function ItemPage({
             setItem(data[0]);
             // Format and store the options available for the item
             const optionsToSet = [];
+            // eslint-disable-next-line no-restricted-syntax
             for (const [key, value] of Object.entries(data[0].multiples.options)) {
               if (value > 0) {
                 const keyWithSpacesAdded = key.replace(/([A-Z])/g, ' $1');
@@ -44,7 +45,15 @@ function ItemPage({
   return item === undefined || options === undefined ? (
     <div />
   ) : (
-    <ItemContainer selection={selection} setSelection={setSelection} item={item} itemUrl={itemUrl} options={options} cart={cart} setCart={setCart} />
+    <ItemContainer
+      selection={selection}
+      setSelection={setSelection}
+      item={item}
+      itemUrl={itemUrl}
+      options={options}
+      cart={cart}
+      setCart={setCart}
+    />
   );
 }
 
