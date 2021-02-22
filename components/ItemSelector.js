@@ -10,7 +10,7 @@ function ItemSelector({ options, selection, setSelection }) {
     return null;
   }
   return (
-    <div className="select mb-2">
+    <div className="select mb-2 mr-2">
       <select value={selection} onChange={handleSelection}>
         <option value="default">Select an Option:</option>
         {options.map((productType) => (

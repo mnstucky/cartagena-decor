@@ -7,6 +7,7 @@ function AddToCartButton({
   selection,
   itemUrl,
   setCartButtonVisibility,
+  quantity,
 }) {
   const [buttonContent, setButtonContent] = useState('Add to Cart');
   const [isDisabled, setIsDisabled] = useState(item.multiples.hasMultiples && selection === 'default');
@@ -27,7 +28,7 @@ function AddToCartButton({
           option: selection,
           images: item.images,
           itemUrl,
-          quantity: cartItem ? cartItem.quantity + 1 : 1,
+          quantity: cartItem ? cartItem.quantity + quantity : quantity,
         };
         updatedItem = true;
         return itemToAdd;
@@ -41,7 +42,7 @@ function AddToCartButton({
         option: selection,
         images: item.images,
         itemUrl,
-        quantity: 1,
+        quantity,
       };
       newCart.push(itemToAdd);
     }
@@ -53,7 +54,7 @@ function AddToCartButton({
   }
 
   return (
-    <button type="button" className="button is-primary ml-2" onClick={addToCart} disabled={isDisabled}>
+    <button type="button" className="button is-primary" onClick={addToCart} disabled={isDisabled}>
       {buttonContent}
     </button>
   );

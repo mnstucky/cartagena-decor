@@ -1,5 +1,5 @@
-import React from "react";
-import Link from "next/link";
+import React from 'react';
+import Link from 'next/link';
 
 function GoToCartButton({
   toggleActive = () => {},
@@ -11,7 +11,7 @@ function GoToCartButton({
       <Link href="/cart/">
         <button
           type="button"
-          className="button is-primary"
+          className="button is-primary ml-2"
           onClick={toggleActive}
         >
           <strong>

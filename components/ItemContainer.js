@@ -5,6 +5,7 @@ import ItemImage from './ItemImage';
 import ItemDescription from './ItemDescription';
 import ItemFeatures from './ItemFeatures';
 import GoToCartButton from './GoToCartButton';
+import QuantitySelector from './QuantitySelector';
 
 function ItemContainer({
   selection,
@@ -16,6 +17,7 @@ function ItemContainer({
   setCart,
 }) {
   const [cartButtonVisibility, setCartButtonVisibility] = useState(false);
+  const [quantity, setQuantity] = useState(1);
   return (
     <div className="container">
       <h1 className="title is-4 mt-2 has-text-centered">{item.name}</h1>
@@ -28,12 +30,15 @@ function ItemContainer({
             <ItemDescription description={item.description} />
             <ItemFeatures features={item.features} />
             <p className="has-text-weight-bold">{item.highlights}</p>
-            <ItemSelector
-              options={options}
-              selection={selection}
-              setSelection={setSelection}
-            />
-            <div className="is-flex is-align-content-center">
+            <div className="is-flex">
+              <ItemSelector
+                options={options}
+                selection={selection}
+                setSelection={setSelection}
+              />
+              <QuantitySelector quantity={quantity} setQuantity={setQuantity} />
+            </div>
+            <div className="is-flex is-align-items-center">
               <AddToCartButton
                 cart={cart}
                 setCart={setCart}
@@ -41,8 +46,12 @@ function ItemContainer({
                 selection={selection}
                 item={item}
                 setCartButtonVisibility={setCartButtonVisibility}
+                quantity={quantity}
               />
-              <p className="has-text-weight-bold mt-2 ml-3 mr-3">${item.price}</p>
+              <p className="has-text-weight-bold mb-0 ml-2">
+                $
+                {item.price}
+              </p>
               <GoToCartButton cart={cart} cartButtonVisibility={cartButtonVisibility} />
             </div>
           </section>
