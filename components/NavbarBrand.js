@@ -7,7 +7,7 @@ function NavbarBrand({ isActive, toggleActive }) {
       <Link href="/">
         <a className="navbar-item">
           <img src="/images/logo.jpg" width="28" height="28" />
-          <h1 className="is-size-4 is-size-5-mobile is-uppercase is-family-secondary ml-2">
+          <h1 className="is-size-4 is-size-5-mobile is-uppercase is-family-secondary ml-2 has-text-black">
             Cartagena Decor
           </h1>
         </a>
