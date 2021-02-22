@@ -8,7 +8,7 @@ function ItemImage({ selection, item, itemUrl }) {
           selection === undefined || selection === 'default'
             ? `/images/${item.images[0]}`
             : `/images/${itemUrl}_${selection
-              .replaceAll(" ", "")
+              .replaceAll(' ', '')
               .toLowerCase()}.JPG`
         }
         alt="Product for sale"
