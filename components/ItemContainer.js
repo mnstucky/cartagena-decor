@@ -19,7 +19,7 @@ function ItemContainer({
   const [cartButtonVisibility, setCartButtonVisibility] = useState(false);
   const [quantity, setQuantity] = useState(1);
   return (
-    <div className="container">
+    <div className="container pl-3 pr-3">
       <h1 className="title is-4 mt-2 has-text-centered">{item.name}</h1>
       <div className="columns">
         <div className="column">
@@ -30,7 +30,7 @@ function ItemContainer({
             <ItemDescription description={item.description} />
             <ItemFeatures features={item.features} />
             <p className="has-text-weight-bold">{item.highlights}</p>
-            <div className="is-flex">
+            <div className="is-flex is-flex-wrap-wrap">
               <ItemSelector
                 options={options}
                 selection={selection}
