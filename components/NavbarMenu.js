@@ -1,7 +1,6 @@
-import React from "react";
-import Link from "next/link";
+import React from 'react';
 import NavbarLink from './NavbarLink';
-import GoToCartButton from "./GoToCartButton";
+import GoToCartButton from './GoToCartButton';
 
 function NavbarBrand({ isActive, toggleActive, cart }) {
   return (

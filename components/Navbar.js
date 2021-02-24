@@ -1,6 +1,6 @@
-import React, { useState } from "react";
-import NavbarBrand from "./NavbarBrand";
-import NavbarMenu from "./NavbarMenu";
+import React, { useState } from 'react';
+import NavbarBrand from './NavbarBrand';
+import NavbarMenu from './NavbarMenu';
 
 function Navbar({ cart }) {
   const [isActive, setIsActive] = useState(false);

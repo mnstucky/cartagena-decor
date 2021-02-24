@@ -4,7 +4,7 @@ import Link from 'next/link';
 function NavbarLink({
   toggleActive,
   path,
-  label
+  label,
 }) {
   return (
     <Link href={path}>

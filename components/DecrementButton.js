@@ -5,7 +5,7 @@ function DecrementButton({
   option,
   quantity,
   cart,
-  setCart
+  setCart,
 }) {
   function decrementQuantity() {
     const newCart = cart.map((cartItem) => {

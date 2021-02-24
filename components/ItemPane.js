@@ -1,7 +1,9 @@
-import React from "react";
-import Link from "next/link";
+import React from 'react';
+import Link from 'next/link';
 
-function ItemPane({ image, name, price, url }) {
+function ItemPane({
+  image, name, price, url,
+}) {
   const paneStyle = {
     width: 300,
   };
@@ -10,7 +12,7 @@ function ItemPane({ image, name, price, url }) {
       <Link href={`\\${url}`}>
         <a className="card-image">
           <div className="image is-3by2">
-            <img src={image}></img>
+            <img src={image} />
           </div>
         </a>
       </Link>
@@ -18,7 +20,10 @@ function ItemPane({ image, name, price, url }) {
         <div className="card-content">
           <a className="name is-5 has-text-weight-semibold has-text-black">{name}</a>
           <br />
-          <a className="subname is-6 has-text-black">${price}</a>
+          <a className="subname is-6 has-text-black">
+            $
+            {price}
+          </a>
         </div>
       </Link>
     </div>

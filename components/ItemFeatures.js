@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 function ItemFeatures({ features }) {
   const formattedFeatures = features.map((para) => <li>{para}</li>);

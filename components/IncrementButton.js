@@ -4,7 +4,7 @@ function IncrementButton({
   name,
   option,
   cart,
-  setCart
+  setCart,
 }) {
   function incrementQuantity() {
     const newCart = cart.map((cartItem) => {
