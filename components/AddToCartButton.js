@@ -14,6 +14,7 @@ function AddToCartButton({
   useEffect(() => {
     if (selection !== 'default') {
       setIsDisabled(false);
+      setButtonContent('Add to Cart');
     } else if (item.multiples.hasMultiples) {
       setIsDisabled(true);
     }
