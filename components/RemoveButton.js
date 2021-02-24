@@ -4,7 +4,7 @@ function RemoveButton({
   name,
   option,
   cart,
-  setCart
+  setCart,
 }) {
   function removeItem() {
     const newCart = cart.filter((cartItem) => cartItem.name !== name || cartItem.option !== option);
@@ -16,7 +16,7 @@ function RemoveButton({
     <button
       onClick={removeItem}
       type="button"
-      className="button is-danger is-light mt-2"
+      className="button is-danger is-light ml-2"
     >
       Remove
     </button>
