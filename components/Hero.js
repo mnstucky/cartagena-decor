@@ -1,6 +1,17 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 function Hero() {
+  useEffect(() => {
+    const rotatingImages = ['./#item-1', './#item-2', './#item-3'];
+    let rotatingImagesIndex = 0;
+    const timer = setInterval(() => {
+      window.location = rotatingImages[rotatingImagesIndex];
+      rotatingImagesIndex = (rotatingImagesIndex + 1) % rotatingImages.length;
+    }, 5000);
+    return () => {
+      clearInterval(timer);
+    };
+  }, []);
   return (
     <div className="box">
       <div className="carousel-wrapper">
