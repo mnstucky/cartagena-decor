@@ -12,7 +12,7 @@ class MyDocument extends Document {
   render() {
     return (
     // eslint-disable-next-line react/jsx-filename-extension
-      <Html>
+      <Html lang="en">
         <Head />
         <body className="has-navbar-fixed-top">
           <Main />
