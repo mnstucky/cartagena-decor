@@ -3,7 +3,6 @@ import { CartContext } from './CartContextProvider';
 import ItemPane from './ItemPane';
 
 function ItemGrid() {
-  const { cart, setCart } = useContext(CartContext);
   const [items, setItems] = useState([]);
   // Load in-stock items from database on component load
   useEffect(() => {
@@ -18,7 +17,21 @@ function ItemGrid() {
           });
       });
   }, []);
-  return (
+  const spinnerStyles = { minHeight: '90vh' };
+  // If fetch from DB is still pending, return a loading spinner
+
+  return items.length === 0 ? (
+    <div className="is-flex is-justify-content-center is-align-items-center" style={spinnerStyles}>
+      <div className="sk-chase">
+        <div className="sk-chase-dot" />
+        <div className="sk-chase-dot" />
+        <div className="sk-chase-dot" />
+        <div className="sk-chase-dot" />
+        <div className="sk-chase-dot" />
+        <div className="sk-chase-dot" />
+      </div>
+    </div>
+  ) : (
     <div className="is-flex is-flex-wrap-wrap is-justify-content-space-evenly">
       {items.map((item) => (
         <ItemPane

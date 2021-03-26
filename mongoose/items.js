@@ -1,64 +1,65 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
+
 const { Schema } = mongoose;
 
 const itemSchema = new Schema({
-	name: {
+  name: {
 	  type: String,
 	  required: true,
-	},
-	category: {
+  },
+  category: {
 	  type: String,
 	  enum: ['coaster', 'tray', 'lazySusan'],
-	},
-	stock: {
+  },
+  stock: {
 	  type: Number,
 	  required: true,
-	},
-	price: {
+  },
+  price: {
 	  type: Number,
 	  required: true,
-	},
-	highlights: {
+  },
+  highlights: {
 	  type: String,
-	},
-	description: {
+  },
+  description: {
 	  type: [String],
 	  required: true,
-	},
-	features: {
+  },
+  features: {
 	  type: [String],
-	},
-	multiples: {
+  },
+  multiples: {
 	  hasMultiples: {
-		type: Boolean,
-		required: true,
+      type: Boolean,
+      required: true,
 	  },
 	  options: {
-		type: Map,
-		of: Number,
+      type: Map,
+      of: Number,
 	  },
-	},
-	shipping: {
+  },
+  shipping: {
 	  type: String,
-	},
-	rating: {
+  },
+  rating: {
 	  type: Number,
-	},
-	images: {
+  },
+  images: {
 	  type: [String],
 	  required: true,
-	},
-	url: {
+  },
+  url: {
 	  type: String,
 	  required: true,
-	},
-  });		
+  },
+});
 
 let Item;
 try {
-	Item = mongoose.model("Item");
+  Item = mongoose.model('Item');
 } catch {
-	Item = mongoose.model("Item", itemSchema);
-}	
+  Item = mongoose.model('Item', itemSchema);
+}
 
 module.exports = Item;
