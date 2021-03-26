@@ -1,12 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { CartContext } from './CartContextProvider';
 
 function DecrementButton({
   name,
   option,
   quantity,
-  cart,
-  setCart,
 }) {
+  const { cart, setCart } = useContext(CartContext);
   function decrementQuantity() {
     const newCart = cart.map((cartItem) => {
       if (cartItem.name === name && cartItem.option === option) {

@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
+import { CartContext } from './CartContextProvider';
 import ItemPane from './ItemPane';
 
-function ItemGrid({
-  cart,
-  setCart,
-}) {
+function ItemGrid() {
+  const { cart, setCart } = useContext(CartContext);
   const [items, setItems] = useState([]);
   // Load in-stock items from database on component load
   useEffect(() => {
@@ -23,8 +22,6 @@ function ItemGrid({
     <div className="is-flex is-flex-wrap-wrap is-justify-content-space-evenly">
       {items.map((item) => (
         <ItemPane
-          cart={cart}
-          setCart={setCart}
           image={`images/${item.images[0]}`}
           name={item.name}
           price={item.price}

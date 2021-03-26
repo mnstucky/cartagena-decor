@@ -1,11 +1,13 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Link from 'next/link';
+import { CartContext } from './CartContextProvider';
 
 function GoToCartButton({
   toggleActive = () => {},
-  cart,
   cartButtonVisibility,
 }) {
+  const { cart } = useContext(CartContext);
+  console.log(cart);
   if (cartButtonVisibility) {
     return (
       <Link href="/cart/">

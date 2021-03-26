@@ -1,14 +1,16 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Link from 'next/link';
 import DecrementButton from '../components/DecrementButton';
 import IncrementButton from '../components/IncrementButton';
 import Subtotal from '../components/Subtotal';
 import RemoveButton from '../components/RemoveButton';
+import { CartContext } from '../components/CartContextProvider';
 
-function Cart({ cart, setCart }) {
+function Cart() {
   const imgStyle = {
     height: 150,
   };
+  const { cart } = useContext(CartContext);
   let cartContents = cart.map((item) => (
     <section>
       <div className="columns mb-0">
@@ -43,21 +45,15 @@ function Cart({ cart, setCart }) {
               name={item.name}
               option={item.option}
               quantity={item.quantity}
-              cart={cart}
-              setCart={setCart}
             />
             <p className="is-size-6 pt-1 pb-1 pl-3 pr-3">{item.quantity}</p>
             <IncrementButton
               name={item.name}
               option={item.option}
-              cart={cart}
-              setCart={setCart}
             />
             <RemoveButton
               name={item.name}
               option={item.option}
-              cart={cart}
-              setCart={setCart}
             />
           </span>
 

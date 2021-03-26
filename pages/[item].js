@@ -2,10 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import ItemContainer from '../components/ItemContainer';
 
-function ItemPage({
-  cart,
-  setCart,
-}) {
+function ItemPage() {
   const router = useRouter();
   let itemUrl = router.query.item;
   const [item, setItem] = useState(undefined);
@@ -51,8 +48,6 @@ function ItemPage({
       item={item}
       itemUrl={itemUrl}
       options={options}
-      cart={cart}
-      setCart={setCart}
     />
   );
 }

@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { CartContext } from './CartContextProvider';
 
 function IncrementButton({
   name,
   option,
-  cart,
-  setCart,
 }) {
+  const { cart, setCart } = useContext(CartContext);
   function incrementQuantity() {
     const newCart = cart.map((cartItem) => {
       if (cartItem.name === name && cartItem.option === option) {

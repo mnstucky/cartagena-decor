@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { CartContext } from './CartContextProvider';
 
 function RemoveButton({
   name,
   option,
-  cart,
-  setCart,
 }) {
+  const { cart, setCart } = useContext(CartContext);
   function removeItem() {
     const newCart = cart.filter((cartItem) => cartItem.name !== name || cartItem.option !== option);
     localStorage.setItem('cart', JSON.stringify(newCart));

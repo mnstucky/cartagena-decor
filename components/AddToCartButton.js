@@ -1,14 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import { CartContext } from './CartContextProvider';
 
 function AddToCartButton({
-  cart,
-  setCart,
   item,
   selection,
   itemUrl,
   setCartButtonVisibility,
   quantity,
 }) {
+  const { cart, setCart } = useContext(CartContext);
   const [buttonContent, setButtonContent] = useState('Add to Cart');
   const [isDisabled, setIsDisabled] = useState(item.multiples.hasMultiples && selection === 'default');
   useEffect(() => {

@@ -2,7 +2,7 @@ import React from 'react';
 import NavbarLink from './NavbarLink';
 import GoToCartButton from './GoToCartButton';
 
-function NavbarBrand({ isActive, toggleActive, cart }) {
+function NavbarBrand({ isActive, toggleActive }) {
   return (
     <div
       id="navbarBasicExample"
@@ -17,7 +17,7 @@ function NavbarBrand({ isActive, toggleActive, cart }) {
       <div className="navbar-end">
         <div className="navbar-item">
           <div className="buttons">
-            <GoToCartButton toggleActive={toggleActive} cart={cart} cartButtonVisibility />
+            <GoToCartButton toggleActive={toggleActive} cartButtonVisibility />
           </div>
         </div>
       </div>

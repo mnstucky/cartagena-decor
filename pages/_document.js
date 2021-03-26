@@ -11,7 +11,7 @@ class MyDocument extends Document {
 
   render() {
     return (
-      // eslint-disable-next-line react/jsx-filename-extension
+    // eslint-disable-next-line react/jsx-filename-extension
       <Html>
         <Head />
         <body className="has-navbar-fixed-top">

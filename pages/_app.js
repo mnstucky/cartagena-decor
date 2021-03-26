@@ -1,16 +1,16 @@
 import Head from 'next/head';
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import Navbar from '../components/Navbar';
+import CartContextProvider from '../components/CartContextProvider';
 import '../styles/mystyles.css';
 import '../styles/customStyles.css';
 
 function MyApp({ Component, pageProps }) {
-  const [cart, setCart] = useState([]);
   // Load saved cart from localStorage
-  useEffect(() => {
-    const storedCart = JSON.parse(window.localStorage.getItem('cart'));
-    setCart(storedCart || []);
-  }, []);
+  // useEffect(() => { TODO: Figure out the best way to bring stored state in from local storage
+  //   const storedCart = JSON.parse(window.localStorage.getItem('cart'));
+  //   setCart(storedCart || []);
+  // }, []);
   return (
     <>
       <Head>
@@ -20,14 +20,16 @@ function MyApp({ Component, pageProps }) {
         <meta name="theme-color" content="#000000" />
         <meta
           name="description"
-          content="Web site created using create-react-app"
+          content="Online store for Cartagena Decor"
         />
         <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
         <title>Cartagena Decor</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Navbar cart={cart} />
-      <Component cart={cart} setCart={setCart} {...pageProps} />
+      <CartContextProvider>
+        <Navbar />
+        <Component {...pageProps} />
+      </CartContextProvider>
     </>
   );
 }
