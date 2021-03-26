@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import ItemSelector from './ItemSelector';
 import AddToCartButton from './AddToCartButton';
 import ItemImage from './ItemImage';
@@ -6,7 +6,6 @@ import ItemDescription from './ItemDescription';
 import ItemFeatures from './ItemFeatures';
 import GoToCartButton from './GoToCartButton';
 import QuantitySelector from './QuantitySelector';
-import { CartContext } from './CartContextProvider';
 
 function ItemContainer({
   selection,
@@ -15,7 +14,6 @@ function ItemContainer({
   itemUrl,
   options,
 }) {
-  const { cart, setCart } = useContext(CartContext);
   const [cartButtonVisibility, setCartButtonVisibility] = useState(false);
   const [quantity, setQuantity] = useState(1);
   return (
