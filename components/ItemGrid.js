@@ -17,7 +17,7 @@ function ItemGrid() {
           });
       });
   }, []);
-  const spinnerStyles = { minHeight: '90vh' };
+  const spinnerStyles = { minHeight: '60vh' };
   // If fetch from DB is still pending, return a loading spinner
 
   return items.length === 0 ? (

@@ -38,7 +38,7 @@ function ItemPage() {
           });
       });
   }, []);
-  const spinnerStyles = { minHeight: '90vh' };
+  const spinnerStyles = { minHeight: '60vh' };
   // If fetch from DB is still pending, return a loading spinner
   return item === undefined || options === undefined ? (
     <div className="is-flex is-justify-content-center is-align-items-center" style={spinnerStyles}>
