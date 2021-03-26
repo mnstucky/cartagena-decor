@@ -15,6 +15,7 @@ function MyApp({ Component, pageProps }) {
     <>
       <Head>
         <meta charset="utf-8" />
+        <link rel="preconnect" href="https://fonts.gstatic.com/" />
         <link rel="icon" href="./public/favicon.ico" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="theme-color" content="#000000" />
@@ -24,7 +25,6 @@ function MyApp({ Component, pageProps }) {
         />
         <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
         <title>Cartagena Decor</title>
-        <link rel="icon" href="/favicon.ico" />
       </Head>
       <CartContextProvider>
         <Navbar />
