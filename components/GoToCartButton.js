@@ -7,13 +7,12 @@ function GoToCartButton({
   cartButtonVisibility,
 }) {
   const { cart } = useContext(CartContext);
-  console.log(cart);
   if (cartButtonVisibility) {
     return (
       <Link href="/cart/">
         <button
           type="button"
-          className="button is-primary ml-2"
+          className="button is-primary"
           onClick={toggleActive}
         >
           <strong>

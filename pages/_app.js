@@ -4,6 +4,7 @@ import Navbar from '../components/Navbar';
 import CartContextProvider from '../components/CartContextProvider';
 import '../styles/mystyles.css';
 import '../styles/customStyles.css';
+import { Provider } from 'next-auth/client';
 
 function MyApp({ Component, pageProps }) {
   // Load saved cart from localStorage
@@ -11,6 +12,7 @@ function MyApp({ Component, pageProps }) {
   //   const storedCart = JSON.parse(window.localStorage.getItem('cart'));
   //   setCart(storedCart || []);
   // }, []);
+
   return (
     <>
       <Head>
@@ -28,8 +30,10 @@ function MyApp({ Component, pageProps }) {
         <title>Cartagena Decor</title>
       </Head>
       <CartContextProvider>
-        <Navbar />
-        <Component {...pageProps} />
+        <Provider session={pageProps.session}>
+          <Navbar />
+          <Component {...pageProps} />
+        </Provider>
       </CartContextProvider>
     </>
   );
