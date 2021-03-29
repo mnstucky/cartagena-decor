@@ -28,7 +28,7 @@ function SignIn({ providers, csrfToken }) {
           <button className="button is-primary" type="submit">Sign in with Email</button>
         </div>
       </form>
-      <button type="button" className="button is-white p-0 mt-2 googleButton" />
+      <button type="button" className="button is-white p-0 mt-2 googleButton" onClick={() => signIn('google')} />
     </div>
   );
 }
