@@ -31,12 +31,12 @@ function NavbarBrand({ isActive, toggleActive }) {
             {' '}
             {!session && (
             <>
-              <button onClick={signIn} className="button is-info">Sign In</button>
+              <button type="button" onClick={signIn} className="button is-info">Sign In</button>
             </>
             )}
             {session && (
             <>
-              <button onClick={signOut} className="button is-info">Sign Out</button>
+              <button type="button" onClick={signOut} className="button is-info">Sign Out</button>
             </>
             )}
           </div>
