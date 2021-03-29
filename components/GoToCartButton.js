@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import Link from 'next/link';
 import { CartContext } from './CartContextProvider';
 
@@ -6,7 +6,12 @@ function GoToCartButton({
   toggleActive = () => {},
   cartButtonVisibility,
 }) {
-  const { cart } = useContext(CartContext);
+  const { cart, setCart } = useContext(CartContext);
+  // Load saved cart from localStorage
+  useEffect(() => {
+    const storedCart = JSON.parse(window.localStorage.getItem('cart'));
+    setCart(storedCart || []);
+  }, []);
   if (cartButtonVisibility) {
     return (
       <Link href="/cart/">
