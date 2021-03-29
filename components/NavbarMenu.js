@@ -26,7 +26,7 @@ function NavbarBrand({ isActive, toggleActive }) {
            {session.user.email}
          </div>
          )}
-        <div className="navbar-item pr-1">
+        <div className="navbar-item pr-0">
           <div className="buttons">
             {' '}
             {!session && (
@@ -41,7 +41,7 @@ function NavbarBrand({ isActive, toggleActive }) {
             )}
           </div>
         </div>
-        <div className="navbar-item pl-1">
+        <div className="navbar-item pl-3">
           <div className="buttons">
             <GoToCartButton toggleActive={toggleActive} cartButtonVisibility />
           </div>
