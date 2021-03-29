@@ -11,7 +11,6 @@ function SignIn({ providers, csrfToken }) {
     router.push('/profile');
     return null;
   }
-  console.log(providers);
   return (
     <div className="container pr-3 pl-3">
       <h1 className="title is-4 mt-2">Sign In</h1>
@@ -29,9 +28,7 @@ function SignIn({ providers, csrfToken }) {
           <button className="button is-primary" type="submit">Sign in with Email</button>
         </div>
       </form>
-      <button type="button" className="button is-white p-0 mt-2">
-        <img src="/images/btn_google_signin_dark_normal_web.png" alt="Sign in with Google" onClick={() => signIn('google')} />
-      </button>
+      <button type="button" className="button is-white p-0 mt-2 googleButton" />
     </div>
   );
 }
