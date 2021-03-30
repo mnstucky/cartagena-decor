@@ -14,6 +14,9 @@ function SignIn({ providers, csrfToken }) {
   return (
     <div className="container pr-3 pl-3">
       <h1 className="title is-4 mt-2">Sign In</h1>
+      <section className="block">
+        <p>Sign in to view your past orders.</p>
+      </section>
       <form method="post" action="/api/auth/signin/email">
         <input name="csrfToken" type="hidden" defaultValue={csrfToken} />
         <div className="field">
