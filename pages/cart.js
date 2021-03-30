@@ -21,7 +21,9 @@ function Cart() {
                 className="image"
                 style={imgStyle}
                 src={
-              item.option === undefined || item.option === 'default'
+                  // If an item option doesn't have an associated image, or no option is selected,
+                  //  display a default image
+              !item.images.includes(`${item.itemUrl}_${item.option.replaceAll(' ', '').toLowerCase()}.JPG`) || item.option === undefined || item.option === 'default'
                 ? `/images/${item.images[0]}`
                 : `/images/${item.itemUrl}_${item.option
                   .replaceAll(' ', '')
