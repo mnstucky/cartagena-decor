@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const Item = require('../../mongoose/items.js');
+const Item = require('../../services/items.js');
 
 export default async function handler(req, res) {
   // Connect to DB

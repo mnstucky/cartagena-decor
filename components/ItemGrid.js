@@ -1,37 +1,30 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { CartContext } from './CartContextProvider';
+import React from 'react';
 import ItemPane from './ItemPane';
+import useFetch from '../services/useFetch';
+import Error from './Error';
 
 function ItemGrid() {
-  const [items, setItems] = useState([]);
-  // Load in-stock items from database on component load
-  useEffect(() => {
-    fetch('/api/db')
-      .then((res) => {
-        if (!res.ok) {
-          console.error('Network response wasn\'t ok');
-        }
-        res.json()
-          .then((data) => {
-            setItems(data);
-          });
-      });
-  }, []);
+  const { data: items, loading, error } = useFetch('db');
   const spinnerStyles = { minHeight: '60vh' };
   // If fetch from DB is still pending, return a loading spinner
-
-  return items.length === 0 ? (
-    <div className="is-flex is-justify-content-center is-align-items-center" style={spinnerStyles}>
-      <div className="sk-chase">
-        <div className="sk-chase-dot" />
-        <div className="sk-chase-dot" />
-        <div className="sk-chase-dot" />
-        <div className="sk-chase-dot" />
-        <div className="sk-chase-dot" />
-        <div className="sk-chase-dot" />
+  if (loading) {
+    return (
+      <div className="is-flex is-justify-content-center is-align-items-center" style={spinnerStyles}>
+        <div className="sk-chase">
+          <div className="sk-chase-dot" />
+          <div className="sk-chase-dot" />
+          <div className="sk-chase-dot" />
+          <div className="sk-chase-dot" />
+          <div className="sk-chase-dot" />
+          <div className="sk-chase-dot" />
+        </div>
       </div>
-    </div>
-  ) : (
+    );
+  }
+  if (error) {
+    return <Error />;
+  }
+  return (
     <div className="is-flex is-flex-wrap-wrap is-justify-content-space-evenly">
       {items.map((item) => (
         <ItemPane

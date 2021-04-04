@@ -7,12 +7,6 @@ import '../styles/customStyles.css';
 import { Provider } from 'next-auth/client';
 
 function MyApp({ Component, pageProps }) {
-  // Load saved cart from localStorage
-  // useEffect(() => { TODO: Figure out the best way to bring stored state in from local storage
-  //   const storedCart = JSON.parse(window.localStorage.getItem('cart'));
-  //   setCart(storedCart || []);
-  // }, []);
-
   return (
     <>
       <Head>
