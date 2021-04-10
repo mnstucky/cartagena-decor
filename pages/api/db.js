@@ -27,7 +27,7 @@ export default async function handler(req, res) {
       Item.find({ url: query.id })
         .select({ _id: 0 })
         .exec((err, item) => {
-          const formattedItem = JSON.stringify(item);
+          const formattedItem = JSON.stringify(item[0]);
           res.json(formattedItem);
         });
     }

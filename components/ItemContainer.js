@@ -12,10 +12,19 @@ function ItemContainer({
   setSelection,
   item,
   itemUrl,
-  options,
 }) {
   const [cartButtonVisibility, setCartButtonVisibility] = useState(false);
   const [quantity, setQuantity] = useState(1);
+  const options = [];
+  // eslint-disable-next-line no-restricted-syntax
+  for (const [key, value] of Object.entries(item.multiples.options)) {
+    if (value > 0) {
+      const keyWithSpacesAdded = key.replace(/([A-Z])/g, ' $1');
+      const formattedOption = keyWithSpacesAdded.charAt(0)
+        .toUpperCase() + keyWithSpacesAdded.slice(1);
+      options.push(formattedOption);
+    }
+  }
   return (
     <div className="container pl-3 pr-3">
       <h1 className="title is-4 mt-2 has-text-centered">{item.name}</h1>

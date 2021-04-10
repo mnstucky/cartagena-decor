@@ -4,7 +4,7 @@ import useFetch from '../services/useFetch';
 import Error from './Error';
 
 function ItemGrid() {
-  const { data: items, loading, error } = useFetch('db');
+  const { data: items, error, loading } = useFetch('db');
   const spinnerStyles = { minHeight: '60vh' };
   // If fetch from DB is still pending, return a loading spinner
   if (loading) {
@@ -32,6 +32,7 @@ function ItemGrid() {
           name={item.name}
           price={item.price}
           url={item.url}
+          key={item.url}
         />
       ))}
     </div>
