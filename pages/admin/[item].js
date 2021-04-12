@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { useSession } from 'next-auth/client';
 import AdminItemContainer from '../../components/AdminItemContainer';
+import LoadingSpinner from '../../components/LoadingSpinner';
 
 function ItemPage() {
   const [session, loading] = useSession();
@@ -50,19 +51,9 @@ function ItemPage() {
           });
       });
   }, []);
-  const spinnerStyles = { minHeight: '60vh' };
   // If fetch from DB is still pending, return a loading spinner
   return item === undefined || options === undefined ? (
-    <div className="is-flex is-justify-content-center is-align-items-center" style={spinnerStyles}>
-      <div className="sk-chase">
-        <div className="sk-chase-dot" />
-        <div className="sk-chase-dot" />
-        <div className="sk-chase-dot" />
-        <div className="sk-chase-dot" />
-        <div className="sk-chase-dot" />
-        <div className="sk-chase-dot" />
-      </div>
-    </div>
+    <LoadingSpinner />
   ) : (
     <AdminItemContainer
       selection={selection}

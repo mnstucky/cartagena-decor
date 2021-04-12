@@ -1,10 +1,10 @@
 import Head from 'next/head';
 import React from 'react';
+import { Provider } from 'next-auth/client';
 import Navbar from '../components/Navbar';
 import CartContextProvider from '../components/CartContextProvider';
 import '../styles/mystyles.css';
 import '../styles/customStyles.css';
-import { Provider } from 'next-auth/client';
 
 function MyApp({ Component, pageProps }) {
   return (

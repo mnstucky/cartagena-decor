@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import DecrementButton from '../components/DecrementButton';
 import IncrementButton from '../components/IncrementButton';
 import Subtotal from '../components/Subtotal';
@@ -17,8 +18,10 @@ function Cart() {
         <div className="column is-one-quarter">
           <Link href={`/${item.itemUrl}`}>
             <a>
-              <img
+              <Image
                 className="image"
+                height="150"
+                width="225"
                 style={imgStyle}
                 src={
                   // If an item option doesn't have an associated image, or no option is selected,

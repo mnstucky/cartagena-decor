@@ -2,23 +2,14 @@ import React from 'react';
 import ItemPane from './ItemPane';
 import useFetch from '../services/useFetch';
 import Error from './Error';
+import LoadingSpinner from './LoadingSpinner';
 
 function ItemGrid() {
   const { data: items, error, loading } = useFetch('db');
-  const spinnerStyles = { minHeight: '60vh' };
   // If fetch from DB is still pending, return a loading spinner
   if (loading) {
     return (
-      <div className="is-flex is-justify-content-center is-align-items-center" style={spinnerStyles}>
-        <div className="sk-chase">
-          <div className="sk-chase-dot" />
-          <div className="sk-chase-dot" />
-          <div className="sk-chase-dot" />
-          <div className="sk-chase-dot" />
-          <div className="sk-chase-dot" />
-          <div className="sk-chase-dot" />
-        </div>
-      </div>
+      <LoadingSpinner />
     );
   }
   if (error) {
