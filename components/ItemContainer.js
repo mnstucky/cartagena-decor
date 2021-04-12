@@ -53,7 +53,7 @@ function ItemContainer({
                 setCartButtonVisibility={setCartButtonVisibility}
                 quantity={quantity}
               />
-              <p className="has-text-weight-bold mb-0 ml-2">
+              <p className="has-text-weight-bold mb-0 ml-2 mr-2">
                 $
                 {item.price}
               </p>
