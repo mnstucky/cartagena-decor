@@ -1,41 +1,19 @@
 import React, { useContext } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
 import DecrementButton from '../components/DecrementButton';
 import IncrementButton from '../components/IncrementButton';
 import Subtotal from '../components/Subtotal';
 import RemoveButton from '../components/RemoveButton';
 import { CartContext } from '../components/CartContextProvider';
+import CartImage from '../components/CartImage';
 
 function Cart() {
-  const imgStyle = {
-    height: 150,
-  };
   const { cart } = useContext(CartContext);
   let cartContents = cart.map((item) => (
     <section>
       <div className="columns mb-0">
         <div className="column is-one-quarter">
-          <Link href={`/${item.itemUrl}`}>
-            <a>
-              <Image
-                className="image"
-                height="150"
-                width="225"
-                style={imgStyle}
-                src={
-                  // If an item option doesn't have an associated image, or no option is selected,
-                  //  display a default image
-              !item.images.includes(`${item.itemUrl}_${item.option.replaceAll(' ', '').toLowerCase()}.JPG`) || item.option === undefined || item.option === 'default'
-                ? `/images/${item.images[0]}`
-                : `/images/${item.itemUrl}_${item.option
-                  .replaceAll(' ', '')
-                  .toLowerCase()}.JPG`
-            }
-                alt="Product for sale"
-              />
-            </a>
-          </Link>
+          <CartImage item={item} />
         </div>
         <div className="column">
           <Link href={`/${item.itemUrl}`}>
