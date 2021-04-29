@@ -7,8 +7,21 @@ function AdminItemContainer({
   const [description, setDescription] = useState(item.description);
   const [features, setFeatures] = useState(item.features);
   const [highlights, setHighlights] = useState(item.highlights);
-  function handleSubmit(event) {
+  const [updateMessage, setUpdateMessage] = useState(undefined);
+  async function handleSubmit(event) {
     event.preventDefault();
+    const data = {
+      description,
+      features,
+      highlights,
+      url: itemUrl,
+    };
+    const response = await fetch('/api/admin', {
+      method: 'POST',
+      body: JSON.stringify(data),
+    });
+    const json = await response.json();
+    setUpdateMessage(json.message);
   }
   function handleDescriptionChange(event) {
     const newDescription = [];
@@ -113,11 +126,15 @@ function AdminItemContainer({
                   />
                 </div>
               </label>
-              <input
-                className="button is-primary"
-                type="submit"
-                value="Save Changes"
-              />
+              <div className="is-flex is-align-items-center">
+                <input
+                  className="button is-primary"
+                  type="submit"
+                  value="Save Changes"
+                />
+                {updateMessage && <p className="ml-3">{updateMessage}</p>}
+              </div>
+
             </form>
           </section>
         </div>
