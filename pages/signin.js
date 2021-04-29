@@ -24,7 +24,7 @@ function SignIn({ providers, csrfToken }) {
             Email address
           </label>
           <div className="control">
-            <input className="input" type="email" id="email" name="email" />
+            <input className="input" type="email" id="email" name="email" required="true" />
           </div>
         </div>
         <div className="control">
