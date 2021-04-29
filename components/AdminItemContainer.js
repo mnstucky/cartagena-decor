@@ -2,11 +2,7 @@ import React, { useState } from 'react';
 import ItemImage from './ItemImage';
 
 function AdminItemContainer({
-  selection,
-  setSelection,
-  item,
-  itemUrl,
-  options,
+  selection, setSelection, item, itemUrl,
 }) {
   const [description, setDescription] = useState(item.description);
   const [features, setFeatures] = useState(item.features);
@@ -43,6 +39,16 @@ function AdminItemContainer({
     setSelection(event.target.value);
     event.preventDefault();
   }
+  const options = [];
+  // eslint-disable-next-line no-restricted-syntax
+  for (const [key, value] of Object.entries(item.multiples.options)) {
+    if (value > 0) {
+      const keyWithSpacesAdded = key.replace(/([A-Z])/g, ' $1');
+      const formattedOption = keyWithSpacesAdded.charAt(0).toUpperCase()
+        + keyWithSpacesAdded.slice(1);
+      options.push(formattedOption);
+    }
+  }
   // Declare iterable indices for fields that are arrays; indices are used to identify
   //    the correct index to update in the handler functions
   let descriptionId = 0;
@@ -72,7 +78,13 @@ function AdminItemContainer({
                 <h6>Description:</h6>
                 {description.map((bullet) => (
                   <div className="field">
-                    <textarea className="textarea" rows="2" value={bullet} id={descriptionId++} onChange={handleDescriptionChange} />
+                    <textarea
+                      className="textarea"
+                      rows="2"
+                      value={bullet}
+                      id={descriptionId++}
+                      onChange={handleDescriptionChange}
+                    />
                   </div>
                 ))}
               </label>
@@ -80,17 +92,32 @@ function AdminItemContainer({
                 <h6>Features:</h6>
                 {features.map((bullet) => (
                   <div className="field">
-                    <textarea className="textarea" rows="2" value={bullet} id={featureId++} onChange={handleFeatureChange} />
+                    <textarea
+                      className="textarea"
+                      rows="2"
+                      value={bullet}
+                      id={featureId++}
+                      onChange={handleFeatureChange}
+                    />
                   </div>
                 ))}
               </label>
               <label className="label">
                 <h6>Highlights:</h6>
                 <div className="field">
-                  <textarea className="textarea" rows="2" value={highlights} onChange={handleHighlightChange} />
+                  <textarea
+                    className="textarea"
+                    rows="2"
+                    value={highlights}
+                    onChange={handleHighlightChange}
+                  />
                 </div>
               </label>
-              <input className="button is-primary" type="submit" value="Save Changes" />
+              <input
+                className="button is-primary"
+                type="submit"
+                value="Save Changes"
+              />
             </form>
           </section>
         </div>
