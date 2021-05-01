@@ -33,6 +33,19 @@ function AdminItemContainer({
       }
     });
     setDescription(newDescription);
+    setUpdateMessage(undefined);
+  }
+  async function addDescription() {
+    const newDescription = [...description];
+    newDescription.push('');
+    setDescription(newDescription);
+    setUpdateMessage(undefined);
+  }
+  async function deleteDescription(event) {
+    const newDescription = [...description];
+    newDescription.splice(event.target.id, 1);
+    setDescription(newDescription);
+    setUpdateMessage(undefined);
   }
   function handleFeatureChange(event) {
     const newFeatures = [];
@@ -95,12 +108,16 @@ function AdminItemContainer({
                       className="textarea"
                       rows="2"
                       value={bullet}
-                      id={descriptionId++}
+                      id={descriptionId}
                       onChange={handleDescriptionChange}
                     />
+                    <div className="is-flex is-flex-direction-row-reverse">
+                      <button id={descriptionId++} type="button" className="button is-danger mt-1" onClick={deleteDescription}>X</button>
+                    </div>
                   </div>
                 ))}
               </label>
+              <button className="button is-primary mb-3" onClick={addDescription}>Add Description</button>
               <label className="label">
                 <h6>Features:</h6>
                 {features.map((bullet) => (
