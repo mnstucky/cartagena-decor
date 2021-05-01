@@ -1,12 +1,13 @@
 import React, { useContext } from 'react';
 import { CartContext } from './CartContextProvider';
 
-function IncrementButton({
+function DecrementCartButton({
   name,
   option,
+  quantity,
 }) {
   const { cart, setCart } = useContext(CartContext);
-  function incrementQuantity() {
+  function decrementQuantity() {
     const newCart = cart.map((cartItem) => {
       if (cartItem.name === name && cartItem.option === option) {
         const updatedItem = {
@@ -15,7 +16,7 @@ function IncrementButton({
           option: cartItem.option,
           images: cartItem.images,
           itemUrl: cartItem.itemUrl,
-          quantity: cartItem.quantity + 1,
+          quantity: cartItem.quantity - 1,
         };
         return updatedItem;
       }
@@ -24,11 +25,17 @@ function IncrementButton({
     localStorage.setItem('cart', JSON.stringify(newCart));
     setCart(newCart);
   }
+
   return (
-    <button onClick={incrementQuantity} type="button" className="button is-link is-light">
-      +
+    <button
+      onClick={decrementQuantity}
+      disabled={quantity <= 1}
+      type="button"
+      className="button is-link is-light"
+    >
+      -
     </button>
   );
 }
 
-export default IncrementButton;
+export default DecrementCartButton;

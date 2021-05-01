@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import Link from 'next/link';
-import DecrementButton from '../components/DecrementButton';
-import IncrementButton from '../components/IncrementButton';
+import DecrementCartButton from '../components/DecrementCartButton';
+import IncrementCartButton from '../components/IncrementCartButton';
 import Subtotal from '../components/Subtotal';
 import RemoveButton from '../components/RemoveButton';
 import { CartContext } from '../components/CartContextProvider';
@@ -28,13 +28,13 @@ function Cart() {
           </div>
           <div className="column">
             <span className="is-flex is-justify-content-flex-end is-align-content-center">
-              <DecrementButton
+              <DecrementCartButton
                 name={item.name}
                 option={item.option}
                 quantity={item.quantity}
               />
               <p className="is-size-6 pt-1 pb-1 pl-3 pr-3">{item.quantity}</p>
-              <IncrementButton
+              <IncrementCartButton
                 name={item.name}
                 option={item.option}
               />

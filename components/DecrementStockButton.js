@@ -1,13 +1,10 @@
 import React, { useContext } from 'react';
 import { CartContext } from './CartContextProvider';
 
-function DecrementButton({
-  name,
-  option,
-  quantity,
+function DecrementStockButton({
+  stock, setStock,
 }) {
-  const { cart, setCart } = useContext(CartContext);
-  function decrementQuantity() {
+  function incrementQuantity() {
     const newCart = cart.map((cartItem) => {
       if (cartItem.name === name && cartItem.option === option) {
         const updatedItem = {
@@ -16,7 +13,7 @@ function DecrementButton({
           option: cartItem.option,
           images: cartItem.images,
           itemUrl: cartItem.itemUrl,
-          quantity: cartItem.quantity - 1,
+          quantity: cartItem.quantity + 1,
         };
         return updatedItem;
       }
@@ -25,17 +22,11 @@ function DecrementButton({
     localStorage.setItem('cart', JSON.stringify(newCart));
     setCart(newCart);
   }
-
   return (
-    <button
-      onClick={decrementQuantity}
-      disabled={quantity <= 1}
-      type="button"
-      className="button is-link is-light"
-    >
+    <button onClick={incrementQuantity} type="button" className="button is-link is-light">
       -
     </button>
   );
 }
 
-export default DecrementButton;
+export default DecrementStockButton;

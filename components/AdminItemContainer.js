@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import ItemImage from './ItemImage';
-import AdminSectionList from "./AdminSectionList";
+import AdminSectionList from './AdminSectionList';
 
 function AdminItemContainer({
   selection, setSelection, item, itemUrl,
@@ -8,6 +8,8 @@ function AdminItemContainer({
   const [description, setDescription] = useState(item.description);
   const [features, setFeatures] = useState(item.features);
   const [highlights, setHighlights] = useState(item.highlights);
+  const [stock, setStock] = useState(item.stock);
+  const [price, usePrice] = useState(item.price);
   const [updateMessage, setUpdateMessage] = useState(undefined);
   async function handleSubmit(event) {
     event.preventDefault();
@@ -16,6 +18,8 @@ function AdminItemContainer({
       features,
       highlights,
       url: itemUrl,
+      stock,
+      price,
     };
     const response = await fetch('/api/admin', {
       method: 'POST',
@@ -29,17 +33,20 @@ function AdminItemContainer({
   }
   function handleSelection(event) {
     setSelection(event.target.value);
+    // Format selection to match formatting of options in item object
+    const unformattedSelectionArray = event.target.value.split(' ');
+    unformattedSelectionArray[0] = unformattedSelectionArray[0].toLowerCase();
+    const unformattedSelection = unformattedSelectionArray.join('');
+    setStock(item.multiples.options[unformattedSelection]);
     event.preventDefault();
   }
   const options = [];
   // eslint-disable-next-line no-restricted-syntax
   for (const [key, value] of Object.entries(item.multiples.options)) {
-    if (value > 0) {
-      const keyWithSpacesAdded = key.replace(/([A-Z])/g, ' $1');
-      const formattedOption = keyWithSpacesAdded.charAt(0).toUpperCase()
+    const keyWithSpacesAdded = key.replace(/([A-Z])/g, ' $1');
+    const formattedOption = keyWithSpacesAdded.charAt(0).toUpperCase()
         + keyWithSpacesAdded.slice(1);
-      options.push(formattedOption);
-    }
+    options.push(formattedOption);
   }
   // Declare iterable indices for fields that are arrays; indices are used to identify
   //    the correct index to update in the handler functions
@@ -50,15 +57,30 @@ function AdminItemContainer({
         <div className="column">
           <ItemImage selection={selection} item={item} itemUrl={itemUrl} />
           <section className="box content">
-            <h6>Make a Selection to View Image:</h6>
+            <h6>Make a Selection to View Image and Make Changes:</h6>
             <div className="select mb-2 mr-2">
               <select value={selection} onChange={handleSelection}>
                 <option value="default">Default View</option>
                 {options.map((productType) => (
-                  <option value={productType}>{productType}</option>
+                  <option key={productType} value={productType}>{productType}</option>
                 ))}
               </select>
             </div>
+            {/* Hide fields if the item page has multiple options and no option is selected */}
+            {!(item.multiples.hasMultiples && selection === 'default') && (
+            <div>
+              <p>
+                Stock:
+                {' '}
+                {stock}
+              </p>
+              <p>
+                Price:
+                {' '}
+                {price}
+              </p>
+            </div>
+            )}
           </section>
         </div>
         <div className="column">
