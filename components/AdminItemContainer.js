@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import ItemImage from './ItemImage';
+import AdminSectionList from "./AdminSectionList";
 
 function AdminItemContainer({
   selection, setSelection, item, itemUrl,
@@ -23,41 +24,6 @@ function AdminItemContainer({
     const json = await response.json();
     setUpdateMessage(json.message);
   }
-  function handleDescriptionChange(event) {
-    const newDescription = [];
-    description.forEach((bullet, index) => {
-      if (parseInt(event.target.id, 10) === index) {
-        newDescription.push(event.target.value);
-      } else {
-        newDescription.push(bullet);
-      }
-    });
-    setDescription(newDescription);
-    setUpdateMessage(undefined);
-  }
-  async function addDescription() {
-    const newDescription = [...description];
-    newDescription.push('');
-    setDescription(newDescription);
-    setUpdateMessage(undefined);
-  }
-  async function deleteDescription(event) {
-    const newDescription = [...description];
-    newDescription.splice(event.target.id, 1);
-    setDescription(newDescription);
-    setUpdateMessage(undefined);
-  }
-  function handleFeatureChange(event) {
-    const newFeatures = [];
-    features.forEach((bullet, index) => {
-      if (parseInt(event.target.id, 10) === index) {
-        newFeatures.push(event.target.value);
-      } else {
-        newFeatures.push(bullet);
-      }
-    });
-    setFeatures(newFeatures);
-  }
   function handleHighlightChange(event) {
     setHighlights(event.target.value);
   }
@@ -77,8 +43,6 @@ function AdminItemContainer({
   }
   // Declare iterable indices for fields that are arrays; indices are used to identify
   //    the correct index to update in the handler functions
-  let descriptionId = 0;
-  let featureId = 0;
   return (
     <div className="container pl-3 pr-3">
       <h1 className="title is-4 mt-2 has-text-centered">{item.name}</h1>
@@ -100,38 +64,8 @@ function AdminItemContainer({
         <div className="column">
           <section className="box content">
             <form onSubmit={handleSubmit}>
-              <label className="label">
-                <h6>Description:</h6>
-                {description.map((bullet) => (
-                  <div className="field">
-                    <textarea
-                      className="textarea"
-                      rows="2"
-                      value={bullet}
-                      id={descriptionId}
-                      onChange={handleDescriptionChange}
-                    />
-                    <div className="is-flex is-flex-direction-row-reverse">
-                      <button id={descriptionId++} type="button" className="button is-danger mt-1" onClick={deleteDescription}>X</button>
-                    </div>
-                  </div>
-                ))}
-              </label>
-              <button className="button is-primary mb-3" onClick={addDescription}>Add Description</button>
-              <label className="label">
-                <h6>Features:</h6>
-                {features.map((bullet) => (
-                  <div className="field">
-                    <textarea
-                      className="textarea"
-                      rows="2"
-                      value={bullet}
-                      id={featureId++}
-                      onChange={handleFeatureChange}
-                    />
-                  </div>
-                ))}
-              </label>
+              <AdminSectionList fieldName="Description" fields={description} setFields={setDescription} />
+              <AdminSectionList fieldName="Feature" fields={features} setFields={setFeatures} />
               <label className="label">
                 <h6>Highlights:</h6>
                 <div className="field">
