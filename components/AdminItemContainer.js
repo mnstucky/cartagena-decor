@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import ItemImage from './ItemImage';
 import AdminSectionList from './AdminSectionList';
+import DecrementStockButton from './DecrementStockButton';
+import IncrementStockButton from './IncrementStockButton';
 
 function AdminItemContainer({
   selection, setSelection, item, itemUrl,
@@ -11,6 +13,7 @@ function AdminItemContainer({
   const [stock, setStock] = useState(item.stock);
   const [price, usePrice] = useState(item.price);
   const [updateMessage, setUpdateMessage] = useState(undefined);
+  console.log(item);
   async function handleSubmit(event) {
     event.preventDefault();
     const data = {
@@ -20,6 +23,7 @@ function AdminItemContainer({
       url: itemUrl,
       stock,
       price,
+      selection,
     };
     const response = await fetch('/api/admin', {
       method: 'POST',
@@ -74,6 +78,8 @@ function AdminItemContainer({
                 {' '}
                 {stock}
               </p>
+              <DecrementStockButton setStock={setStock} />
+              <IncrementStockButton setStock={setStock} />
               <p>
                 Price:
                 {' '}

@@ -14,12 +14,22 @@ export default async (req, res) => {
       })
         .catch((err) => console.error(err));
       const {
-        description, features, highlights, url,
+        description, features, highlights, url, stock, price, selection,
       } = JSON.parse(req.body);
+      const unformattedSelectionArray = selection.split(' ');
+      unformattedSelectionArray[0] = unformattedSelectionArray[0].toLowerCase();
+      const unformattedSelection = unformattedSelectionArray.join('');
       const itemToUpdate = await Item.findOne({ url });
       itemToUpdate.description = description;
       itemToUpdate.features = features;
       itemToUpdate.highlights = highlights;
+      itemToUpdate.price = price;
+      if (selection === 'default') {
+        itemToUpdate.stock = stock;
+      } else {
+        itemToUpdate.multiples.options.set(unformattedSelection, stock);
+      }
+      console.log(itemToUpdate);
       const updatedItem = await itemToUpdate.save();
       if (updatedItem === itemToUpdate) {
         res.send({
