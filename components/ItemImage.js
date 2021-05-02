@@ -7,9 +7,9 @@ function ItemImage({ selection, item, itemUrl }) {
     <figure className="image box">
       <img
         src={
-          !haveAnImage || selection === undefined || selection === 'default'
-            ? `/images/${item.images[0]}`
-            : `/images/${itemUrl}_${selection
+          !haveAnImage || false || selection === 'default'
+            ? `https://cartagena-decor.s3.amazonaws.com/${item.images[0]}`
+            : `https://cartagena-decor.s3.amazonaws.com/${itemUrl}_${selection
               .replaceAll(' ', '')
               .toLowerCase()}.JPG`
         }

@@ -19,7 +19,7 @@ function ItemGrid() {
     <div className="is-flex is-flex-wrap-wrap is-justify-content-space-evenly">
       {items.map((item) => (
         <ItemPane
-          image={`images/${item.images[0]}`}
+          image={`https://cartagena-decor.s3.amazonaws.com/${item.images[0]}`}
           name={item.name}
           price={item.price}
           url={item.url}
