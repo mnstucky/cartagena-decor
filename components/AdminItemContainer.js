@@ -3,6 +3,7 @@ import ItemImage from './ItemImage';
 import AdminSectionList from './AdminSectionList';
 import DecrementStockButton from './DecrementStockButton';
 import IncrementStockButton from './IncrementStockButton';
+import AdminSectionField from './AdminSectionField';
 
 function AdminItemContainer({
   selection, setSelection, item, itemUrl,
@@ -97,17 +98,7 @@ function AdminItemContainer({
             <form onSubmit={handleSubmit}>
               <AdminSectionList fieldName="Description" fields={description} setFields={setDescription} />
               <AdminSectionList fieldName="Feature" fields={features} setFields={setFeatures} />
-              <label className="label">
-                <h6>Highlights:</h6>
-                <div className="field">
-                  <textarea
-                    className="textarea"
-                    rows="2"
-                    value={highlights}
-                    onChange={handleHighlightChange}
-                  />
-                </div>
-              </label>
+              <AdminSectionField fieldName="Highlights" field={highlights} setField={setHighlights} />
               <div className="is-flex is-align-items-center">
                 <input
                   className="button is-primary"
