@@ -60,17 +60,17 @@
 .item-1 {
   z-index: 2;
   opacity: 1;
-  background: url("../public/images/hero1.JPG");
+  background: url("https://cartagena-decor.s3.amazonaws.com/hero1.JPG");
   background-size: cover;
   background-position: center;
 }
 .item-2 {
-  background: url("../public/images/hero2.JPG");
+  background: url("https://cartagena-decor.s3.amazonaws.com/hero2.JPG");
   background-size: cover;
   background-position: center;
 }
 .item-3 {
-  background: url("../public/images/hero3.JPG");
+  background: url("https://cartagena-decor.s3.amazonaws.com/hero3.JPG");
   background-size: cover;
   background-position: center;
 }
@@ -148,12 +148,12 @@
 }
 
 .googleButton {
-  background-image: url('/images/btn_google_signin_dark_normal_web.png');
+  background-image: url('https://cartagena-decor.s3.amazonaws.com/btn_google_signin_dark_normal_web.png');
   height: 49px;
   width: 194px;
 
 }
 
 .googleButton:hover {
-  background-image: url('/images/btn_google_signin_dark_focus_web.png');
+  background-image: url('https://cartagena-decor.s3.amazonaws.com/btn_google_signin_dark_focus_web.png');
 }
