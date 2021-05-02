@@ -72,20 +72,23 @@ function AdminItemContainer({
             </div>
             {/* Hide fields if the item page has multiple options and no option is selected */}
             {!(item.multiples.hasMultiples && selection === 'default') && (
-            <div>
-              <p>
-                Stock:
-                {' '}
-                {stock}
-              </p>
-              <DecrementStockButton setStock={setStock} />
-              <IncrementStockButton setStock={setStock} />
-              <p>
-                Price:
-                {' '}
-                {price}
-              </p>
-            </div>
+            <>
+              <div className="is-flex is-align-items-center">
+                <p className="mb-0 mr-2">Stock:</p>
+                <DecrementStockButton setStock={setStock} />
+                <p className="ml-3 mr-3 mb-0">
+                  {stock}
+                </p>
+                <IncrementStockButton setStock={setStock} />
+              </div>
+              <div>
+                <p>
+                  Price:
+                  {' '}
+                  {price}
+                </p>
+              </div>
+            </>
             )}
           </section>
         </div>
