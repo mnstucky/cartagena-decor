@@ -4,6 +4,7 @@ import AdminSectionList from './AdminSectionList';
 import DecrementStockButton from './DecrementStockButton';
 import IncrementStockButton from './IncrementStockButton';
 import AdminSectionField from './AdminSectionField';
+import AdminSectionNumberField from './AdminSectionNumberField';
 
 function AdminItemContainer({
   selection, setSelection, item, itemUrl,
@@ -12,7 +13,7 @@ function AdminItemContainer({
   const [features, setFeatures] = useState(item.features);
   const [highlights, setHighlights] = useState(item.highlights);
   const [stock, setStock] = useState(item.stock);
-  const [price, usePrice] = useState(item.price);
+  const [price, setPrice] = useState(item.price);
   const [updateMessage, setUpdateMessage] = useState(undefined);
   console.log(item);
   async function handleSubmit(event) {
@@ -75,20 +76,14 @@ function AdminItemContainer({
             {!(item.multiples.hasMultiples && selection === 'default') && (
             <>
               <div className="is-flex is-align-items-center">
-                <p className="mb-0 mr-2">Stock:</p>
+                <p className="mb-0 mr-2 has-text-weight-bold">Stock:</p>
                 <DecrementStockButton setStock={setStock} />
                 <p className="ml-3 mr-3 mb-0">
                   {stock}
                 </p>
                 <IncrementStockButton setStock={setStock} />
               </div>
-              <div>
-                <p>
-                  Price:
-                  {' '}
-                  {price}
-                </p>
-              </div>
+              <AdminSectionNumberField field={price} setField={setPrice} fieldName="Price" />
             </>
             )}
           </section>

@@ -1,21 +1,22 @@
 import React from 'react';
 
-function AdminSectionField({
+function AdminSectionNumberField({
   field, setField, fieldName,
 }) {
   function handleFieldChange(event) {
     setField(event.target.value);
   }
   return (
-    <label className="label">
-      <h6>
+  // eslint-disable-next-line jsx-a11y/label-has-associated-control
+    <label className="label is-flex is-align-items-center mt-2">
+      <h6 className="mb-0 mr-3">
         {fieldName}
         :
       </h6>
       <div className="field">
-        <textarea
-          className="textarea"
-          rows="2"
+        <input
+          type="number"
+          className="input"
           value={field}
           onChange={handleFieldChange}
         />
@@ -24,4 +25,4 @@ function AdminSectionField({
   );
 }
 
-export default AdminSectionField;
+export default AdminSectionNumberField;
