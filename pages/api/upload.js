@@ -6,7 +6,8 @@ const Item = require('../../services/items.js');
 
 export default async (req, res) => {
   const session = await getSession({ req });
-  if (session) {
+  // TODO: Link approved admin accounts to database
+  if (session && session?.user?.email === 'mnstucky@gmail.com') {
     aws.config.update({
       accessKeyId: process.env.AWS_ACCESS_KEY,
       secretAccessKey: process.env.AWS_SECRET_KEY,

@@ -5,7 +5,8 @@ const Item = require('../../services/items.js');
 
 export default async (req, res) => {
   const session = await getSession({ req });
-  if (session) {
+  // TODO: Link authorized users to database
+  if (session && session?.user?.email === 'mnstucky@gmail.com') {
     if (req.method === 'POST') {
     // Connect to the DB
       await mongoose.connect(process.env.MONGO_URL, {
