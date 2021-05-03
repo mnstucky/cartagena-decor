@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useReducer } from 'react';
 import ItemImage from './ItemImage';
 import AdminSectionList from './AdminSectionList';
 import DecrementStockButton from './DecrementStockButton';
@@ -15,7 +15,6 @@ function AdminItemContainer({
   const [stock, setStock] = useState(item.stock);
   const [price, setPrice] = useState(item.price);
   const [updateMessage, setUpdateMessage] = useState(undefined);
-  console.log(item);
   async function handleSubmit(event) {
     event.preventDefault();
     const data = {
@@ -34,9 +33,6 @@ function AdminItemContainer({
     const json = await response.json();
     setUpdateMessage(json.message);
   }
-  function handleHighlightChange(event) {
-    setHighlights(event.target.value);
-  }
   function handleSelection(event) {
     setSelection(event.target.value);
     // Format selection to match formatting of options in item object
@@ -45,6 +41,27 @@ function AdminItemContainer({
     const unformattedSelection = unformattedSelectionArray.join('');
     setStock(item.multiples.options[unformattedSelection]);
     event.preventDefault();
+  }
+  async function uploadImage(event) {
+    const file = event.target.files[0];
+    const convertedSelection = selection === 'default' ? 'main' : selection;
+    const convertedImageUrl = `${itemUrl}_${convertedSelection.replaceAll(' ', '').toLowerCase()}.JPG`;
+    const filename = encodeURIComponent(convertedImageUrl);
+    const response = await fetch(`/api/upload?file=${filename}`);
+    const { url, fields } = await response.json();
+    const formData = new FormData();
+    Object.entries({ ...fields, file }).forEach(([key, value]) => {
+      formData.append(key, value);
+    });
+    const upload = await fetch(url, {
+      method: 'POST',
+      body: formData,
+    });
+    if (upload.ok) {
+      console.log('Uploaded successfully!');
+    } else {
+      console.error('Upload failed.');
+    }
   }
   const options = [];
   // eslint-disable-next-line no-restricted-syntax
@@ -84,6 +101,11 @@ function AdminItemContainer({
                 <IncrementStockButton setStock={setStock} />
               </div>
               <AdminSectionNumberField field={price} setField={setPrice} fieldName="Price" />
+              <label className="button is-primary">
+                Change Image
+                <input className="is-hidden" onChange={uploadImage} type="file" accept="image/png, image/jpg" />
+              </label>
+              <p>(Image must be in .JPG format. Preferred dimensions are 720 x 480.)</p>
             </>
             )}
           </section>
