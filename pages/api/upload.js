@@ -9,9 +9,9 @@ export default async (req, res) => {
   // TODO: Link approved admin accounts to database
   if (session && session?.user?.email === 'mnstucky@gmail.com') {
     aws.config.update({
-      accessKeyId: process.env.AWS_ACCESS_KEY,
-      secretAccessKey: process.env.AWS_SECRET_KEY,
-      region: process.env.AWS_REGION,
+      accessKeyId: process.env.CUSTOM_AWS_ACCESS_KEY,
+      secretAccessKey: process.env.CUSTOM_AWS_SECRET_KEY,
+      region: process.env.CUSTOM_AWS_REGION,
       signatureVersion: 'v4',
     });
     const s3 = new aws.S3();
