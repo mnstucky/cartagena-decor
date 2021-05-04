@@ -1,10 +1,10 @@
 import React, { useState, useReducer } from 'react';
 import ItemImage from './ItemImage';
-import AdminSectionList from './AdminSectionList';
+import ControlledTextareaList from './ControlledTextareaList';
 import DecrementStockButton from './DecrementStockButton';
 import IncrementStockButton from './IncrementStockButton';
-import AdminSectionField from './AdminSectionField';
-import AdminSectionNumberField from './AdminSectionNumberField';
+import ControlledTextareaSingle from './ControlledTextareaSingle';
+import ControlledNumberInput from './ControlledNumberInput';
 
 function AdminItemContainer({
   selection, setSelection, item, itemUrl,
@@ -100,7 +100,7 @@ function AdminItemContainer({
                 </p>
                 <IncrementStockButton setStock={setStock} />
               </div>
-              <AdminSectionNumberField field={price} setField={setPrice} fieldName="Price" />
+              <ControlledNumberInput field={price} setField={setPrice} fieldName="Price" />
               <label className="button is-primary">
                 Change Image
                 <input className="is-hidden" onChange={uploadImage} type="file" accept="image/png, image/jpg" />
@@ -113,9 +113,9 @@ function AdminItemContainer({
         <div className="column">
           <section className="box content">
             <form onSubmit={handleSubmit}>
-              <AdminSectionList fieldName="Description" fields={description} setFields={setDescription} />
-              <AdminSectionList fieldName="Feature" fields={features} setFields={setFeatures} />
-              <AdminSectionField fieldName="Highlights" field={highlights} setField={setHighlights} />
+              <ControlledTextareaList fieldName="Description" fields={description} setFields={setDescription} />
+              <ControlledTextareaList fieldName="Feature" fields={features} setFields={setFeatures} />
+              <ControlledTextareaSingle fieldName="Highlights" field={highlights} setField={setHighlights} />
               <div className="is-flex is-align-items-center">
                 <input
                   className="button is-primary"

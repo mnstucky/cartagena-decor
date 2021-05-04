@@ -1,6 +1,6 @@
 import React from 'react';
 
-function AdminSectionList({
+function ControlledTextareaList({
   fields, setFields, fieldName,
 }) {
   function handleFieldChange(event) {
@@ -30,7 +30,10 @@ function AdminSectionList({
   return (
     <>
       <label className="label">
-        <h6>{fieldName}:</h6>
+        <h6>
+          {fieldName}
+          :
+        </h6>
         {fields.map((bullet) => (
           <div className="field">
             <textarea
@@ -55,4 +58,4 @@ function AdminSectionList({
   );
 }
 
-export default AdminSectionList;
+export default ControlledTextareaList;

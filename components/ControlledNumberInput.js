@@ -1,6 +1,6 @@
 import React from 'react';
 
-function AdminSectionNumberField({
+function ControlledNumberInput({
   field, setField, fieldName,
 }) {
   function handleFieldChange(event) {
@@ -25,4 +25,4 @@ function AdminSectionNumberField({
   );
 }
 
-export default AdminSectionNumberField;
+export default ControlledNumberInput;
