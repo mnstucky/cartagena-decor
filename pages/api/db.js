@@ -23,11 +23,19 @@ export default async function handler(req, res) {
           res.json(formattedItems);
         });
       // If an id parameter is used, return a single item
-    } else {
+    } else if (query.id) {
       Item.find({ url: query.id })
         .select({ _id: 0 })
         .exec((err, item) => {
           const formattedItem = JSON.stringify(item[0]);
+          res.json(formattedItem);
+        });
+      // If a list parameter is used, return a list of the specified field
+    } else if (query.list) {
+      Item.find({})
+        .distinct(`${query.list}`)
+        .exec((err, item) => {
+          const formattedItem = JSON.stringify(item);
           res.json(formattedItem);
         });
     }
