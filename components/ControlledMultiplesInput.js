@@ -37,8 +37,8 @@ function ControlledMultiplesInput({
     setOptions(newOptions);
   }
   async function deleteOption(event) {
-    const newOptions = [...options];
-    // newOptions.delete( );
+    const newOptions = new Map(options);
+    newOptions.delete(event.target.id);
     setOptions(newOptions);
   }
   return (
@@ -75,7 +75,7 @@ function ControlledMultiplesInput({
                 />
               </div>
             </label>
-            <label className="label is-flex is-align-items-center ml-2">
+            <label className="label is-flex is-align-items-center mt-2 ml-2">
               <h6 className="mb-0 mr-3">
                 Stock:
               </h6>
@@ -89,6 +89,9 @@ function ControlledMultiplesInput({
                 />
               </div>
             </label>
+            <div className="is-flex is-flex-direction-row-reverse">
+              <button id={option} type="button" className="button is-danger" onClick={deleteOption}>X</button>
+            </div>
           </div>
 
         ))}
