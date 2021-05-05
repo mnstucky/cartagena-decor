@@ -9,6 +9,7 @@ import ControlledTextareaSingle from '../../components/ControlledTextareaSingle'
 import ControlledTextareaList from '../../components/ControlledTextareaList';
 import ControlledSelect from '../../components/ControlledSelect';
 import ControlledMultiplesInput from '../../components/ControlledMultiplesInput';
+import ControlledUrlField from '../../components/ControlledUrlField';
 
 function AddItem() {
   const [session] = useSession();
@@ -21,6 +22,7 @@ function AddItem() {
   const [features, setFeatures] = useState([]);
   const [hasMultiples, setHasMultiples] = useState(false);
   const [options, setOptions] = useState(new Map());
+  const [url, setUrl] = useState('');
   const { data: categories, error, loading } = useFetch('db?list=category');
   // TODO: Link authorized users to database
   if (session?.user?.email !== 'mnstucky@gmail.com') {
@@ -53,6 +55,7 @@ function AddItem() {
         <ControlledTextareaList fieldName="Description" fields={description} setFields={setDescription} />
         <ControlledTextareaList fieldName="Features" fields={features} setFields={setFeatures} />
         <ControlledMultiplesInput options={options} setOptions={setOptions} hasMultiples={hasMultiples} setHasMultiples={setHasMultiples} />
+        <ControlledUrlField url={url} setUrl={setUrl} />
       </form>
     </div>
 
