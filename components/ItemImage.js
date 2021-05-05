@@ -8,7 +8,7 @@ function ItemImage({ selection, item, itemUrl }) {
       <img
         src={
           !haveAnImage || false || selection === 'default'
-            ? `https://cartagena-decor.s3.amazonaws.com/${item.images[0]}`
+            ? `https://cartagena-decor.s3.amazonaws.com/${itemUrl}_main.JPG`
             : `https://cartagena-decor.s3.amazonaws.com/${itemUrl}_${selection
               .replaceAll(' ', '')
               .toLowerCase()}.JPG`
