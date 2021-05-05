@@ -2,15 +2,20 @@ import React, { useState } from 'react';
 import useFetch from '../services/useFetch';
 
 function ControlledUrlField({ url, setUrl }) {
-  const [urlMessage, setUrlMessage] = useState();
+  const [urlMessage, setUrlMessage] = useState('The URL must be exactly two lowercase letters.');
   const { data: urls, error, loading } = useFetch('db?list=url');
   function handleUrlChange(event) {
     if (!urls.find((url) => url === event.target.value)) {
       setUrl(event.target.value);
-      setUrlMessage(undefined);
     } else {
       setUrl(event.target.value);
       setUrlMessage('The URL you have selected is not unique. Please try again.');
+      return;
+    }
+    if (/^[a-z]{2}$/.test(event.target.value)) {
+      setUrlMessage('Valid URL.');
+    } else {
+      setUrlMessage('The URL must be exactly two lowercase letters.');
     }
   }
   if (loading) {
@@ -34,7 +39,7 @@ function ControlledUrlField({ url, setUrl }) {
           onChange={handleUrlChange}
         />
       </div>
-      {urlMessage && <h6 className="mb-0">{urlMessage}</h6>}
+      {urlMessage && <h6 className="mb-0 ml-2">{urlMessage}</h6>}
     </label>
   );
 }
