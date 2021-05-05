@@ -20,7 +20,7 @@ function AddItem() {
   const [description, setDescription] = useState([]);
   const [features, setFeatures] = useState([]);
   const [hasMultiples, setHasMultiples] = useState(false);
-  const [options, setOptions] = useState();
+  const [options, setOptions] = useState(new Map());
   const { data: categories, error, loading } = useFetch('db?list=category');
   // TODO: Link authorized users to database
   if (session?.user?.email !== 'mnstucky@gmail.com') {
