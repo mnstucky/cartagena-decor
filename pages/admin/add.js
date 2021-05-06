@@ -30,9 +30,10 @@ function AddItem() {
   function updateLocked(event) {
     setLocked(true);
   }
-  async function uploadMainImage(event) {
+  async function uploadImage(event) {
+    console.log(event);
     const file = event.target.files[0];
-    const convertedImageUrl = `${url}_main.JPG`;
+    const convertedImageUrl = `${event.target.id}.JPG`;
     const filename = encodeURIComponent(convertedImageUrl);
     const response = await fetch(`/api/upload?file=${filename}`);
     const { url: returnedUrl, fields } = await response.json();
@@ -77,9 +78,12 @@ function AddItem() {
   if (error) {
     return <Error />;
   }
+  const paneStyle = {
+    width: 300,
+  };
   return (
     <div className="container pl-3 pr-3">
-      <h1 className="is-size-4 has-text-weight-bold">Add Item</h1>
+      <h1 className="is-size-4 has-text-weight-bold mb-3">Add Item</h1>
       <form>
         {!locked
             && (
@@ -93,37 +97,71 @@ function AddItem() {
               <ControlledTextareaList fieldName="Features" fields={features} setFields={setFeatures} />
               <ControlledMultiplesInput options={options} setOptions={setOptions} hasMultiples={hasMultiples} setHasMultiples={setHasMultiples} />
               <ControlledUrlField url={url} setUrl={setUrl} />
+              {name && stock && price && url.length === 2
+              && (
               <button type="button" className="button is-primary" onClick={updateLocked}>
                 Save and Add Images
               </button>
+              )}
             </>
             )}
         {locked
         && (
-        <>
-          <label className="button is-primary">
-            Add Main Image
-            <input className="is-hidden" onChange={uploadMainImage} type="file" accept="image/jpg" />
-          </label>
-          <p>(Image must be in .JPG format. Preferred dimensions are 720 x 480.)</p>
-          <div className="columns">
-            {uploaded.map((imageUrl) => (
-              <div className="column is-one-third">
-                <figure className="image box">
-                  <img
-                    src={`https://cartagena-decor.s3.amazonaws.com/${imageUrl}?${Math.floor(Math.random() * 10000)}`}
-                    alt={`Uploaded at ${imageUrl}`}
-                  />
-                  <figcaption>
-                    Uploaded as:
-                    {' '}
-                    {imageUrl}
-                  </figcaption>
-                </figure>
+        <div className="is-flex">
+          <div className="card ml-2 mr-2" style={paneStyle}>
+            {uploaded.includes(`${url}_main.JPG`)
+            && (
+            <div className="card-image">
+              <div className="image is-4by3">
+                <img
+                  // Append query string to image URL to force refresh upon rerender if user uploads new image
+                  src={`https://cartagena-decor.s3.amazonaws.com/${url}_main.JPG?${Math.floor(Math.random() * 10000)}`}
+                  alt={`Uploaded at ${url}_main.JPG`}
+                />
               </div>
-            ))}
+            </div>
+            )}
+            <div className="card-content">
+              <div className="content">
+                <label className="button is-primary">
+                  Set Main Image
+                  <input className="is-hidden" id={`${url}_main`} onChange={uploadImage} type="file" accept="image/jpg" />
+                </label>
+              </div>
+            </div>
           </div>
-        </>
+          {Array.from(options).map(([name, stock]) => {
+            const convertedImageName = `${url}_${name.replaceAll(' ', '').toLowerCase()}`;
+            return (
+              <div className="card ml-2 mr-2" style={paneStyle}>
+                {uploaded.includes(`${convertedImageName}.JPG`)
+                  && (
+                  <div className="card-image">
+                    <div className="image is-4by3">
+                      <img
+                          // Append query string to image URL to force refresh upon rerender if user uploads new image
+                        src={`https://cartagena-decor.s3.amazonaws.com/${convertedImageName}.JPG?${Math.floor(Math.random() * 10000)}`}
+                        alt={`Uploaded at ${convertedImageName}.JPG`}
+                      />
+                    </div>
+                  </div>
+                  )}
+                <div className="card-content">
+                  <div className="content">
+                    <label className="button is-primary">
+                      Set
+                      {' '}
+                      {name}
+                      {' '}
+                      Image
+                      <input className="is-hidden" id={`${convertedImageName}`} onChange={uploadImage} type="file" accept="image/jpg" />
+                    </label>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
         )}
       </form>
     </div>
