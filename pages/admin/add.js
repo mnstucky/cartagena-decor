@@ -10,6 +10,7 @@ import ControlledTextareaList from '../../components/ControlledTextareaList';
 import ControlledSelect from '../../components/ControlledSelect';
 import ControlledMultiplesInput from '../../components/ControlledMultiplesInput';
 import ControlledUrlField from '../../components/ControlledUrlField';
+import AdminAddImageCard from '../../components/AdminAddImageCard';
 
 function AddItem() {
   const [session] = useSession();
@@ -25,39 +26,9 @@ function AddItem() {
   const [url, setUrl] = useState('');
   const [locked, setLocked] = useState(false);
   const [uploaded, setUploaded] = useState([]);
-  const [newUploadToggle, setNewUploadToggle] = useState(false);
   const { data: categories, error, loading } = useFetch('db?list=category');
   function updateLocked(event) {
     setLocked(true);
-  }
-  async function uploadImage(event) {
-    console.log(event);
-    const file = event.target.files[0];
-    const convertedImageUrl = `${event.target.id}.JPG`;
-    const filename = encodeURIComponent(convertedImageUrl);
-    const response = await fetch(`/api/upload?file=${filename}`);
-    const { url: returnedUrl, fields } = await response.json();
-    const formData = new FormData();
-    Object.entries({ ...fields, file }).forEach(([key, value]) => {
-      formData.append(key, value);
-    });
-    const upload = await fetch(returnedUrl, {
-      method: 'POST',
-      body: formData,
-    });
-    if (upload.ok) {
-      console.log('Uploaded successfully!');
-      if (!uploaded.includes(convertedImageUrl)) {
-        const newUploaded = [...uploaded];
-        newUploaded.push(convertedImageUrl);
-        setUploaded(newUploaded);
-      } else {
-        // Use toggle to force component rerender to update image query string and fetch new image
-        setNewUploadToggle((previousValue) => !previousValue);
-      }
-    } else {
-      console.error('Upload failed.');
-    }
   }
   // TODO: Link authorized users to database
   if (session?.user?.email !== 'mnstucky@gmail.com') {
@@ -108,58 +79,10 @@ function AddItem() {
         {locked
         && (
         <div className="is-flex">
-          <div className="card ml-2 mr-2" style={paneStyle}>
-            {uploaded.includes(`${url}_main.JPG`)
-            && (
-            <div className="card-image">
-              <div className="image is-4by3">
-                <img
-                  // Append query string to image URL to force refresh upon rerender if user uploads new image
-                  src={`https://cartagena-decor.s3.amazonaws.com/${url}_main.JPG?${Math.floor(Math.random() * 10000)}`}
-                  alt={`Uploaded at ${url}_main.JPG`}
-                />
-              </div>
-            </div>
-            )}
-            <div className="card-content">
-              <div className="content">
-                <label className="button is-primary">
-                  Set Main Image
-                  <input className="is-hidden" id={`${url}_main`} onChange={uploadImage} type="file" accept="image/jpg" />
-                </label>
-              </div>
-            </div>
-          </div>
-          {Array.from(options).map(([name, stock]) => {
-            const convertedImageName = `${url}_${name.replaceAll(' ', '').toLowerCase()}`;
-            return (
-              <div className="card ml-2 mr-2" style={paneStyle}>
-                {uploaded.includes(`${convertedImageName}.JPG`)
-                  && (
-                  <div className="card-image">
-                    <div className="image is-4by3">
-                      <img
-                          // Append query string to image URL to force refresh upon rerender if user uploads new image
-                        src={`https://cartagena-decor.s3.amazonaws.com/${convertedImageName}.JPG?${Math.floor(Math.random() * 10000)}`}
-                        alt={`Uploaded at ${convertedImageName}.JPG`}
-                      />
-                    </div>
-                  </div>
-                  )}
-                <div className="card-content">
-                  <div className="content">
-                    <label className="button is-primary">
-                      Set
-                      {' '}
-                      {name}
-                      {' '}
-                      Image
-                      <input className="is-hidden" id={`${convertedImageName}`} onChange={uploadImage} type="file" accept="image/jpg" />
-                    </label>
-                  </div>
-                </div>
-              </div>
-            );
+          <AdminAddImageCard optionName="Main" convertedImageName={`${url}_main`} uploaded={uploaded} setUploaded={setUploaded} />
+          {Array.from(options).map(([optionName, stock]) => {
+            const convertedImageName = `${url}_${optionName.replaceAll(' ', '').toLowerCase()}`;
+            return <AdminAddImageCard optionName={optionName} convertedImageName={convertedImageName} uploaded={uploaded} setUploaded={setUploaded} />;
           })}
         </div>
         )}

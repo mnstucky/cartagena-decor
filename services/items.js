@@ -4,54 +4,54 @@ const { Schema } = mongoose;
 
 const itemSchema = new Schema({
   name: {
-	  type: String,
-	  required: true,
+    type: String,
+    required: true,
   },
   category: {
-	  type: String,
-	  enum: ['coaster', 'tray', 'lazySusan'],
+    type: String,
+    enum: ['coaster', 'tray', 'lazySusan'],
   },
   stock: {
-	  type: Number,
-	  required: true,
+    type: Number,
+    required: true,
   },
   price: {
-	  type: Number,
-	  required: true,
+    type: Number,
+    required: true,
   },
   highlights: {
-	  type: String,
+    type: String,
   },
   description: {
-	  type: [String],
-	  required: true,
+    type: [String],
+    required: true,
   },
   features: {
-	  type: [String],
+    type: [String],
   },
   multiples: {
-	  hasMultiples: {
+    hasMultiples: {
       type: Boolean,
       required: true,
-	  },
-	  options: {
+    },
+    options: {
       type: Map,
       of: Number,
-	  },
+    },
   },
   shipping: {
-	  type: String,
+    type: String,
   },
   rating: {
-	  type: Number,
+    type: Number,
   },
   images: {
-	  type: [String],
-	  required: true,
+    type: [String],
+    required: true,
   },
   url: {
-	  type: String,
-	  required: true,
+    type: String,
+    required: true,
   },
 });
 
