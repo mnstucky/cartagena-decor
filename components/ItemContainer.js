@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import Link from 'next/link';
+import { useSession } from 'next-auth/client';
 import ItemSelector from './ItemSelector';
 import AddToCartButton from './AddToCartButton';
 import ItemImage from './ItemImage';
@@ -13,6 +15,7 @@ function ItemContainer({
   item,
   itemUrl,
 }) {
+  const [session, loading] = useSession();
   const [cartButtonVisibility, setCartButtonVisibility] = useState(false);
   const [quantity, setQuantity] = useState(1);
   const options = [];
@@ -59,6 +62,12 @@ function ItemContainer({
               </p>
               <GoToCartButton cartButtonVisibility={cartButtonVisibility} />
             </div>
+            {/* TODO: Link to database */}
+            {session?.user?.email === 'mnstucky@gmail.com' && (
+              <Link href={`/admin/${itemUrl}`}>
+                <button className="button is-info mt-2">Edit Item</button>
+              </Link>
+            )}
           </section>
         </div>
       </div>
