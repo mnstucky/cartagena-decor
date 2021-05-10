@@ -1,11 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ItemPane from './ItemPane';
 import useFetch from '../services/useFetch';
 import Error from './Error';
 import LoadingSpinner from './LoadingSpinner';
 
 function ItemGrid() {
-  const { data: items, error, loading } = useFetch('db');
+  const [needsRefresh, setNeedsRefresh] = useState(false);
+  const { data: items, error, loading } = useFetch('db', needsRefresh);
+  console.log('Rendered');
   // If fetch from DB is still pending, return a loading spinner
   if (loading) {
     return (
@@ -24,6 +26,7 @@ function ItemGrid() {
           price={item.price}
           url={item.url}
           key={item.url}
+          setNeedsRefresh={setNeedsRefresh}
         />
       ))}
     </div>

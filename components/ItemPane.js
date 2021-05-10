@@ -3,12 +3,19 @@ import Link from 'next/link';
 import { useSession } from 'next-auth/client';
 
 function ItemPane({
-  image, name, price, url,
+  image, name, price, url, setNeedsRefresh,
 }) {
   const paneStyle = {
     width: 300,
   };
   const [session, loading] = useSession();
+  async function deleteItem(event) {
+    const response = await fetch('/api/deleteitem', {
+      method: 'DELETE',
+      body: JSON.stringify({ url: event.target.id }),
+    });
+    setNeedsRefresh((currentState) => !currentState);
+  }
   return (
     <div className="card m-2" style={paneStyle}>
       <Link href={`\\${url}`}>
@@ -30,6 +37,7 @@ function ItemPane({
       </Link>
       {session?.user?.email === 'mnstucky@gmail.com' && (
         <div className="is-flex is-justify-content-flex-end">
+          <button type="button" className="button is-danger mr-2" id={url} onClick={deleteItem}>Delete</button>
           <Link href={`/admin/${url}`}>
             <button type="button" className="button is-info mb-2 mr-2">Edit</button>
           </Link>
