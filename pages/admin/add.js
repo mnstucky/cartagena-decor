@@ -30,6 +30,37 @@ function AddItem() {
   function updateLocked(event) {
     setLocked(true);
   }
+  async function handleSubmit(event) {
+    event.preventDefault();
+    // TODO: convert option names to camelCase for database storage
+    const formattedOptions = {};
+    options.forEach((stockNum, option) => {
+      let formattedOption = option.split(' ').map((word) => word[0].toUpperCase() + word.substring(1));
+      formattedOption = formattedOption.join('');
+      formattedOption = formattedOption[0].toLowerCase() + formattedOption.substring(1);
+      Object.defineProperty(formattedOptions, formattedOption, {
+        value: stockNum,
+        enumerable: true,
+      });
+    });
+    const data = {
+      name,
+      category,
+      stock,
+      price,
+      highlights,
+      description,
+      features,
+      hasMultiples,
+      options: formattedOptions,
+      images: uploaded,
+      url,
+    };
+    const response = await fetch('/api/createitem', {
+      method: 'POST',
+      body: JSON.stringify(data),
+    });
+  }
   // TODO: Link authorized users to database
   if (session?.user?.email !== 'mnstucky@gmail.com') {
     return (
@@ -78,17 +109,28 @@ function AddItem() {
             )}
         {locked
         && (
-        <div className="is-flex">
-          <AdminAddImageCard optionName="Main" convertedImageName={`${url}_main`} uploaded={uploaded} setUploaded={setUploaded} />
-          {Array.from(options).map(([optionName, stock]) => {
-            const convertedImageName = `${url}_${optionName.replaceAll(' ', '').toLowerCase()}`;
-            return <AdminAddImageCard optionName={optionName} convertedImageName={convertedImageName} uploaded={uploaded} setUploaded={setUploaded} />;
-          })}
-        </div>
+        <>
+          <div className="is-flex">
+            <AdminAddImageCard optionName="Main" convertedImageName={`${url}_main`} uploaded={uploaded} setUploaded={setUploaded} />
+            {Array.from(options).map(([optionName, stock]) => {
+              const convertedImageName = `${url}_${optionName.replaceAll(' ', '').toLowerCase()}`;
+              return (
+                <AdminAddImageCard
+                  optionName={optionName}
+                  convertedImageName={convertedImageName}
+                  uploaded={uploaded}
+                  setUploaded={setUploaded}
+                />
+              );
+            })}
+          </div>
+          <button type="button" className="button is-primary mt-3" onClick={handleSubmit}>
+            Submit Item
+          </button>
+        </>
         )}
       </form>
     </div>
-
   );
 }
 

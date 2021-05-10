@@ -26,7 +26,7 @@ function AdminItemContainer({
       price,
       selection,
     };
-    const response = await fetch('/api/admin', {
+    const response = await fetch('/api/updateitem', {
       method: 'POST',
       body: JSON.stringify(data),
     });
