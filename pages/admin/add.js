@@ -32,7 +32,6 @@ function AddItem() {
   }
   async function handleSubmit(event) {
     event.preventDefault();
-    // TODO: convert option names to camelCase for database storage
     const formattedOptions = {};
     options.forEach((stockNum, option) => {
       let formattedOption = option.split(' ').map((word) => word[0].toUpperCase() + word.substring(1));
@@ -99,7 +98,7 @@ function AddItem() {
               <ControlledTextareaList fieldName="Features" fields={features} setFields={setFeatures} />
               <ControlledMultiplesInput options={options} setOptions={setOptions} hasMultiples={hasMultiples} setHasMultiples={setHasMultiples} />
               <ControlledUrlField url={url} setUrl={setUrl} />
-              {name && stock && price && url.length === 2
+              {name && stock && price && url.length === 2 && description.length > 0
               && (
               <button type="button" className="button is-primary" onClick={updateLocked}>
                 Save and Add Images
