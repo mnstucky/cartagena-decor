@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import Link from 'next/link';
+import { loadStripe } from '@stripe/stripe-js';
 import DecrementCartButton from '../components/DecrementCartButton';
 import IncrementCartButton from '../components/IncrementCartButton';
 import Subtotal from '../components/Subtotal';
@@ -7,8 +8,23 @@ import RemoveButton from '../components/RemoveButton';
 import { CartContext } from '../components/CartContextProvider';
 import CartImage from '../components/CartImage';
 
+const stripePromise = loadStripe('pk_test_51IpzwDAh1yeccWEtIig7AKjgidmx64ismOoTdlpj99ZRUSO17RZCc1lyHuVOrU8ihzyAnzUegojZna9xbmARVSPT00n2GQ7Tnn');
+
 function Cart() {
   const { cart } = useContext(CartContext);
+  async function handleCheckout(event) {
+    const stripe = await stripePromise;
+    const response = await fetch('/api/createcheckout', { method: 'POST' });
+    const session = await response.json();
+    const result = await stripe.redirectToCheckout({
+      sessionId: session.id,
+    });
+    if (result.error) {
+      // If `redirectToCheckout` fails due to a browser or network
+      // error, display the localized error message to your customer
+      // using `result.error.message`.
+    }
+  }
   let cartContents;
   if (cart.length === 0) {
     cartContents = <p>Your cart is empty.</p>;
@@ -55,8 +71,9 @@ function Cart() {
       <h1 className="title is-4 mt-2">Cart</h1>
       <div className="box">
         {cartContents}
-        <div className="is-flex is-justify-content-flex-end">
+        <div className="is-flex is-justify-content-flex-end is-align-items-center">
           <Subtotal cart={cart} />
+          <button type="button" className="button is-primary ml-3" onClick={handleCheckout}>Checkout</button>
         </div>
       </div>
     </div>
