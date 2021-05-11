@@ -1,9 +1,9 @@
 import React from 'react';
 
-function Error() {
+function Error({ message = 'Sorry, something went wrong.' }) {
   return (
     <div className="box">
-      <h1>Sorry, something went wrong.</h1>
+      <h1>{message}</h1>
     </div>
   );
 }

@@ -16,7 +16,7 @@ function ContactForm() {
   function handleSubmit(event) {
     event.preventDefault();
 
-    fetch('http://localhost:3000/api/email', {
+    fetch(`${process.env.NEXTAUTH_URL}/api/email`, {
       method: 'POST',
       body: JSON.stringify({
         name: nameValue,

@@ -7,22 +7,24 @@ import Subtotal from '../components/Subtotal';
 import RemoveButton from '../components/RemoveButton';
 import { CartContext } from '../components/CartContextProvider';
 import CartImage from '../components/CartImage';
+import Error from '../components/Error';
 
 const stripePromise = loadStripe('pk_test_51IpzwDAh1yeccWEtIig7AKjgidmx64ismOoTdlpj99ZRUSO17RZCc1lyHuVOrU8ihzyAnzUegojZna9xbmARVSPT00n2GQ7Tnn');
 
 function Cart() {
   const { cart } = useContext(CartContext);
+  // eslint-disable-next-line consistent-return
   async function handleCheckout(event) {
     const stripe = await stripePromise;
-    const response = await fetch('/api/createcheckout', { method: 'POST' });
+    const response = await fetch('/api/createcheckout', { method: 'POST', body: JSON.stringify(cart) });
     const session = await response.json();
     const result = await stripe.redirectToCheckout({
       sessionId: session.id,
     });
     if (result.error) {
-      // If `redirectToCheckout` fails due to a browser or network
-      // error, display the localized error message to your customer
-      // using `result.error.message`.
+      return (
+        <Error message={`The following error occurred: ${result.error.message}`} />
+      );
     }
   }
   let cartContents;
