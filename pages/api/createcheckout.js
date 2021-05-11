@@ -1,4 +1,5 @@
-const stripe = require('stripe')('sk_test_51IpzwDAh1yeccWEtuiPcesCNBrFErskmqmlntUKzQFq3VxxTPnCBWqmmDMxmIRwAhXGnYBnqklGj9o2QePLvkx9N00zGzy974C');
+const stripe = require('stripe')(process.env.STRIPE_TEST_SECRET);
+// TODO: Update URL for production
 
 export default async function handler(req, res) {
   if (req.method === 'POST') {
