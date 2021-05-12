@@ -14,7 +14,6 @@ function NavbarBrand({ isActive, toggleActive }) {
         <NavbarLink toggleActive={toggleActive} path="/" label="Home" />
         <NavbarLink toggleActive={toggleActive} path="/shop/" label="Shop" />
         <NavbarLink toggleActive={toggleActive} path="/contact/" label="Contact" />
-        <NavbarLink toggleActive={toggleActive} path="/about/" label="About" />
         {session && <NavbarLink toggleActive={toggleActive} path="/profile/" label="Profile" /> }
       </div>
       <div className="navbar-end">
