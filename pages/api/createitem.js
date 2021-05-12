@@ -27,7 +27,6 @@ export default async (req, res) => {
         images,
         url,
       } = JSON.parse(req.body);
-      console.log(req.body);
       const newItem = new Item({
         name,
         category,
