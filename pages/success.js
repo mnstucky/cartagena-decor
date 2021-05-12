@@ -15,8 +15,8 @@ export default function Success({ sessionId }) {
   }
   return (
     <div className="container pr-3 pl-3">
-      <div className="block">
-        <p>
+      <div>
+        <p className="mt-4">
           Thanks for your order,
           {' '}
           {data.customer.name}
