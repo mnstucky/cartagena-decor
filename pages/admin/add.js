@@ -1,5 +1,5 @@
 import React, {
-  useState, useRef, useEffect, useLayoutEffect,
+  useState,
 } from 'react';
 import { useSession } from 'next-auth/client';
 import useFetch from '../../services/useFetch';
@@ -85,9 +85,6 @@ function AddItem() {
   if (error) {
     return <Error />;
   }
-  const paneStyle = {
-    width: 300,
-  };
   return (
     <div className="container pl-3 pr-3">
       <h1 className="is-size-4 has-text-weight-bold mb-3">Add Item</h1>
@@ -96,15 +93,20 @@ function AddItem() {
             && (
             <>
               <ControlledTextInput fieldName="Name" field={name} setField={setName} />
+              {!name && <p className="has-text-danger-dark">An item name is required.</p>}
               <ControlledSelect fieldName="Category" setField={setCategory} options={categories} />
+              {!category && <p className="has-text-danger-dark">You must select a category.</p>}
               <ControlledNumberInput fieldName="Stock" field={stock} setField={setStock} />
+              {stock < 0 && <p className="has-text-danger-dark">Stock must be nonnegative.</p>}
               <ControlledNumberInput fieldName="Price" field={price} setField={setPrice} />
+              {price < 0 && <p className="has-text-danger-dark">Price must be nonnegative.</p>}
               <ControlledTextareaSingle fieldName="Highlights" field={highlights} setField={setHighlights} />
               <ControlledTextareaList fieldName="Description" fields={description} setFields={setDescription} />
+              {description.length < 1 && <p className="has-text-danger-dark">A description is required.</p>}
               <ControlledTextareaList fieldName="Features" fields={features} setFields={setFeatures} />
               <ControlledMultiplesInput options={options} setOptions={setOptions} hasMultiples={hasMultiples} setHasMultiples={setHasMultiples} />
               <ControlledUrlField url={url} setUrl={setUrl} />
-              {name && category && stock && price && url.length === 2 && description.length > 0
+              {name && category && stock && stock >= 0 && price && price >= 0 && url.length === 2 && description.length > 0
               && (
               <button type="button" className="button is-primary" onClick={makeReadyToAddImages}>
                 Save and Add Images
