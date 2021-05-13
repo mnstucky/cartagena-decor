@@ -32,7 +32,7 @@ function Cart() {
     cartContents = <p>Your cart is empty.</p>;
   } else {
     cartContents = cart.map((item) => (
-      <section>
+      <section key={item.itemUrl}>
         <div className="columns mb-0">
           <div className="column is-one-quarter">
             <CartImage item={item} />

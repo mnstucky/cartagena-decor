@@ -1,27 +1,21 @@
 import { useSession } from 'next-auth/client';
 import React from 'react';
-import Link from 'next/link';
 import useFetch from '../services/useFetch';
 import LoadingSpinner from '../components/LoadingSpinner';
 import Error from '../components/Error';
-import CartImage from '../components/CartImage';
-import DecrementCartButton from '../components/DecrementCartButton';
-import IncrementCartButton from '../components/IncrementCartButton';
-import RemoveButton from '../components/RemoveButton';
 
 function Profile() {
   const [session, sessionLoading] = useSession();
   const { data: orders, error, loading } = useFetch('getorders');
-  console.log(orders);
   if (typeof window !== 'undefined' && loading) {
     return null;
   }
   if (!session) {
     return (
       <div className="container pr-3 pl-3">
-        <h1 className="title is-4 mt-2">User Profile</h1>
+        <h1 className="title is-4 mt-2">Orders</h1>
         <p className="block">
-          Please sign in to access your profile.
+          Please sign in to access your past orders.
         </p>
       </div>
     );
@@ -39,7 +33,7 @@ function Profile() {
       <h1 className="title is-4 mt-2">Orders</h1>
       <div className="block">
         {orders.map((order) => (
-          <section>
+          <section key={order.date}>
             <div className="columns mb-0">
               <div className="column">
                 <p>
@@ -64,7 +58,7 @@ function Profile() {
               </div>
               <div className="column">
                 <p className="has-text-weight-bold">Items</p>
-                {order.items.map((item) => <p>{`${item.description} x ${item.quantity}`}</p>)}
+                {order.items.map((item) => <p key={item.description}>{`${item.description} x ${item.quantity}`}</p>)}
                 <p className="mt-5">{`Subtotal: $${order.subtotal / 100.0}`}</p>
                 <p className="has-text-weight-bold">{`Total: $${order.total / 100.0}`}</p>
               </div>

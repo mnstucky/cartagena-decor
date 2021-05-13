@@ -14,7 +14,7 @@ function ItemSelector({ options, selection, setSelection }) {
       <select value={selection} onChange={handleSelection}>
         <option value="default">Select an Option:</option>
         {options.map((productType) => (
-          <option value={productType}>{productType}</option>
+          <option key={productType} value={productType}>{productType}</option>
         ))}
       </select>
     </div>
