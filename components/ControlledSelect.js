@@ -15,7 +15,8 @@ function ControlledSelect({
       </h6>
       <div className="select">
         <select onChange={handleFieldChange}>
-          {options.map((option) => <option value={option}>{option}</option>)}
+          <option value="">Select a Category</option>
+          {options.map((option) => <option key={option} value={option}>{option}</option>)}
         </select>
       </div>
     </label>

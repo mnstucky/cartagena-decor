@@ -35,7 +35,7 @@ function ControlledTextareaList({
           :
         </h6>
         {fields.map((bullet) => (
-          <div className="field">
+          <div key={fieldId} className="field">
             <textarea
               className="textarea"
               rows="2"

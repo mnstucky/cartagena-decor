@@ -18,9 +18,9 @@ function AddItem() {
   // State for add item form
   const [session] = useSession();
   const [name, setName] = useState('');
-  const [category, setCategory] = useState();
-  const [stock, setStock] = useState();
-  const [price, setPrice] = useState();
+  const [category, setCategory] = useState('');
+  const [stock, setStock] = useState('');
+  const [price, setPrice] = useState('');
   const [highlights, setHighlights] = useState('');
   const [description, setDescription] = useState([]);
   const [features, setFeatures] = useState([]);
@@ -29,6 +29,7 @@ function AddItem() {
   const [url, setUrl] = useState('');
   const [readyToAddImages, setReadyToAddImages] = useState(false);
   const [uploaded, setUploaded] = useState([]);
+  const [errorMessage, setErrorMessage] = useState('');
   const { data: categories, error, loading } = useFetch('getitems?list=category');
   function makeReadyToAddImages(event) {
     setReadyToAddImages(true);
@@ -62,6 +63,8 @@ function AddItem() {
       method: 'POST',
       body: JSON.stringify(data),
     });
+    const formattedResponse = await response.json();
+    setErrorMessage(formattedResponse.error);
   }
   // TODO: Link authorized users to database
   if (session?.user?.email !== 'mnstucky@gmail.com') {
@@ -101,7 +104,7 @@ function AddItem() {
               <ControlledTextareaList fieldName="Features" fields={features} setFields={setFeatures} />
               <ControlledMultiplesInput options={options} setOptions={setOptions} hasMultiples={hasMultiples} setHasMultiples={setHasMultiples} />
               <ControlledUrlField url={url} setUrl={setUrl} />
-              {name && stock && price && url.length === 2 && description.length > 0
+              {name && category && stock && price && url.length === 2 && description.length > 0
               && (
               <button type="button" className="button is-primary" onClick={makeReadyToAddImages}>
                 Save and Add Images
@@ -126,9 +129,15 @@ function AddItem() {
               );
             })}
           </div>
-          <button type="button" className="button is-primary mt-3" onClick={handleSubmit}>
-            Submit Item
-          </button>
+          {uploaded.length > 0
+          && (
+          <>
+            <button type="button" className="button is-primary mt-3" onClick={handleSubmit}>
+              Submit Item
+            </button>
+            <p className="mt-4">{errorMessage}</p>
+          </>
+          )}
         </>
         )}
       </form>
