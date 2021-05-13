@@ -29,7 +29,7 @@ function AddItem() {
   const [url, setUrl] = useState('');
   const [readyToAddImages, setReadyToAddImages] = useState(false);
   const [uploaded, setUploaded] = useState([]);
-  const { data: categories, error, loading } = useFetch('db?list=category');
+  const { data: categories, error, loading } = useFetch('getitems?list=category');
   function makeReadyToAddImages(event) {
     setReadyToAddImages(true);
   }

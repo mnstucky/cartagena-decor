@@ -18,7 +18,7 @@ function ItemPage({ itemUrl }) {
     );
   }
   const [selection, setSelection] = useState('default');
-  const { data: item, error, loading } = useFetch(`db?id=${itemUrl}`);
+  const { data: item, error, loading } = useFetch(`getitems?id=${itemUrl}`);
   if (loading) {
     return (
       <LoadingSpinner />

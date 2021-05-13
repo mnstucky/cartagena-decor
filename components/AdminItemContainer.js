@@ -47,7 +47,7 @@ function AdminItemContainer({
     const convertedSelection = selection === 'default' ? 'main' : selection;
     const convertedImageUrl = `${itemUrl}_${convertedSelection.replaceAll(' ', '').toLowerCase()}.JPG`;
     const filename = encodeURIComponent(convertedImageUrl);
-    const response = await fetch(`/api/upload?file=${filename}`);
+    const response = await fetch(`/api/uploadimage?file=${filename}`);
     const { url, fields } = await response.json();
     const formData = new FormData();
     Object.entries({ ...fields, file }).forEach(([key, value]) => {

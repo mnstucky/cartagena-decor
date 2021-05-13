@@ -4,7 +4,7 @@ import LoadingSpinner from '../components/LoadingSpinner';
 import Error from '../components/Error';
 
 export default function Success({ sessionId }) {
-  const { data, error, loading } = useFetch(`orderdetails?session_id=${sessionId}`);
+  const { data, error, loading } = useFetch(`handleorder?session_id=${sessionId}`);
   if (loading) {
     return (
       <LoadingSpinner />

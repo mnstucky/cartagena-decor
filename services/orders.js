@@ -62,6 +62,10 @@ const orderSchema = new Schema({
     type: [invoicedItemSchema],
     required: true,
   },
+  date: {
+    type: Date,
+    required: true,
+  },
 });
 
 let Order;

@@ -6,7 +6,7 @@ import LoadingSpinner from './LoadingSpinner';
 
 function ItemGrid() {
   const [needsRefresh, setNeedsRefresh] = useState(false);
-  const { data: items, error, loading } = useFetch('db', needsRefresh);
+  const { data: items, error, loading } = useFetch('getitems', needsRefresh);
   // If fetch from DB is still pending, return a loading spinner
   if (loading) {
     return (

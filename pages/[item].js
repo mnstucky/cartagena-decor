@@ -7,7 +7,7 @@ import LoadingSpinner from '../components/LoadingSpinner';
 function ItemPage({ itemUrl }) {
   const [selection, setSelection] = useState('default');
   // Get item from DB by itemUrl
-  const { data: item, error, loading } = useFetch(`db?id=${itemUrl}`);
+  const { data: item, error, loading } = useFetch(`getitems?id=${itemUrl}`);
   // If fetch from DB is still pending, return a loading spinner
   if (loading) {
     return (

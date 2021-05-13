@@ -55,6 +55,7 @@ export default async function handler(req, res) {
       subtotal,
       total,
       items: formattedLineItems,
+      date: new Date(),
     });
 
     // Save order to DB
