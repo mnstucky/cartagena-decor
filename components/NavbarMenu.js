@@ -15,6 +15,8 @@ function NavbarBrand({ isActive, toggleActive }) {
         <NavbarLink toggleActive={toggleActive} path="/shop/" label="Shop" />
         <NavbarLink toggleActive={toggleActive} path="/contact/" label="Contact" />
         {session && <NavbarLink toggleActive={toggleActive} path="/profile/" label="Profile" /> }
+        {/* TODO: link admin accounts to database */}
+        {session && session.user.email === 'mnstucky@gmail.com' && <NavbarLink toggleActive={toggleActive} path="/admin/orders/" label="Orders" /> }
       </div>
       <div className="navbar-end">
         {session
