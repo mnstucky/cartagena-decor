@@ -6,17 +6,17 @@ import GoToCartButton from './GoToCartButton';
 import LoadingSpinner from './LoadingSpinner';
 import Error from './Error';
 
-function NavbarBrand({ isActive, toggleActive }) {
+function NavbarMenu({ isActive, toggleActive }) {
   const [session, sessionLoading] = useSession();
   const { data: admins, error, loading } = useFetch('getadmins');
-  if (loading) {
-    return (
-      <LoadingSpinner />
-    );
-  }
-  if (error) {
-    return <Error message="Admin users failed to fetch." />;
-  }
+  // if (loading) {
+  //   return (
+  //     <LoadingSpinner />
+  //   );
+  // }
+  // if (error) {
+  //   return <Error message="Admin users failed to fetch." />;
+  // }
   return (
     <div
       id="navbarBasicExample"
@@ -27,7 +27,7 @@ function NavbarBrand({ isActive, toggleActive }) {
         <NavbarLink toggleActive={toggleActive} path="/shop/" label="Shop" />
         <NavbarLink toggleActive={toggleActive} path="/contact/" label="Contact" />
         {session && <NavbarLink toggleActive={toggleActive} path="/profile/" label="Profile" /> }
-        {admins.some((admin) => admin.email === session?.user?.email) && <NavbarLink toggleActive={toggleActive} path="/admin/orders/" label="Orders" /> }
+        {admins && admins.some((admin) => admin.email === session?.user?.email) && <NavbarLink toggleActive={toggleActive} path="/admin/orders/" label="Orders" /> }
       </div>
       <div className="navbar-end">
         {session
@@ -63,4 +63,4 @@ function NavbarBrand({ isActive, toggleActive }) {
   );
 }
 
-export default NavbarBrand;
+export default NavbarMenu;
