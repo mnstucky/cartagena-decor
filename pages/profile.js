@@ -30,6 +30,14 @@ function Profile() {
   }
   return (
     <div className="container pr-3 pl-3 mt-5">
+      <div className="block">
+        <h1 className="title is-4 mt-2">Profile</h1>
+        <p>
+          You're signed in as
+          {' '}
+          {session.user.email}
+        </p>
+      </div>
       <h1 className="title is-4 mt-2">Orders</h1>
       <div className="block">
         {orders.map((order) => (
