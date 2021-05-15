@@ -1,4 +1,5 @@
 import { getSession } from 'next-auth/client';
+import getAdmins from '../../services/getAdmins';
 
 const mongoose = require('mongoose');
 const Order = require('../../services/orders.js');
@@ -6,8 +7,8 @@ const Order = require('../../services/orders.js');
 export default async function handler(req, res) {
   // Validate admin user
   const session = await getSession({ req });
-  // TODO: link admin users to database
-  if (session.user.email !== 'mnstucky@gmail.com') {
+  const admins = await getAdmins();
+  if (!admins.some((admin) => admin.email === session?.user?.email)) {
     res.json({ error: 'You must be signed in as an administrator to retrieve all orders.' });
   }
   // Connect to DB

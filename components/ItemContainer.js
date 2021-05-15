@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { useSession } from 'next-auth/client';
+import useFetch from '../services/useFetch';
 import ItemSelector from './ItemSelector';
 import AddToCartButton from './AddToCartButton';
 import ItemImage from './ItemImage';
@@ -8,6 +9,8 @@ import ItemDescription from './ItemDescription';
 import ItemFeatures from './ItemFeatures';
 import GoToCartButton from './GoToCartButton';
 import QuantitySelector from './QuantitySelector';
+import LoadingSpinner from './LoadingSpinner';
+import Error from './Error';
 
 function ItemContainer({
   selection,
@@ -15,9 +18,10 @@ function ItemContainer({
   item,
   itemUrl,
 }) {
-  const [session, loading] = useSession();
+  const [session, sessionLoading] = useSession();
   const [cartButtonVisibility, setCartButtonVisibility] = useState(false);
   const [quantity, setQuantity] = useState(1);
+  const { data: admins, error, loading } = useFetch('getadmins');
   const options = [];
   // eslint-disable-next-line no-restricted-syntax
   for (const [key, value] of Object.entries(item.multiples.options)) {
@@ -27,6 +31,14 @@ function ItemContainer({
         .toUpperCase() + keyWithSpacesAdded.slice(1);
       options.push(formattedOption);
     }
+  }
+  if (loading) {
+    return (
+      <LoadingSpinner />
+    );
+  }
+  if (error) {
+    return <Error message="Admin users failed to fetch." />;
   }
   return (
     <div className="container pl-3 pr-3">
@@ -62,11 +74,10 @@ function ItemContainer({
               </p>
               <GoToCartButton cartButtonVisibility={cartButtonVisibility} />
             </div>
-            {/* TODO: Link to database */}
-            {session?.user?.email === 'mnstucky@gmail.com' && (
-              <Link href={`/admin/${itemUrl}`}>
-                <button className="button is-info mt-2">Edit Item</button>
-              </Link>
+            {admins.some((admin) => admin.email === session?.user?.email) && (
+            <Link href={`/admin/${itemUrl}`}>
+              <button type="button" className="button is-info mt-2">Edit Item</button>
+            </Link>
             )}
           </section>
         </div>

@@ -1,12 +1,13 @@
 import { getSession } from 'next-auth/client';
+import getAdmins from '../../services/getAdmins';
 
 const mongoose = require('mongoose');
 const Item = require('../../services/items.js');
 
 export default async (req, res) => {
   const session = await getSession({ req });
-  // TODO: Link authorized users to database
-  if (session && session?.user?.email === 'mnstucky@gmail.com') {
+  const admins = await getAdmins();
+  if (session && admins.some((admin) => admin.email === session?.user?.email)) {
     if (req.method === 'POST') {
       // Connect to the DB
       await mongoose.connect(process.env.MONGO_URL, {

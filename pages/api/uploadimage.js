@@ -1,13 +1,11 @@
 import { getSession } from 'next-auth/client';
 import aws from 'aws-sdk';
-
-const mongoose = require('mongoose');
-const Item = require('../../services/items.js');
+import getAdmins from '../../services/getAdmins';
 
 export default async (req, res) => {
   const session = await getSession({ req });
-  // TODO: Link approved admin accounts to database
-  if (session && session?.user?.email === 'mnstucky@gmail.com') {
+  const admins = await getAdmins();
+  if (session && admins.some((admin) => admin.email === session?.user?.email)) {
     aws.config.update({
       accessKeyId: process.env.CUSTOM_AWS_ACCESS_KEY,
       secretAccessKey: process.env.CUSTOM_AWS_SECRET_KEY,

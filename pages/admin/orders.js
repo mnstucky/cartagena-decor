@@ -1,34 +1,30 @@
-import React, {
-  useState,
-} from 'react';
+import React from 'react';
 import { useSession } from 'next-auth/client';
 import useFetch from '../../services/useFetch';
 import LoadingSpinner from '../../components/LoadingSpinner';
 import Error from '../../components/Error';
 
 function Orders() {
-  // Restrict access to page to admin users
   const [session] = useSession();
   const { data: orders, error, loading } = useFetch('getallorders');
-  // TODO: Link authorized users to database
-  if (session?.user?.email !== 'mnstucky@gmail.com') {
-    return (
-      <div className="container pr-3 pl-3">
-        <h1 className="title is-4 mt-2">Add Item</h1>
-        <p className="block">
-          Sorry, you don't have permission to access this page.
-        </p>
-      </div>
-    );
-  }
-  console.log(orders);
-  if (loading) {
+  const { data: admins, adminError, adminLoading } = useFetch('getadmins');
+  if (loading || adminLoading || !admins) {
     return (
       <LoadingSpinner />
     );
   }
-  if (error) {
+  if (error || adminError) {
     return <Error />;
+  }
+  if (!admins.some((admin) => admin.email === session?.user?.email)) {
+    return (
+      <div className="container pr-3 pl-3">
+        <h1 className="title is-4 mt-2">Add Item</h1>
+        <p className="block">
+          Sorry, you do not have permission to access this page.
+        </p>
+      </div>
+    );
   }
   return (
     <div className="container pl-3 pr-3">

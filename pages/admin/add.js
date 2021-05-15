@@ -2,6 +2,7 @@ import React, {
   useState,
 } from 'react';
 import { useSession } from 'next-auth/client';
+import { loadGetInitialProps } from 'next/dist/next-server/lib/utils';
 import useFetch from '../../services/useFetch';
 import LoadingSpinner from '../../components/LoadingSpinner';
 import Error from '../../components/Error';
@@ -31,6 +32,7 @@ function AddItem() {
   const [uploaded, setUploaded] = useState([]);
   const [errorMessage, setErrorMessage] = useState('');
   const { data: categories, error, loading } = useFetch('getitems?list=category');
+  const { data: admins, adminError, adminLoading } = useFetch('getadmins');
   function makeReadyToAddImages(event) {
     setReadyToAddImages(true);
   }
@@ -66,24 +68,23 @@ function AddItem() {
     const formattedResponse = await response.json();
     setErrorMessage(formattedResponse.error);
   }
-  // TODO: Link authorized users to database
-  if (session?.user?.email !== 'mnstucky@gmail.com') {
-    return (
-      <div className="container pr-3 pl-3">
-        <h1 className="title is-4 mt-2">Add Item</h1>
-        <p className="block">
-          Sorry, you don't have permission to access this page.
-        </p>
-      </div>
-    );
-  }
-  if (loading) {
+  if (loading || adminLoading || !admins) {
     return (
       <LoadingSpinner />
     );
   }
-  if (error) {
+  if (error || adminError) {
     return <Error />;
+  }
+  if (admins.some((admin) => admin.email !== session?.user?.email)) {
+    return (
+      <div className="container pr-3 pl-3">
+        <h1 className="title is-4 mt-2">Add Item</h1>
+        <p className="block">
+          Sorry, you do not have permission to access this page.
+        </p>
+      </div>
+    );
   }
   return (
     <div className="container pl-3 pr-3">
@@ -104,9 +105,15 @@ function AddItem() {
               <ControlledTextareaList fieldName="Description" fields={description} setFields={setDescription} />
               {description.length < 1 && <p className="has-text-danger-dark">A description is required.</p>}
               <ControlledTextareaList fieldName="Features" fields={features} setFields={setFeatures} />
-              <ControlledMultiplesInput options={options} setOptions={setOptions} hasMultiples={hasMultiples} setHasMultiples={setHasMultiples} />
+              <ControlledMultiplesInput
+                options={options}
+                setOptions={setOptions}
+                hasMultiples={hasMultiples}
+                setHasMultiples={setHasMultiples}
+              />
               <ControlledUrlField url={url} setUrl={setUrl} />
-              {name && category && stock && stock >= 0 && price && price >= 0 && url.length === 2 && description.length > 0
+              {name && category && stock && stock >= 0 && price && price >= 0
+              && url.length === 2 && description.length > 0
               && (
               <button type="button" className="button is-primary" onClick={makeReadyToAddImages}>
                 Save and Add Images
