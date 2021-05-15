@@ -18,6 +18,9 @@ export default async function handler(req, res) {
   const { query } = req;
   if (req.method === 'GET') {
     // If no id parameter is used, return all orders for signed-in user by email address
+    if (!session?.user) {
+      res.json({ error: 'You must be signed in to access this API route.' });
+    }
     if (Object.keys(query).length === 0) {
       Order.find({ email: session.user.email })
         .exec((err, orders) => {

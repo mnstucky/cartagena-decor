@@ -71,6 +71,11 @@ function ItemContainer({
               <p className="has-text-weight-bold mb-0 ml-2 mr-2">
                 $
                 {item.price}
+                {' x '}
+                {quantity}
+                {' = '}
+                $
+                {item.price * quantity}
               </p>
               <GoToCartButton cartButtonVisibility={cartButtonVisibility} />
             </div>
