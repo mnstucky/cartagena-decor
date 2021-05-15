@@ -7,10 +7,11 @@ function AddToCartButton({
   itemUrl,
   setCartButtonVisibility,
   quantity,
+  isDisabled,
+  setIsDisabled,
 }) {
   const { cart, setCart } = useContext(CartContext);
   const [buttonContent, setButtonContent] = useState('Add to Cart');
-  const [isDisabled, setIsDisabled] = useState(item.multiples.hasMultiples && selection === 'default');
   useEffect(() => {
     if (selection !== 'default') {
       setIsDisabled(false);

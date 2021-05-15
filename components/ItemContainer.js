@@ -21,6 +21,7 @@ function ItemContainer({
   const [session, sessionLoading] = useSession();
   const [cartButtonVisibility, setCartButtonVisibility] = useState(false);
   const [quantity, setQuantity] = useState(1);
+  const [addButtonDisabled, setAddButtonDisabled] = useState(item.multiples.hasMultiples && selection === 'default');
   const { data: admins, error, loading } = useFetch('getadmins');
   const options = [];
   // eslint-disable-next-line no-restricted-syntax
@@ -67,7 +68,10 @@ function ItemContainer({
                 item={item}
                 setCartButtonVisibility={setCartButtonVisibility}
                 quantity={quantity}
+                isDisabled={addButtonDisabled}
+                setIsDisabled={setAddButtonDisabled}
               />
+
               <p className="has-text-weight-bold mb-0 ml-2 mr-2">
                 $
                 {item.price}
@@ -79,6 +83,7 @@ function ItemContainer({
               </p>
               <GoToCartButton cartButtonVisibility={cartButtonVisibility} />
             </div>
+            {addButtonDisabled && <p className="has-text-danger-dark">You must select an option to add to cart.</p>}
             {admins.some((admin) => admin.email === session?.user?.email) && (
             <Link href={`/admin/${itemUrl}`}>
               <button type="button" className="button is-info mt-2">Edit Item</button>
