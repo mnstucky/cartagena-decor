@@ -59,21 +59,19 @@ export default async function handler(req, res) {
     });
 
     // Save order to DB
-    newOrder.save((err) => {
-      if (err) {
-        console.log(err);
-        res.send({
-          session,
-          customer,
-          error: 'Something went wrong saving your order.',
-        });
-      } else {
-        res.send({
-          session,
-          customer,
-          message: 'Order saved.',
-        });
-      }
-    });
+    try {
+      const response = await newOrder.save();
+      res.send({
+        session,
+        customer,
+        message: 'Order saved.',
+      });
+    } catch (err) {
+      res.send({
+        session,
+        customer,
+        error: 'Something went wrong saving your order.',
+      });
+    }
   }
 }

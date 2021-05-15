@@ -1,10 +1,15 @@
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
 import useFetch from '../services/useFetch';
 import LoadingSpinner from '../components/LoadingSpinner';
 import Error from '../components/Error';
+import { CartContext } from '../components/CartContextProvider';
 
 export default function Success({ sessionId }) {
   const { data, error, loading } = useFetch(`handleorder?session_id=${sessionId}`);
+  const { cart, setCart } = useContext(CartContext);
+  useEffect(() => {
+    setCart([]);
+  }, []);
   if (loading) {
     return (
       <LoadingSpinner />
