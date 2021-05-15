@@ -74,6 +74,11 @@ function Cart() {
       <div className="box">
         {cartContents}
         <div className="is-flex is-justify-content-flex-end is-align-items-center">
+          <Link href="/shop/">
+            <button type="button" className="button is-link mb-2">Keep Shopping</button>
+          </Link>
+        </div>
+        <div className="is-flex is-justify-content-flex-end is-align-items-center">
           <Subtotal cart={cart} />
           <button type="button" className="button is-primary ml-3" onClick={handleCheckout}>Checkout</button>
         </div>
