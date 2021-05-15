@@ -8,7 +8,7 @@ function Orders() {
   const [session] = useSession();
   const { data: orders, error, loading } = useFetch('getallorders');
   const { data: admins, adminError, adminLoading } = useFetch('getadmins');
-  if (loading || adminLoading || !admins) {
+  if (loading || adminLoading) {
     return (
       <LoadingSpinner />
     );

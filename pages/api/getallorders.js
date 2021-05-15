@@ -10,6 +10,7 @@ export default async function handler(req, res) {
   const admins = await getAdmins();
   if (!admins.some((admin) => admin.email === session?.user?.email)) {
     res.json({ error: 'You must be signed in as an administrator to retrieve all orders.' });
+    return;
   }
   // Connect to DB
   await mongoose.connect(process.env.MONGO_URL, {
