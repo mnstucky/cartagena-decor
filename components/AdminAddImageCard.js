@@ -19,7 +19,6 @@ function AdminAddImageCard({
       body: formData,
     });
     if (upload.ok) {
-      console.log('Uploaded successfully!');
       if (!uploaded.includes(convertedImageUrl)) {
         const newUploaded = [...uploaded];
         newUploaded.push(convertedImageUrl);

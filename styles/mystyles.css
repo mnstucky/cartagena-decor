@@ -262,7 +262,8 @@ textarea {
 code,
 pre {
   -moz-osx-font-smoothing: auto;
-  -webkit-font-smoothing: auto;
+    /*noinspection CssInvalidPropertyValue*/
+    -webkit-font-smoothing: auto;
   font-family: monospace; }
 
 body {

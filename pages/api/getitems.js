@@ -40,9 +40,5 @@ export default async function handler(req, res) {
         });
     }
     // eslint-disable-next-line eqeqeq
-  } else if (req.method == 'POST') {
-
-  } else {
-    // Handle other HTTP methods
   }
 }

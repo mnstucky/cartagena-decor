@@ -31,7 +31,7 @@ function ControlledMultiplesInput({
     });
     setOptions(newOptions);
   }
-  async function addOption(event) {
+  async function addOption() {
     const newOptions = new Map(options);
     newOptions.set('Variety Name', 0);
     setOptions(newOptions);

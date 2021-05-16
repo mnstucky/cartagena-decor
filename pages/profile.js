@@ -33,7 +33,7 @@ function Profile() {
       <div className="block">
         <h1 className="title is-4 mt-2">Profile</h1>
         <p>
-          You're signed in as
+          You are signed in as
           {' '}
           {session.user.email}
         </p>

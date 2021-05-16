@@ -1,4 +1,4 @@
-import React, { useState, useReducer } from 'react';
+import React, { useState } from 'react';
 import ItemImage from './ItemImage';
 import ControlledTextareaList from './ControlledTextareaList';
 import DecrementStockButton from './DecrementStockButton';

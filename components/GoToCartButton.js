@@ -1,3 +1,5 @@
+// noinspection HtmlUnknownTarget
+
 import React, { useContext, useEffect } from 'react';
 import Link from 'next/link';
 import { CartContext } from './CartContextProvider';

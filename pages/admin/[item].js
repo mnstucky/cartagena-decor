@@ -12,7 +12,7 @@ function ItemPage({ itemUrl }) {
       <div className="container pr-3 pl-3">
         <h1 className="title is-4 mt-2">User Profile</h1>
         <p className="block">
-          Sorry, you don't have permission to access this page.
+          Sorry, you do not have permission to access this page.
         </p>
       </div>
     );

@@ -1,3 +1,5 @@
+// noinspection HtmlUnknownTarget
+
 import React, { useContext } from 'react';
 import Link from 'next/link';
 import { loadStripe } from '@stripe/stripe-js';
@@ -14,7 +16,7 @@ const stripePromise = loadStripe('pk_test_51IpzwDAh1yeccWEtIig7AKjgidmx64ismOoTd
 function Cart() {
   const { cart } = useContext(CartContext);
   // eslint-disable-next-line consistent-return
-  async function handleCheckout(event) {
+  async function handleCheckout() {
     const stripe = await stripePromise;
     const response = await fetch('/api/createcheckout', { method: 'POST', body: JSON.stringify(cart) });
     const session = await response.json();

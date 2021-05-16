@@ -2,7 +2,6 @@ import React, {
   useState,
 } from 'react';
 import { useSession } from 'next-auth/client';
-import { loadGetInitialProps } from 'next/dist/next-server/lib/utils';
 import useFetch from '../../services/useFetch';
 import LoadingSpinner from '../../components/LoadingSpinner';
 import Error from '../../components/Error';
@@ -33,7 +32,7 @@ function AddItem() {
   const [errorMessage, setErrorMessage] = useState('');
   const { data: categories, error, loading } = useFetch('getitems?list=category');
   const { data: admins, adminError, adminLoading } = useFetch('getadmins');
-  function makeReadyToAddImages(event) {
+  function makeReadyToAddImages() {
     setReadyToAddImages(true);
   }
   async function handleSubmit(event) {
@@ -126,7 +125,7 @@ function AddItem() {
         <>
           <div className="is-flex">
             <AdminAddImageCard optionName="Main" convertedImageName={`${url}_main`} uploaded={uploaded} setUploaded={setUploaded} />
-            {Array.from(options).map(([optionName, stock]) => {
+            {Array.from(options).map(([optionName]) => {
               const convertedImageName = `${url}_${optionName.replaceAll(' ', '').toLowerCase()}`;
               return (
                 <AdminAddImageCard

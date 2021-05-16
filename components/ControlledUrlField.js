@@ -5,7 +5,7 @@ function ControlledUrlField({ url, setUrl }) {
   const [urlMessage, setUrlMessage] = useState('The URL must be exactly two lowercase letters.');
   const { data: urls, error, loading } = useFetch('getitems?list=url');
   function handleUrlChange(event) {
-    if (!urls.find((url) => url === event.target.value)) {
+    if (!urls.find((possibleUrl) => possibleUrl === event.target.value)) {
       setUrl(event.target.value);
     } else {
       setUrl(event.target.value);

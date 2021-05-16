@@ -5,7 +5,6 @@ sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
 export default function handler(req, res) {
   if (req.method === 'POST') {
-    console.log(req.body);
     const msg = {
       to: 'mnstucky@gmail.com', // need to update for production
       from: 'mnstucky@gmail.com', // same
@@ -14,7 +13,6 @@ export default function handler(req, res) {
     };
     sgMail.send(msg).then(
       () => {
-        console.log('Sent');
         res.json({
           status: 'success',
         });

@@ -12,8 +12,7 @@ export default async function getAdmins() {
   mongoose.connection.on('error', console.error.bind(console, 'MongoDB connection error: '));
 
   // Return all admins
-  const rawAdmins = await Admin.find({})
+  const admins = await Admin.find({})
     .select({ _id: 0, __v: 0 });
-  const admins = JSON.stringify(rawAdmins);
-  return rawAdmins;
+  return admins;
 }

@@ -21,7 +21,7 @@ function ItemPane({
       <Link href={`\\${url}`}>
         <a className="card-image">
           <div className="image is-3by2">
-            <img src={image} />
+            <img alt="Product display" src={image} />
           </div>
         </a>
       </Link>

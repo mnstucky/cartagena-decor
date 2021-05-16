@@ -1,3 +1,5 @@
+// noinspection DuplicatedCode
+
 const chai = require('chai');
 
 const { expect } = chai;
