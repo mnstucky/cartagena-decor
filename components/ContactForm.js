@@ -13,6 +13,7 @@ function ContactForm() {
   function handleEmailChange(event) {
     setEmailValue(event.target.value);
   }
+  const [APIresponse, setAPIResponse] = useState('');
   function handleSubmit(event) {
     event.preventDefault();
 
@@ -21,13 +22,23 @@ function ContactForm() {
       body: JSON.stringify({
         name: nameValue,
         subject: subjectValue,
+        email: emailValue,
       }),
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
       },
     })
-      .then((res) => res.json());
+      .then(async (res) => {
+        const response = await res.json();
+        setAPIResponse(response.status);
+      });
+  }
+  let submitMessage = '';
+  if (APIresponse === 'success') {
+    submitMessage = 'Thank you for contacting us! We will be in touch.';
+  } else if (APIresponse === 'error') {
+    submitMessage = 'Something went wrong. Please try again later.';
   }
   return (
     <form onSubmit={handleSubmit}>
@@ -71,8 +82,11 @@ function ContactForm() {
           />
         </label>
       </div>
+      <div className="is-flex is-align-items-center">
+        <input disabled={APIresponse} className="button is-info mr-3" type="submit" value="Submit" />
+        <p>{submitMessage}</p>
+      </div>
 
-      <input className="button is-info" type="submit" value="Submit" />
     </form>
   );
 }
