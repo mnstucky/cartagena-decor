@@ -83,7 +83,7 @@ function ItemContainer({
               </p>
               <GoToCartButton cartButtonVisibility={cartButtonVisibility} />
             </div>
-            {addButtonDisabled && <p className="has-text-danger-dark">You must select an option to add to cart.</p>}
+            {item.multiples.hasMultiples && selection === 'default' && <p className="has-text-danger-dark">You must select an option to add to cart.</p>}
             {admins.some((admin) => admin.email === session?.user?.email) && (
             <Link href={`/admin/${itemUrl}`}>
               <button type="button" className="button is-info mt-2">Edit Item</button>
