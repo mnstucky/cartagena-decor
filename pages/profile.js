@@ -49,6 +49,17 @@ function Profile() {
                     weekday: 'long', year: 'numeric', month: 'long', day: 'numeric',
                   })}
                 </p>
+                {order.shipping.hasShipped && (
+                <>
+                  <p className="has-text-weight-bold">Shipped</p>
+                  <p>
+                    Tracking #:
+                    {' '}
+                    {order.shipping.tracking}
+                  </p>
+                </>
+                )}
+
               </div>
               <div className="column">
                 <p className="has-text-weight-bold">Shipping Info:</p>

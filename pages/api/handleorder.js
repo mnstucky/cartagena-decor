@@ -51,6 +51,8 @@ export default async function handler(req, res) {
         },
         name: shipping.name,
         phone: shipping.phone,
+        hasShipped: false,
+        tracking: '',
       },
       subtotal,
       total,

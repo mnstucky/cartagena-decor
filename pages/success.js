@@ -9,6 +9,7 @@ export default function Success({ sessionId }) {
   const { cart, setCart } = useContext(CartContext);
   useEffect(() => {
     setCart([]);
+    localStorage.setItem('cart', JSON.stringify([]));
   }, []);
   if (loading) {
     return (

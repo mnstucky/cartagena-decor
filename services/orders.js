@@ -49,6 +49,8 @@ const orderSchema = new Schema({
     },
     name: String,
     phone: String,
+    hasShipped: Boolean,
+    tracking: String,
   },
   subtotal: {
     type: Number,
