@@ -30,8 +30,13 @@ function ContactForm() {
       },
     })
       .then(async (res) => {
-        const response = await res.json();
-        setAPIResponse(response.status);
+        if (res.ok) {
+          setAPIResponse('success');
+        } else {
+          setAPIResponse('error');
+        }
+      }).catch(error => {
+        throw error;
       });
   }
   let submitMessage = '';
