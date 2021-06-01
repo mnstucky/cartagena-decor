@@ -11,8 +11,12 @@ function GoToCartButton({
   const { cart, setCart } = useContext(CartContext);
   // Load saved cart from localStorage
   useEffect(() => {
-    const storedCart = JSON.parse(window.localStorage.getItem('cart'));
-    setCart(storedCart || []);
+    try {
+      const storedCart = JSON.parse(window.localStorage.getItem('cart'));
+      setCart(storedCart || []);
+    } catch (error) {
+      setCart([]);
+    }
   }, []);
   if (cartButtonVisibility) {
     return (
