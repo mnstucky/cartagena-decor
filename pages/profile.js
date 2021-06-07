@@ -28,6 +28,7 @@ function Profile() {
   if (error) {
     return <Error />;
   }
+  let itemKey = 0;
   return (
     <div className="container pr-3 pl-3 mt-5">
       <div className="block">
@@ -77,7 +78,7 @@ function Profile() {
               </div>
               <div className="column">
                 <p className="has-text-weight-bold">Items</p>
-                {order.items.map((item) => <p key={item.description}>{`${item.description} x ${item.quantity}`}</p>)}
+                {order.items.map((item) => <p key={itemKey++}>{`${item.description} x ${item.quantity}`}</p>)}
                 <p className="mt-5">{`Subtotal: $${order.subtotal / 100.0}`}</p>
                 <p className="has-text-weight-bold">{`Total: $${order.total / 100.0}`}</p>
               </div>

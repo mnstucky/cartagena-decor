@@ -75,7 +75,7 @@ function AddItem() {
   if (error || adminError) {
     return <Error />;
   }
-  if (admins.some((admin) => admin.email !== session?.user?.email)) {
+  if (!admins.some((admin) => admin.email === session?.user?.email)) {
     return (
       <div className="container pr-3 pl-3">
         <h1 className="title is-4 mt-2">Add Item</h1>
