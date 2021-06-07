@@ -7,7 +7,10 @@ import Error from '../../components/Error';
 
 function ItemPage({ itemUrl }) {
   const [session] = useSession();
-  if (session?.user?.email !== 'mnstucky@gmail.com') {
+  const { data: admins, adminError, adminLoading } = useFetch('getadmins');
+  const [selection, setSelection] = useState('default');
+  const { data: item, error, loading } = useFetch(`getitems?id=${itemUrl}`);
+  if (!admins || !admins.some((admin) => admin.email === session?.user?.email)) {
     return (
       <div className="container pr-3 pl-3">
         <h1 className="title is-4 mt-2">User Profile</h1>
@@ -17,8 +20,6 @@ function ItemPage({ itemUrl }) {
       </div>
     );
   }
-  const [selection, setSelection] = useState('default');
-  const { data: item, error, loading } = useFetch(`getitems?id=${itemUrl}`);
   if (loading) {
     return (
       <LoadingSpinner />

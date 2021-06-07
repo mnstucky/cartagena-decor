@@ -1,6 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { useSession } from 'next-auth/client';
+import useFetch from '../services/useFetch';
 
 function ItemPane({
   image, name, price, url, setNeedsRefresh,
@@ -9,6 +10,7 @@ function ItemPane({
     width: 300,
   };
   const [session, loading] = useSession();
+  const { data: admins, error, adminLoading } = useFetch('getadmins');
   async function deleteItem(event) {
     const response = await fetch('/api/deleteitem', {
       method: 'DELETE',
@@ -35,7 +37,7 @@ function ItemPane({
           </a>
         </div>
       </Link>
-      {session?.user?.email === 'mnstucky@gmail.com' && (
+      {admins && admins.some((admin) => admin.email === session?.user?.email) && (
         <div className="is-flex is-justify-content-flex-end">
           <button type="button" className="button is-danger mr-2" id={url} onClick={deleteItem}>Delete</button>
           <Link href={`/admin/${url}`}>
