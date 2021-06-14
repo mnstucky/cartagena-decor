@@ -7,9 +7,9 @@ export default async (req, res) => {
   const admins = await getAdmins();
   if (session && admins.some((admin) => admin.email === session?.user?.email)) {
     aws.config.update({
-      accessKeyId: process.env.CUSTOM_AWS_ACCESS_KEY,
-      secretAccessKey: process.env.CUSTOM_AWS_SECRET_KEY,
-      region: process.env.CUSTOM_AWS_REGION,
+      accessKeyId: process.env.AWS_CUSTOM_ACCESS_KEY,
+      secretAccessKey: process.env.AWS_CUSTOM_SECRET_KEY,
+      region: process.env.AWS_CUSTOM_REGION,
       signatureVersion: 'v4',
     });
     const s3 = new aws.S3();

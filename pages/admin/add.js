@@ -30,6 +30,7 @@ function AddItem() {
   const [readyToAddImages, setReadyToAddImages] = useState(false);
   const [uploaded, setUploaded] = useState([]);
   const [errorMessage, setErrorMessage] = useState('');
+  const [submitted, setSubmitted] = useState(false);
   const { data: categories, error, loading } = useFetch('getitems?list=category');
   const { data: admins, adminError, adminLoading } = useFetch('getadmins');
   function makeReadyToAddImages() {
@@ -66,6 +67,7 @@ function AddItem() {
     });
     const formattedResponse = await response.json();
     setErrorMessage(formattedResponse.error);
+    setSubmitted(true);
   }
   if (loading || adminLoading || !admins) {
     return (
@@ -140,10 +142,11 @@ function AddItem() {
           {uploaded.length > 0
           && (
           <>
-            <button type="button" className="button is-primary mt-3" onClick={handleSubmit}>
+            <button type="button" className="button is-primary mt-3" onClick={handleSubmit} disabled={submitted}>
               Submit Item
             </button>
             <p className="mt-4">{errorMessage}</p>
+            {submitted && <p className="mt-4">Item submitted.</p>}
           </>
           )}
         </>
