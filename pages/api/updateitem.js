@@ -16,7 +16,7 @@ export default async (req, res) => {
       })
         .catch((err) => console.error(err));
       const {
-        description, features, highlights, url, stock, price, selection,
+        description, features, highlights, url, stock, price, selection, category,
       } = JSON.parse(req.body);
       const unformattedSelectionArray = selection.split(' ');
       unformattedSelectionArray[0] = unformattedSelectionArray[0].toLowerCase();
@@ -26,12 +26,12 @@ export default async (req, res) => {
       itemToUpdate.features = features;
       itemToUpdate.highlights = highlights;
       itemToUpdate.price = price;
+      itemToUpdate.category = category;
       if (selection === 'default') {
         itemToUpdate.stock = stock;
       } else {
         itemToUpdate.multiples.options.set(unformattedSelection, stock);
       }
-      console.log(itemToUpdate);
       const updatedItem = await itemToUpdate.save();
       if (updatedItem === itemToUpdate) {
         res.send({

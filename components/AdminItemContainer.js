@@ -14,6 +14,7 @@ function AdminItemContainer({
   const [highlights, setHighlights] = useState(item.highlights);
   const [stock, setStock] = useState(item.stock);
   const [price, setPrice] = useState(item.price);
+  const [category, setCategory] = useState(item.category);
   const [updateMessage, setUpdateMessage] = useState(undefined);
   async function handleSubmit(event) {
     event.preventDefault();
@@ -25,6 +26,7 @@ function AdminItemContainer({
       stock,
       price,
       selection,
+      category,
     };
     const response = await fetch('/api/updateitem', {
       method: 'POST',
@@ -113,6 +115,7 @@ function AdminItemContainer({
         <div className="column">
           <section className="box content">
             <form onSubmit={handleSubmit}>
+              <ControlledTextareaSingle fieldName="Category" field={category} setField={setCategory} />
               <ControlledTextareaList fieldName="Description" fields={description} setFields={setDescription} />
               <ControlledTextareaList fieldName="Feature" fields={features} setFields={setFeatures} />
               <ControlledTextareaSingle fieldName="Highlights" field={highlights} setField={setHighlights} />
