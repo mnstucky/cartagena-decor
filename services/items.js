@@ -9,7 +9,7 @@ const itemSchema = new Schema({
   },
   category: {
     type: String,
-    enum: ['coaster', 'tray', 'lazySusan'],
+    required: true,
   },
   stock: {
     type: Number,

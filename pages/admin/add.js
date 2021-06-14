@@ -19,6 +19,7 @@ function AddItem() {
   const [session] = useSession();
   const [name, setName] = useState('');
   const [category, setCategory] = useState('');
+  const [newCategory, setNewCategory] = useState(false);
   const [stock, setStock] = useState('');
   const [price, setPrice] = useState('');
   const [highlights, setHighlights] = useState('');
@@ -35,6 +36,10 @@ function AddItem() {
   const { data: admins, adminError, adminLoading } = useFetch('getadmins');
   function makeReadyToAddImages() {
     setReadyToAddImages(true);
+  }
+  function handleNewCategoryToggle(event) {
+    event.preventDefault();
+    setNewCategory(true);
   }
   async function handleSubmit(event) {
     event.preventDefault();
@@ -96,7 +101,14 @@ function AddItem() {
             <>
               <ControlledTextInput fieldName="Name" field={name} setField={setName} />
               {!name && <p className="has-text-danger-dark">An item name is required.</p>}
-              <ControlledSelect fieldName="Category" setField={setCategory} options={categories} />
+              {!newCategory
+                && (
+                <>
+                  <ControlledSelect fieldName="Category" setField={setCategory} options={categories} />
+                  <button className="button is-primary" type="button" onClick={handleNewCategoryToggle}>Add New Category</button>
+                </>
+                )}
+              {newCategory && <ControlledTextInput fieldName="Add Category" field={category} setField={setCategory} /> }
               {!category && <p className="has-text-danger-dark">You must select a category.</p>}
               <ControlledNumberInput fieldName="Stock" field={stock} setField={setStock} />
               {stock < 0 && <p className="has-text-danger-dark">Stock must be nonnegative.</p>}
