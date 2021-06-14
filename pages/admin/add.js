@@ -151,6 +151,7 @@ function AddItem() {
               );
             })}
           </div>
+          <p className="mt-4 has-text-weight-bold">Image must be in .JPG format. Preferred dimensions are 720 x 480.</p>
           {uploaded.length > 0
           && (
           <>
