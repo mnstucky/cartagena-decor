@@ -1,7 +1,7 @@
 import React from 'react';
 
 function ControlledSelect({
-  setField, fieldName, options,
+  setField, fieldName, options, defaultValue,
 }) {
   function handleFieldChange(event) {
     setField(event.target.value);
@@ -15,7 +15,7 @@ function ControlledSelect({
       </h6>
       <div className="select">
         <select onChange={handleFieldChange}>
-          <option value="">Select a Category</option>
+          <option value="">{defaultValue}</option>
           {options.map((option) => <option key={option} value={option}>{option}</option>)}
         </select>
       </div>
