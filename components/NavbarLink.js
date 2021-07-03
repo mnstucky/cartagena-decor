@@ -5,10 +5,15 @@ function NavbarLink({
   toggleActive,
   path,
   label,
+  isBold = false,
 }) {
+  let classes = 'navbar-item';
+  if (isBold) {
+    classes += ' has-text-weight-bold';
+  }
   return (
     <Link href={path}>
-      <a className="navbar-item" onClick={toggleActive}>
+      <a className={`${classes}`} onClick={toggleActive}>
         {label}
       </a>
     </Link>

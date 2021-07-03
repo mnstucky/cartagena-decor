@@ -18,6 +18,8 @@ function NavbarMenu({ isActive, toggleActive }) {
         <NavbarLink toggleActive={toggleActive} path="/contact/" label="Contact" />
         {session && <NavbarLink toggleActive={toggleActive} path="/profile/" label="Profile" /> }
         {admins && admins.some((admin) => admin.email === session?.user?.email) && <NavbarLink toggleActive={toggleActive} path="/admin/orders/" label="Orders" /> }
+        <NavbarLink toggleActive={toggleActive} path="/shop/" label="Shop Maran Cafe" isBold />
+        {/* TODO: edit link to display only coffee items at this path */}
       </div>
       <div className="navbar-end">
         {session

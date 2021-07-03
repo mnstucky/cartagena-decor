@@ -35,6 +35,7 @@ function AdminItemContainer({
     const json = await response.json();
     setUpdateMessage(json.message);
   }
+  // TODO: make the default view editable
   function handleSelection(event) {
     setSelection(event.target.value);
     // Format selection to match formatting of options in item object

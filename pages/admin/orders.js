@@ -41,6 +41,9 @@ function Orders() {
       </div>
     );
   }
+  // TODO: Sort orders by most recent first
+  // TODO: Add field for shipping type
+  // TODO: Items w/ multiple varieties need their variety indicated - also need to fix in DB
   return (
     <div className="container pl-3 pr-3">
       <h1 className="is-size-4 has-text-weight-bold mb-3">Open Orders</h1>
