@@ -17,6 +17,10 @@ function MyApp({ Component, pageProps }) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="theme-color" content="#000000" />
         <meta name="description" content="Online store for Cartagena Decor" />
+        <meta
+          name="facebook-domain-verification"
+          content="6fv6uotwskkrcy3d1m84tw0cvuljqn"
+        />
         <title>Cartagena Decor</title>
       </Head>
       <CartContextProvider>
