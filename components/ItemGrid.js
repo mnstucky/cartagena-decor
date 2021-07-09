@@ -1,19 +1,19 @@
-import React, { useState } from 'react';
-import ItemPane from './ItemPane';
-import useFetch from '../services/useFetch';
-import Error from './Error';
-import LoadingSpinner from './LoadingSpinner';
-import ControlledSelect from './ControlledSelect';
+import React, { useState } from "react";
+import ItemPane from "./ItemPane";
+import useFetch from "../services/useFetch";
+import Error from "./Error";
+import LoadingSpinner from "./LoadingSpinner";
+import ControlledSelect from "./ControlledSelect";
 
-function ItemGrid() {
+function ItemGrid({ startingCategory }) {
   const [needsRefresh, setNeedsRefresh] = useState(false);
-  const [selectedCategory, setSelectedCategory] = useState('');
-  const { data: items, error, loading } = useFetch('getitems', needsRefresh);
+  const [selectedCategory, setSelectedCategory] = useState(
+    startingCategory || ""
+  );
+  const { data: items, error, loading } = useFetch("getitems", needsRefresh);
   // If fetch from DB is still pending, return a loading spinner
   if (loading) {
-    return (
-      <LoadingSpinner />
-    );
+    return <LoadingSpinner />;
   }
   if (error) {
     return <Error />;
@@ -27,7 +27,12 @@ function ItemGrid() {
   }
   return (
     <>
-      <ControlledSelect fieldName="Filter By Category" setField={setSelectedCategory} options={categories} defaultValue="All" />
+      <ControlledSelect
+        fieldName="Filter By Category"
+        setField={setSelectedCategory}
+        options={categories}
+        defaultValue={startingCategory || "All"}
+      />
       <div className="is-flex is-flex-wrap-wrap is-justify-content-space-evenly">
         {items.map((item) => {
           if (!selectedCategory || selectedCategory === item.category) {
