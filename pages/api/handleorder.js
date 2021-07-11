@@ -1,25 +1,28 @@
-const stripe = require('stripe')(process.env.STRIPE_TEST_SECRET);
-const mongoose = require('mongoose');
-const Order = require('../../services/orders.js');
+const stripe = require("stripe")(process.env.STRIPE_TEST_SECRET);
+const mongoose = require("mongoose");
+const Order = require("../../services/orders.js");
 
 export default async function handler(req, res) {
-  if (req.method === 'GET') {
+  if (req.method === "GET") {
     // Get order information from Stripe checkout
-    const session = await stripe.checkout.sessions.retrieve(req.query.session_id);
+    const session = await stripe.checkout.sessions.retrieve(
+      req.query.session_id
+    );
     const customer = await stripe.customers.retrieve(session.customer);
-    const lineItems = await stripe.checkout.sessions.listLineItems(req.query.session_id);
+    const lineItems = await stripe.checkout.sessions.listLineItems(
+      req.query.session_id
+    );
 
     // Connect to the DB
-    await mongoose.connect(process.env.MONGO_URL, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    })
+    await mongoose
+      .connect(process.env.MONGO_URL, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+      })
       .catch((err) => console.error(err));
 
     // Prepare Stripe data for storage
-    const {
-      name, email, address, shipping,
-    } = customer;
+    const { name, email, address, shipping } = customer;
     const { amount_subtotal: subtotal, amount_total: total } = session;
     const formattedLineItems = lineItems.data.map((item) => ({
       description: item.description,
@@ -52,7 +55,8 @@ export default async function handler(req, res) {
         name: shipping.name,
         phone: shipping.phone,
         hasShipped: false,
-        tracking: '',
+        tracking: "",
+        shippingType: "",
       },
       subtotal,
       total,
@@ -66,13 +70,13 @@ export default async function handler(req, res) {
       res.send({
         session,
         customer,
-        message: 'Order saved.',
+        message: "Order saved.",
       });
     } catch (err) {
       res.send({
         session,
         customer,
-        error: 'Something went wrong saving your order.',
+        error: "Something went wrong saving your order.",
       });
     }
   }

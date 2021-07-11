@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const { Schema } = mongoose;
 
@@ -51,6 +51,7 @@ const orderSchema = new Schema({
     phone: String,
     hasShipped: Boolean,
     tracking: String,
+    shippingType: String,
   },
   subtotal: {
     type: Number,
@@ -72,9 +73,9 @@ const orderSchema = new Schema({
 
 let Order;
 try {
-  Order = mongoose.model('Order');
+  Order = mongoose.model("Order");
 } catch {
-  Order = mongoose.model('Order', orderSchema);
+  Order = mongoose.model("Order", orderSchema);
 }
 
 module.exports = Order;
