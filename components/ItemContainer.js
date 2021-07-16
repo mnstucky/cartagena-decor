@@ -55,11 +55,13 @@ function ItemContainer({ selection, setSelection, item, itemUrl }) {
                 selection={selection}
                 setSelection={setSelection}
               />
-              <QuantitySelector
-                quantity={quantity}
-                setQuantity={setQuantity}
-                maxQuantity={item.stock}
-              />
+              {!(item.multiples.hasMultiples && selection === "default") && (
+                <QuantitySelector
+                  quantity={quantity}
+                  setQuantity={setQuantity}
+                  maxQuantity={item.stock}
+                />
+              )}
             </div>
             <div className="is-flex is-align-items-center">
               <AddToCartButton
