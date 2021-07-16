@@ -1,8 +1,6 @@
-import React from 'react';
+import React from "react";
 
-function QuantitySelector({
-  quantity, setQuantity,
-}) {
+function QuantitySelector({ quantity, setQuantity, maxQuantity }) {
   function decrementQuantity() {
     setQuantity(quantity - 1);
   }
@@ -19,20 +17,16 @@ function QuantitySelector({
       >
         -
       </button>
-      <p className="mb-0 ml-2 mr-2">
-        Quantity:
-        {' '}
-        {quantity}
-      </p>
+      <p className="mb-0 ml-2 mr-2">Quantity: {quantity}</p>
       <button
         onClick={incrementQuantity}
+        disabled={quantity >= maxQuantity}
         type="button"
         className="button is-link is-light"
       >
         +
       </button>
     </div>
-
   );
 }
 

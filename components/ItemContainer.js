@@ -1,42 +1,38 @@
-import React, { useState } from 'react';
-import Link from 'next/link';
-import { useSession } from 'next-auth/client';
-import useFetch from '../services/useFetch';
-import ItemSelector from './ItemSelector';
-import AddToCartButton from './AddToCartButton';
-import ItemImage from './ItemImage';
-import ItemDescription from './ItemDescription';
-import ItemFeatures from './ItemFeatures';
-import GoToCartButton from './GoToCartButton';
-import QuantitySelector from './QuantitySelector';
-import LoadingSpinner from './LoadingSpinner';
-import Error from './Error';
+import React, { useState } from "react";
+import Link from "next/link";
+import { useSession } from "next-auth/client";
+import useFetch from "../services/useFetch";
+import ItemSelector from "./ItemSelector";
+import AddToCartButton from "./AddToCartButton";
+import ItemImage from "./ItemImage";
+import ItemDescription from "./ItemDescription";
+import ItemFeatures from "./ItemFeatures";
+import GoToCartButton from "./GoToCartButton";
+import QuantitySelector from "./QuantitySelector";
+import LoadingSpinner from "./LoadingSpinner";
+import Error from "./Error";
 
-function ItemContainer({
-  selection,
-  setSelection,
-  item,
-  itemUrl,
-}) {
+function ItemContainer({ selection, setSelection, item, itemUrl }) {
   const [session, sessionLoading] = useSession();
   const [cartButtonVisibility, setCartButtonVisibility] = useState(false);
   const [quantity, setQuantity] = useState(1);
-  const [addButtonDisabled, setAddButtonDisabled] = useState(item.multiples.hasMultiples && selection === 'default');
-  const { data: admins, error, loading } = useFetch('getadmins');
+  const [addButtonDisabled, setAddButtonDisabled] = useState(
+    item.multiples.hasMultiples && selection === "default"
+  );
+  const { data: admins, error, loading } = useFetch("getadmins");
   const options = [];
   // eslint-disable-next-line no-restricted-syntax
   for (const [key, value] of Object.entries(item.multiples.options)) {
     if (value > 0) {
-      const keyWithSpacesAdded = key.replace(/([A-Z])/g, ' $1');
-      const formattedOption = keyWithSpacesAdded.charAt(0)
-        .toUpperCase() + keyWithSpacesAdded.slice(1);
+      const keyWithSpacesAdded = key.replace(/([A-Z])/g, " $1");
+      const formattedOption =
+        keyWithSpacesAdded.charAt(0).toUpperCase() +
+        keyWithSpacesAdded.slice(1);
       options.push(formattedOption);
     }
   }
   if (loading) {
-    return (
-      <LoadingSpinner />
-    );
+    return <LoadingSpinner />;
   }
   if (error) {
     return <Error message="Admin users failed to fetch." />;
@@ -59,7 +55,11 @@ function ItemContainer({
                 selection={selection}
                 setSelection={setSelection}
               />
-              <QuantitySelector quantity={quantity} setQuantity={setQuantity} />
+              <QuantitySelector
+                quantity={quantity}
+                setQuantity={setQuantity}
+                maxQuantity={item.stock}
+              />
             </div>
             <div className="is-flex is-align-items-center">
               <AddToCartButton
@@ -73,21 +73,24 @@ function ItemContainer({
               />
 
               <p className="has-text-weight-bold mb-0 ml-2 mr-2">
-                $
-                {item.price}
-                {' x '}
+                ${item.price}
+                {" x "}
                 {quantity}
-                {' = '}
-                $
-                {item.price * quantity}
+                {" = "}${item.price * quantity}
               </p>
               <GoToCartButton cartButtonVisibility={cartButtonVisibility} />
             </div>
-            {item.multiples.hasMultiples && selection === 'default' && <p className="has-text-danger-dark">You must select an option to add to cart.</p>}
+            {item.multiples.hasMultiples && selection === "default" && (
+              <p className="has-text-danger-dark">
+                You must select an option to add to cart.
+              </p>
+            )}
             {admins.some((admin) => admin.email === session?.user?.email) && (
-            <Link href={`/admin/${itemUrl}`}>
-              <button type="button" className="button is-info mt-2">Edit Item</button>
-            </Link>
+              <Link href={`/admin/${itemUrl}`}>
+                <button type="button" className="button is-info mt-2">
+                  Edit Item
+                </button>
+              </Link>
             )}
           </section>
         </div>
