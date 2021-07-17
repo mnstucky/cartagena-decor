@@ -37,7 +37,6 @@ function ItemContainer({ selection, setSelection, item, itemUrl }) {
   if (error) {
     return <Error message="Admin users failed to fetch." />;
   }
-  console.log(item.multiples.options[selection]);
   return (
     <div className="container pl-3 pr-3">
       <h1 className="title is-4 mt-2 has-text-centered">{item.name}</h1>
