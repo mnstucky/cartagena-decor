@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Link from "next/link";
 import ItemImage from "./ItemImage";
 import ControlledTextareaList from "./ControlledTextareaList";
 import DecrementStockButton from "./DecrementStockButton";
@@ -13,6 +14,7 @@ function AdminItemContainer({ selection, setSelection, item, itemUrl }) {
   const [stock, setStock] = useState(item.stock);
   const [price, setPrice] = useState(item.price);
   const [category, setCategory] = useState(item.category);
+  const [name, setName] = useState(item.name);
   const [updateMessage, setUpdateMessage] = useState(undefined);
   async function handleSubmit(event) {
     event.preventDefault();
@@ -25,6 +27,7 @@ function AdminItemContainer({ selection, setSelection, item, itemUrl }) {
       price,
       selection,
       category,
+      name,
     };
     const response = await fetch("/api/updateitem", {
       method: "POST",
@@ -78,7 +81,11 @@ function AdminItemContainer({ selection, setSelection, item, itemUrl }) {
   //    the correct index to update in the handler functions
   return (
     <div className="container pl-3 pr-3">
-      <h1 className="title is-4 mt-2 has-text-centered">{item.name}</h1>
+      <ControlledTextareaSingle
+        fieldName="Title"
+        field={name}
+        setField={setName}
+      />
       <div className="columns">
         <div className="column">
           <ItemImage selection={selection} item={item} itemUrl={itemUrl} />
@@ -155,6 +162,9 @@ function AdminItemContainer({ selection, setSelection, item, itemUrl }) {
                   value="Save Changes"
                 />
                 {updateMessage && <p className="ml-3">{updateMessage}</p>}
+                <Link href={`/${itemUrl}`}>
+                  <button className="button is-link ml-3">View Item</button>
+                </Link>
               </div>
             </form>
           </section>
