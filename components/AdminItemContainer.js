@@ -64,7 +64,6 @@ function AdminItemContainer({ selection, setSelection, item, itemUrl }) {
       body: formData,
     });
     if (upload.ok) {
-      console.log("Uploaded successfully!");
     } else {
       console.error("Upload failed.");
     }
