@@ -37,6 +37,7 @@ function ItemContainer({ selection, setSelection, item, itemUrl }) {
   if (error) {
     return <Error message="Admin users failed to fetch." />;
   }
+  console.log(item.multiples.options[selection]);
   return (
     <div className="container pl-3 pr-3">
       <h1 className="title is-4 mt-2 has-text-centered">{item.name}</h1>
@@ -59,7 +60,14 @@ function ItemContainer({ selection, setSelection, item, itemUrl }) {
                 <QuantitySelector
                   quantity={quantity}
                   setQuantity={setQuantity}
-                  maxQuantity={item.stock}
+                  maxQuantity={
+                    !item.multiples.hasMultiples
+                      ? item.stock
+                      : item.multiples.options[
+                          selection.charAt(0).toLowerCase() +
+                            selection.slice(1).replace(" ", "")
+                        ]
+                  }
                 />
               )}
             </div>

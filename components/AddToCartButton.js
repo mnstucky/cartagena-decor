@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useContext } from 'react';
-import { CartContext } from './CartContextProvider';
+import React, { useState, useEffect, useContext } from "react";
+import { CartContext } from "./CartContextProvider";
 
 function AddToCartButton({
   item,
@@ -11,11 +11,11 @@ function AddToCartButton({
   setIsDisabled,
 }) {
   const { cart, setCart } = useContext(CartContext);
-  const [buttonContent, setButtonContent] = useState('Add to Cart');
+  const [buttonContent, setButtonContent] = useState("Add to Cart");
   useEffect(() => {
-    if (selection !== 'default') {
+    if (selection !== "default") {
       setIsDisabled(false);
-      setButtonContent('Add to Cart');
+      setButtonContent("Add to Cart");
     } else if (item.multiples.hasMultiples) {
       setIsDisabled(true);
     }
@@ -31,6 +31,12 @@ function AddToCartButton({
           images: item.images,
           itemUrl,
           quantity: cartItem ? cartItem.quantity + quantity : quantity,
+          maxQuantity: !item.multiples.hasMultiples
+            ? item.stock
+            : item.multiples.options[
+                selection.charAt(0).toLowerCase() +
+                  selection.slice(1).replace(" ", "")
+              ],
         };
         updatedItem = true;
         return itemToAdd;
@@ -45,18 +51,29 @@ function AddToCartButton({
         images: item.images,
         itemUrl,
         quantity,
+        maxQuantity: !item.multiples.hasMultiples
+          ? item.stock
+          : item.multiples.options[
+              selection.charAt(0).toLowerCase() +
+                selection.slice(1).replace(" ", "")
+            ],
       };
       newCart.push(itemToAdd);
     }
-    localStorage.setItem('cart', JSON.stringify(newCart));
+    localStorage.setItem("cart", JSON.stringify(newCart));
     setCart(newCart);
-    setButtonContent('Item Added');
+    setButtonContent("Item Added");
     setIsDisabled(true);
     setCartButtonVisibility(true);
   }
 
   return (
-    <button type="button" className="button is-primary" onClick={addToCart} disabled={isDisabled}>
+    <button
+      type="button"
+      className="button is-primary"
+      onClick={addToCart}
+      disabled={isDisabled}
+    >
       {buttonContent}
     </button>
   );

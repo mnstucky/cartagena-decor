@@ -4,7 +4,6 @@ const stripe = require("stripe")(process.env.STRIPE_TEST_SECRET);
 export default async function handler(req, res) {
   if (req.method === "POST") {
     const cartContents = JSON.parse(req.body);
-    console.log(cartContents);
     const formattedContents = cartContents.map((item) => ({
       price_data: {
         currency: "usd",

@@ -1,31 +1,38 @@
 // noinspection HtmlUnknownTarget
 
-import React, { useContext } from 'react';
-import Link from 'next/link';
-import { loadStripe } from '@stripe/stripe-js';
-import DecrementCartButton from '../components/DecrementCartButton';
-import IncrementCartButton from '../components/IncrementCartButton';
-import Subtotal from '../components/Subtotal';
-import RemoveButton from '../components/RemoveButton';
-import { CartContext } from '../components/CartContextProvider';
-import CartImage from '../components/CartImage';
-import Error from '../components/Error';
+import React, { useContext } from "react";
+import Link from "next/link";
+import { loadStripe } from "@stripe/stripe-js";
+import DecrementCartButton from "../components/DecrementCartButton";
+import IncrementCartButton from "../components/IncrementCartButton";
+import Subtotal from "../components/Subtotal";
+import RemoveButton from "../components/RemoveButton";
+import { CartContext } from "../components/CartContextProvider";
+import CartImage from "../components/CartImage";
+import Error from "../components/Error";
 
-const stripePromise = loadStripe('pk_test_51IpzwDAh1yeccWEtIig7AKjgidmx64ismOoTdlpj99ZRUSO17RZCc1lyHuVOrU8ihzyAnzUegojZna9xbmARVSPT00n2GQ7Tnn');
+const stripePromise = loadStripe(
+  "pk_test_51JC8iGJpFLurhJIAsOGokWyTuMcR3yYN0VZPmjVh5wCCAFINNwP1cUplm9RMD5480wgRSe6n4ulNZQyZ30SYt4t000Atdc6wrR"
+);
 
 function Cart() {
   const { cart } = useContext(CartContext);
   // eslint-disable-next-line consistent-return
   async function handleCheckout() {
     const stripe = await stripePromise;
-    const response = await fetch('/api/createcheckout', { method: 'POST', body: JSON.stringify(cart) });
+    const response = await fetch("/api/createcheckout", {
+      method: "POST",
+      body: JSON.stringify(cart),
+    });
     const session = await response.json();
     const result = await stripe.redirectToCheckout({
       sessionId: session.id,
     });
     if (result.error) {
       return (
-        <Error message={`The following error occurred: ${result.error.message}`} />
+        <Error
+          message={`The following error occurred: ${result.error.message}`}
+        />
       );
     }
   }
@@ -43,7 +50,9 @@ function Cart() {
             <Link href={`/${item.itemUrl}`}>
               <a className="has-text-weight-bold has-text-black">{item.name}</a>
             </Link>
-            <p>{item.option !== 'default' && `Selected Option: ${item.option}`}</p>
+            <p>
+              {item.option !== "default" && `Selected Option: ${item.option}`}
+            </p>
             <p>{`$${item.price}`}</p>
           </div>
           <div className="column">
@@ -54,16 +63,9 @@ function Cart() {
                 quantity={item.quantity}
               />
               <p className="is-size-6 pt-1 pb-1 pl-3 pr-3">{item.quantity}</p>
-              <IncrementCartButton
-                name={item.name}
-                option={item.option}
-              />
-              <RemoveButton
-                name={item.name}
-                option={item.option}
-              />
+              <IncrementCartButton name={item.name} option={item.option} />
+              <RemoveButton name={item.name} option={item.option} />
             </span>
-
           </div>
         </div>
         <hr className="navbar-divider mt-0" />
@@ -77,12 +79,20 @@ function Cart() {
         {cartContents}
         <div className="is-flex is-justify-content-flex-end is-align-items-center">
           <Link href="/shop/">
-            <button type="button" className="button is-link mb-2">Keep Shopping</button>
+            <button type="button" className="button is-link mb-2">
+              Keep Shopping
+            </button>
           </Link>
         </div>
         <div className="is-flex is-justify-content-flex-end is-align-items-center">
           <Subtotal cart={cart} />
-          <button type="button" className="button is-primary ml-3" onClick={handleCheckout}>Checkout</button>
+          <button
+            type="button"
+            className="button is-primary ml-3"
+            onClick={handleCheckout}
+          >
+            Checkout
+          </button>
         </div>
       </div>
     </div>
