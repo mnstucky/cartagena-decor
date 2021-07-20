@@ -12,7 +12,7 @@ import CartImage from "../components/CartImage";
 import Error from "../components/Error";
 
 const stripePromise = loadStripe(
-  "pk_test_51JC8iGJpFLurhJIAsOGokWyTuMcR3yYN0VZPmjVh5wCCAFINNwP1cUplm9RMD5480wgRSe6n4ulNZQyZ30SYt4t000Atdc6wrR"
+  "pk_live_51JC8iGJpFLurhJIASqy8xOrD2zs7FaKAg4bPLOzVhEdYvtNxeRduyZqd4NmBefV5Iln6kmqmj1Lu9qeEXR48F7ny00Ifzbulua"
 );
 
 function Cart() {

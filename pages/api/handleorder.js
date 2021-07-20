@@ -38,7 +38,7 @@ export default async function handler(req, res) {
       const urlArray = url.split("-");
       const uniqueUrl = urlArray[0];
       const unformattedSelection = urlArray[1];
-      const itemToUpdate = await Item.findOne({ uniqueUrl });
+      const itemToUpdate = await Item.findOne({ url: uniqueUrl });
       if (unformattedSelection === "default") {
         itemToUpdate.stock -= metadata[url];
       } else {
@@ -84,7 +84,6 @@ export default async function handler(req, res) {
       items: formattedLineItems,
       date: new Date(),
     });
-    console.log(newOrder);
 
     // Save order to DB
     try {
