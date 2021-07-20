@@ -1,5 +1,3 @@
-// noinspection HtmlUnknownTarget
-
 import React, { useContext } from "react";
 import Link from "next/link";
 import { loadStripe } from "@stripe/stripe-js";
