@@ -1,12 +1,15 @@
-import React from "react";
+import React, { useEffect } from "react";
 
-function QuantitySelector({ quantity, setQuantity, maxQuantity }) {
+function QuantitySelector({ quantity, setQuantity, maxQuantity, selection }) {
   function decrementQuantity() {
     setQuantity(quantity - 1);
   }
   function incrementQuantity() {
     setQuantity(quantity + 1);
   }
+  useEffect(() => {
+    setQuantity(1);
+  }, [selection]);
   return (
     <div className="is-flex is-align-items-center mb-2">
       <button

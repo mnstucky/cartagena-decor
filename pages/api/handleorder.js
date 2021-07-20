@@ -1,6 +1,8 @@
+/* eslint-disable no-await-in-loop */
 const stripe = require("stripe")(process.env.STRIPE_TEST_SECRET);
 const mongoose = require("mongoose");
 const Order = require("../../services/orders.js");
+const Item = require("../../services/items.js");
 
 export default async function handler(req, res) {
   if (req.method === "GET") {
@@ -12,7 +14,7 @@ export default async function handler(req, res) {
     const lineItems = await stripe.checkout.sessions.listLineItems(
       req.query.session_id
     );
-
+    const { metadata } = session;
     // Connect to the DB
     await mongoose
       .connect(process.env.MONGO_URL, {
@@ -30,7 +32,26 @@ export default async function handler(req, res) {
       subtotal: item.amount_subtotal,
       total: item.amount_total,
     }));
-
+    // Update quantities in DB
+    // eslint-disable-next-line no-restricted-syntax
+    for (const url of Object.keys(metadata)) {
+      const urlArray = url.split("-");
+      const uniqueUrl = urlArray[0];
+      const unformattedSelection = urlArray[1];
+      const itemToUpdate = await Item.findOne({ uniqueUrl });
+      if (unformattedSelection === "default") {
+        itemToUpdate.stock -= metadata[url];
+      } else {
+        const currentStock = itemToUpdate.multiples.options.get(
+          unformattedSelection
+        );
+        itemToUpdate.multiples.options.set(
+          unformattedSelection,
+          currentStock - metadata[url]
+        );
+      }
+      await itemToUpdate.save();
+    }
     // Create Order to save to DB
     const newOrder = new Order({
       name,
@@ -63,6 +84,7 @@ export default async function handler(req, res) {
       items: formattedLineItems,
       date: new Date(),
     });
+    console.log(newOrder);
 
     // Save order to DB
     try {

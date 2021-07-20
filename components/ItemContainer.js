@@ -59,12 +59,13 @@ function ItemContainer({ selection, setSelection, item, itemUrl }) {
                 <QuantitySelector
                   quantity={quantity}
                   setQuantity={setQuantity}
+                  selection={selection}
                   maxQuantity={
                     !item.multiples.hasMultiples
                       ? item.stock
                       : item.multiples.options[
                           selection.charAt(0).toLowerCase() +
-                            selection.slice(1).replace(" ", "")
+                            selection.slice(1).replaceAll(" ", "")
                         ]
                   }
                 />
