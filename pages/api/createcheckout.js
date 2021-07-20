@@ -4,6 +4,12 @@ const stripe = require("stripe")(process.env.STRIPE_TEST_SECRET);
 export default async function handler(req, res) {
   if (req.method === "POST") {
     const cartContents = JSON.parse(req.body);
+    let use7Shipping = false;
+    for (const item of cartContents) {
+      if (item.itemUrl === "ls" || item.name.includes("16 Oz")) {
+        use7Shipping = true;
+      }
+    }
     const formattedContents = cartContents.map((item) => ({
       price_data: {
         currency: "usd",
@@ -19,7 +25,9 @@ export default async function handler(req, res) {
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ["card"],
       // TODO: Incorporate additional logic to handle different shipping rates, if desired
-      shipping_rates: ["shr_1JEHRJJpFLurhJIA1gvl8B3i"],
+      shipping_rates: use7Shipping
+        ? ["shr_1JF81jJpFLurhJIATK6T3X8D"]
+        : ["shr_1JEHRJJpFLurhJIA1gvl8B3i"],
       shipping_address_collection: {
         allowed_countries: ["US"],
       },
