@@ -1,18 +1,13 @@
-import React, { useContext } from 'react';
-import { CartContext } from './CartContextProvider';
+import React, { useContext } from "react";
+import { CartContext } from "./CartContextProvider";
 
 function Subtotal() {
   const { cart, setCart } = useContext(CartContext);
   let subtotal = 0;
   cart.forEach((cartItem) => {
-    subtotal += (cartItem.price * cartItem.quantity);
+    subtotal += cartItem.price * cartItem.quantity;
   });
-  return (
-    <p className="has-text-weight-bold">
-      Subtotal: $
-      {subtotal}
-    </p>
-  );
+  return <p className="has-text-weight-bold">Subtotal: ${subtotal}</p>;
 }
 
 export default Subtotal;

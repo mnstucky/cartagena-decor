@@ -86,7 +86,7 @@ function ItemContainer({ selection, setSelection, item, itemUrl }) {
                 ${item.price}
                 {" x "}
                 {quantity}
-                {" = "}${item.price * quantity}
+                {" = "}${(item.price * quantity).toFixed(2)}
               </p>
               <GoToCartButton cartButtonVisibility={cartButtonVisibility} />
             </div>
