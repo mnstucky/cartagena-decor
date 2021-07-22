@@ -42,7 +42,6 @@ function Orders() {
       </div>
     );
   }
-  // TODO: Add field for shipping type
   return (
     <div className="container pl-3 pr-3">
       <h1 className="is-size-4 has-text-weight-bold mb-3">Open Orders</h1>
@@ -106,14 +105,14 @@ function Orders() {
               <div className="column">
                 <p className="has-text-weight-bold">Items</p>
                 {order.items.map((item) => (
-                  <p
-                    key={keyValue++}
-                  >{`${item.description} x ${item.quantity}`}</p>
+                  <p key={keyValue++}>
+                    {`${item.description} x ${item.quantity}`}
+                  </p>
                 ))}
                 <p className="mt-5">{`Subtotal: $${order.subtotal / 100.0}`}</p>
-                <p className="has-text-weight-bold">{`Total: $${
-                  order.total / 100.0
-                }`}</p>
+                <p className="has-text-weight-bold">
+                  {`Total: $${order.total / 100.0}`}
+                </p>
               </div>
             </div>
             <hr className="navbar-divider mt-0" />

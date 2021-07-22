@@ -1,6 +1,5 @@
 /* eslint-disable no-restricted-syntax */
 const stripe = require("stripe")(process.env.STRIPE_TEST_SECRET);
-// TODO: Update URL for production
 
 export default async function handler(req, res) {
   if (req.method === "POST") {
@@ -27,6 +26,7 @@ export default async function handler(req, res) {
         unit_amount: item.price * 100,
       },
       quantity: item.quantity,
+      tax_rates: ["txr_1JFTzdJpFLurhJIAZnWhci1K"],
     }));
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ["card"],
@@ -46,3 +46,7 @@ export default async function handler(req, res) {
     res.send({ id: session.id });
   }
 }
+
+// TODO: Enable taxes
+// TODO: Make stripe keys environment variables
+// TODO: Shipping, add an extra dollar on top of base price per unit
