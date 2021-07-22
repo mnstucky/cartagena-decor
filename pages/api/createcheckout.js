@@ -63,5 +63,3 @@ export default async function handler(req, res) {
     res.send({ id: session.id });
   }
 }
-
-// TODO: Shipping, add an extra dollar on top of base price per unit
