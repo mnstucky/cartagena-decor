@@ -45,7 +45,7 @@ export default async function handler(req, res) {
         unit_amount: item.price * 100,
       },
       quantity: item.quantity,
-      tax_rates: ["txr_1JFTzdJpFLurhJIAZnWhci1K"],
+      dynamic_tax_rates: ["txr_1JFTzdJpFLurhJIAZnWhci1K"],
     }));
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ["card"],
