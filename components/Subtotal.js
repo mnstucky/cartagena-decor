@@ -7,7 +7,9 @@ function Subtotal() {
   cart.forEach((cartItem) => {
     subtotal += cartItem.price * cartItem.quantity;
   });
-  return <p className="has-text-weight-bold">Subtotal: ${subtotal}</p>;
+  return (
+    <p className="has-text-weight-bold">Subtotal: ${subtotal.toFixed(2)}</p>
+  );
 }
 
 export default Subtotal;

@@ -1,11 +1,7 @@
-import React, { useContext } from 'react';
-import { CartContext } from './CartContextProvider';
+import React, { useContext } from "react";
+import { CartContext } from "./CartContextProvider";
 
-function DecrementCartButton({
-  name,
-  option,
-  quantity,
-}) {
+function DecrementCartButton({ name, option, quantity }) {
   const { cart, setCart } = useContext(CartContext);
   function decrementQuantity() {
     const newCart = cart.map((cartItem) => {
@@ -17,12 +13,13 @@ function DecrementCartButton({
           images: cartItem.images,
           itemUrl: cartItem.itemUrl,
           quantity: cartItem.quantity - 1,
+          maxQuantity: cartItem.maxQuantity,
         };
         return updatedItem;
       }
       return cartItem;
     });
-    localStorage.setItem('cart', JSON.stringify(newCart));
+    localStorage.setItem("cart", JSON.stringify(newCart));
     setCart(newCart);
   }
 

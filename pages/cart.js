@@ -51,6 +51,7 @@ function Cart() {
             <p>
               {item.option !== "default" && `Selected Option: ${item.option}`}
             </p>
+            <p>Number in Stock: {item.maxQuantity}</p>
             <p>{`$${item.price}`}</p>
           </div>
           <div className="column">
