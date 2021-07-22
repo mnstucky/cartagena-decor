@@ -31,8 +31,8 @@ export default async function handler(req, res) {
     }
     const shippingStartValue = use7Shipping ? 7 : 5;
     const shippingRate = cartContents.reduce(
-      (acc, cur) => acc + 1,
-      shippingStartValue
+      (acc, cur) => acc + Number(cur.quantity),
+      shippingStartValue - 1
     );
     const formattedContents = cartContents.map((item) => ({
       price_data: {
