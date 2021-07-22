@@ -1,6 +1,20 @@
 /* eslint-disable no-restricted-syntax */
 const stripe = require("stripe")(process.env.STRIPE_TEST_SECRET);
 
+const shippingRates = {
+  5: "shr_1JF9DgJpFLurhJIAXsiygSCb",
+  6: "shr_1JFs4aJpFLurhJIAfe6yAMle",
+  7: "shr_1JF9EQJpFLurhJIA8QGY7N8p",
+  8: "shr_1JFs51JpFLurhJIAzdyyzxO7",
+  9: "shr_1JFs5PJpFLurhJIAMrjB6ehE",
+  10: "shr_1JFs5cJpFLurhJIAP08lMN6a",
+  11: "shr_1JFs7IJpFLurhJIA12HpgEW5",
+  12: "shr_1JFs7cJpFLurhJIALLyds4Cg",
+  13: "shr_1JFs7uJpFLurhJIAslWVw7rw",
+  14: "shr_1JFs8DJpFLurhJIAa5H1LEYg",
+  15: "shr_1JFs8WJpFLurhJIAqCnWHigg",
+};
+
 export default async function handler(req, res) {
   if (req.method === "POST") {
     const cartContents = JSON.parse(req.body);
@@ -15,6 +29,11 @@ export default async function handler(req, res) {
       const unformattedSelection = unformattedSelectionArray.join("");
       cartMetadata[`${item.itemUrl}-${unformattedSelection}`] = item.quantity;
     }
+    const shippingStartValue = use7Shipping ? 7 : 5;
+    const shippingRate = cartContents.reduce(
+      (acc, cur) => acc + 1,
+      shippingStartValue
+    );
     const formattedContents = cartContents.map((item) => ({
       price_data: {
         currency: "usd",
@@ -30,9 +49,7 @@ export default async function handler(req, res) {
     }));
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ["card"],
-      shipping_rates: use7Shipping
-        ? ["shr_1JF9EQJpFLurhJIA8QGY7N8p"]
-        : ["shr_1JF9DgJpFLurhJIAXsiygSCb"],
+      shipping_rates: [shippingRates[shippingRate]],
       shipping_address_collection: {
         allowed_countries: ["US"],
       },
@@ -47,6 +64,4 @@ export default async function handler(req, res) {
   }
 }
 
-// TODO: Enable taxes
-// TODO: Make stripe keys environment variables
 // TODO: Shipping, add an extra dollar on top of base price per unit
