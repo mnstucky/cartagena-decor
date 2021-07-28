@@ -2,6 +2,7 @@
 const stripe = require("stripe")(process.env.STRIPE_TEST_SECRET);
 
 const shippingRates = {
+  0: "shr_1JI3wSJpFLurhJIAyY4e2AMj",
   5: "shr_1JF9DgJpFLurhJIAXsiygSCb",
   6: "shr_1JFs4aJpFLurhJIAfe6yAMle",
   7: "shr_1JF9EQJpFLurhJIA8QGY7N8p",
@@ -19,21 +20,24 @@ export default async function handler(req, res) {
   if (req.method === "POST") {
     const cartContents = JSON.parse(req.body);
     let use7Shipping = false;
+    let useFreeShipping = false;
     const cartMetadata = {};
     for (const item of cartContents) {
       if (item.itemUrl === "ls" || item.name.includes("16 Oz")) {
         use7Shipping = true;
       }
+      if (item.itemUrl === "ts") useFreeShipping = true;
       const unformattedSelectionArray = item.option.split(" ");
       unformattedSelectionArray[0] = unformattedSelectionArray[0].toLowerCase();
       const unformattedSelection = unformattedSelectionArray.join("");
       cartMetadata[`${item.itemUrl}-${unformattedSelection}`] = item.quantity;
     }
     const shippingStartValue = use7Shipping ? 7 : 5;
-    const shippingRate = cartContents.reduce(
+    let shippingRate = cartContents.reduce(
       (acc, cur) => acc + Number(cur.quantity),
       shippingStartValue - 1
     );
+    if (useFreeShipping) shippingRate = 0;
     const formattedContents = cartContents.map((item) => ({
       price_data: {
         currency: "usd",
