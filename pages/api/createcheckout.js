@@ -62,6 +62,7 @@ export default async function handler(req, res) {
       success_url: `${process.env.NEXTAUTH_URL}/success?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${process.env.NEXTAUTH_URL}/cart`,
       metadata: cartMetadata,
+      allow_promotion_codes: true,
     });
 
     res.send({ id: session.id });
