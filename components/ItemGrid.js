@@ -1,16 +1,16 @@
-import React, { useState } from "react";
-import ItemPane from "./ItemPane";
-import useFetch from "../services/useFetch";
-import Error from "./Error";
-import LoadingSpinner from "./LoadingSpinner";
-import ControlledSelect from "./ControlledSelect";
+import React, { useState } from 'react';
+import ItemPane from './ItemPane';
+import useFetch from '../services/useFetch';
+import Error from './Error';
+import LoadingSpinner from './LoadingSpinner';
+import ControlledSelect from './ControlledSelect';
 
 function ItemGrid({ startingCategory }) {
   const [needsRefresh, setNeedsRefresh] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState(
-    startingCategory || ""
+    startingCategory || ''
   );
-  const { data: items, error, loading } = useFetch("getitems", needsRefresh);
+  const { data: items, error, loading } = useFetch('getitems', needsRefresh);
   // If fetch from DB is still pending, return a loading spinner
   if (loading) {
     return <LoadingSpinner />;
@@ -26,14 +26,26 @@ function ItemGrid({ startingCategory }) {
     }
   }
   return (
-    <>
+    <div className='is-flex is-flex-direction-column'>
       <ControlledSelect
-        fieldName="Filter By Category"
+        fieldName='Filter By Category'
         setField={setSelectedCategory}
         options={categories}
-        defaultValue={startingCategory || "All"}
+        field={selectedCategory}
       />
-      <div className="is-flex is-flex-wrap-wrap is-justify-content-space-evenly">
+      <div className='is-flex is-flex-wrap-wrap is-justify-content-space-evenly'>
+        {selectedCategory === 'Coffee' && (
+          <iframe
+            width='560'
+            height='315'
+            src='https://www.youtube.com/embed/IFGh8k17370'
+            title='YouTube video player'
+            frameBorder='0'
+            allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
+            allowFullScreen
+            className='mb-3 mt-1'
+          />
+        )}
         {items.map((item) => {
           if (!selectedCategory || selectedCategory === item.category) {
             return (
@@ -49,7 +61,7 @@ function ItemGrid({ startingCategory }) {
           }
         })}
       </div>
-    </>
+    </div>
   );
 }
 
