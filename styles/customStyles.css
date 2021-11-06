@@ -74,6 +74,16 @@
   background-size: cover;
   background-position: center;
 }
+.item-4 {
+  background: url('https://cartagena-decor.s3.amazonaws.com/Maran+Cafe+Process.jpg');
+  background-size: cover;
+  background-position: center;
+}
+.item-5 {
+  background: url('https://cartagena-decor.s3.amazonaws.com/Maran+Plant.jpg');
+  background-size: cover;
+  background-position: center;
+}
 
 /* Selects the current active element that is preceded by .item-1 */
 *:target ~ .item-1 {
@@ -87,7 +97,9 @@
 
 /* Selects the current active #item-2/#item-3 element that is preceded by .item-2/.item-3 */
 #item-2:target ~ .item-2,
-#item-3:target ~ .item-3 {
+#item-3:target ~ .item-3,
+#item-4:target ~ .item-4,
+#item-5:target ~ .item-5 {
   z-index: 3;
   opacity: 1;
 }

@@ -15,8 +15,8 @@ function NavbarBrand({ isActive, toggleActive }) {
           <h1 className='is-size-4 is-hidden-mobile is-uppercase is-family-secondary ml-2 has-text-black'>
             cartagena decor
           </h1>
-          <h1 className='is-size-4 is-size-5-mobile is-uppercase is-family-secondary ml-2 has-text-black'>
-            +
+          <h1 className='is-size-6 is-size-6-mobile is-uppercase is-family-secondary ml-2 has-text-black'>
+            &
           </h1>
           <img
             alt='Maran Cafe logo'
