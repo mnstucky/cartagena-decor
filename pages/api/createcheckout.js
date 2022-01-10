@@ -20,7 +20,7 @@ export default async function handler(req, res) {
   if (req.method === "POST") {
     const cartContents = JSON.parse(req.body);
     let use7Shipping = false;
-    let useFreeShipping = false;
+    let useFreeShipping = true;
     const cartMetadata = {};
     for (const item of cartContents) {
       if (item.itemUrl === "ls" || item.name.includes("16 Oz")) {
