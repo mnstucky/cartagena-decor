@@ -1,5 +1,7 @@
 import React, { useState } from "react";
-import { Button, Typography, AppBar, Toolbar, IconButton } from "@mui/material";
+import {
+  Button, Typography, AppBar, Toolbar, IconButton,
+} from "@mui/material";
 import { Menu } from "@mui/icons-material";
 
 function Navbar() {
