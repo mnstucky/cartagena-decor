@@ -1,21 +1,27 @@
 import React, { useState } from "react";
-import NavbarBrand from "./NavbarBrand";
-import NavbarMenu from "./NavbarMenu";
+import { Button, Typography, AppBar, Toolbar, IconButton } from "@mui/material";
+import { Menu } from "@mui/icons-material";
 
 function Navbar() {
   const [isActive, setIsActive] = useState(false);
-  function toggleActive() {
-    setIsActive(!isActive);
-  }
   return (
-    <nav
-      className="navbar is-fixed-top"
-      role="navigation"
-      aria-label="main navigation"
-    >
-      <NavbarBrand isActive={isActive} toggleActive={toggleActive} />
-      <NavbarMenu isActive={isActive} toggleActive={toggleActive} />
-    </nav>
+    <AppBar position="static">
+      <Toolbar>
+        <IconButton
+          size="large"
+          edge="start"
+          color="inherit"
+          aria-label="menu"
+          sx={{ mr: 2 }}
+        >
+          <Menu />
+        </IconButton>
+        <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+          Cartagena Decor & Maran Caf&eacute;
+        </Typography>
+        <Button color="inherit">Login</Button>
+      </Toolbar>
+    </AppBar>
   );
 }
 

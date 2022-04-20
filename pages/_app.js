@@ -3,8 +3,7 @@ import React from "react";
 import { Provider } from "next-auth/client";
 import Navbar from "../components/Navbar";
 import CartContextProvider from "../components/CartContextProvider";
-import "../styles/mystyles.css";
-import "../styles/customStyles.css";
+import "swiper/swiper.scss";
 import ErrorBoundary from "../components/ErrorBoundary";
 
 function MyApp({ Component, pageProps }) {
