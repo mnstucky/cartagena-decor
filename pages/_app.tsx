@@ -1,6 +1,6 @@
 import Head from "next/head";
 import React from "react";
-import { CssBaseline } from "@mui/material";
+import { Container, CssBaseline } from "@mui/material";
 import { Provider } from "next-auth/client";
 import Navbar from "../components/Navbar";
 import CartContextProvider from "../components/CartContextProvider";
@@ -27,7 +27,9 @@ function MyApp({ Component, pageProps }) {
         <Provider session={pageProps.session}>
           <ErrorBoundary>
             <Navbar />
-            <Component {...pageProps} />
+            <Container>
+              <Component {...pageProps} />
+            </Container>
           </ErrorBoundary>
         </Provider>
       </CartContextProvider>
