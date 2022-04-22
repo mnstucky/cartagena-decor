@@ -4,7 +4,6 @@ import { CssBaseline } from "@mui/material";
 import { Provider } from "next-auth/client";
 import Navbar from "../components/Navbar";
 import CartContextProvider from "../components/CartContextProvider";
-import "swiper/swiper.scss";
 import ErrorBoundary from "../components/ErrorBoundary";
 
 function MyApp({ Component, pageProps }) {

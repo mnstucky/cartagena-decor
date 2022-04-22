@@ -28,7 +28,7 @@ export default function useFetch(url, needsRefresh) {
     // Function will run when component unmounts
     return () => {
       isMounted.current = false;
-    }
+    };
   }, [needsRefresh]);
 
   return { data, error, loading };
