@@ -1,24 +1,22 @@
-import { useEffect } from 'react';
+import { Paper } from '@mui/material';
+import React, { useEffect, useState } from 'react';
+import useGetSanityData from '../services/useGetSanityData';
 
 function Hero() {
+  const { data: carouselImages } = useGetSanityData(`*[_type == 'carousel']{"imageUrl": image.asset->url}`, {}, false);
+  const [carouselImageIndex, setCarouselImageIndex] = useState(0);
   useEffect(() => {
-    const rotatingImages = [
-      './#item-1',
-      './#item-2',
-      './#item-3',
-      './#item-4',
-      './#item-5',
-    ];
-    let rotatingImagesIndex = 1;
+    if (!carouselImages) return () => {};
     const timer = setInterval(() => {
-      rotatingImagesIndex = (rotatingImagesIndex + 1) % rotatingImages.length;
+      setCarouselImageIndex((previousIndex) => (previousIndex + 1) % carouselImages.length);
     }, 5000);
     return () => {
       clearInterval(timer);
     };
   }, []);
+  if (!carouselImages) return null;
   return (
-    null
+    <Paper elevation={2}><img style={{ width: '60%', height: 'auto' }} src={carouselImages[carouselImageIndex].imageUrl} alt="hero" /></Paper>
   );
 }
 
