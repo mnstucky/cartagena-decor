@@ -27,7 +27,7 @@ function MyApp({ Component, pageProps }) {
         <Provider session={pageProps.session}>
           <ErrorBoundary>
             <Navbar />
-            <Container>
+            <Container style={{ paddingTop: '45px' }}>
               <Component {...pageProps} />
             </Container>
           </ErrorBoundary>

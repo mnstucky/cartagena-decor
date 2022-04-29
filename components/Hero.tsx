@@ -16,7 +16,15 @@ function Hero() {
   }, []);
   if (!carouselImages) return null;
   return (
-    <Paper elevation={2}><img style={{ width: '60%', height: 'auto' }} src={carouselImages[carouselImageIndex].imageUrl} alt="hero" /></Paper>
+    <Paper elevation={2} style={{ height: '25vh' }}>
+      <img
+        style={{
+          width: '100%', height: '100%', objectFit: 'cover', overflow: 'hidden', borderRadius: '3px',
+        }}
+        src={carouselImages[carouselImageIndex].imageUrl}
+        alt="hero"
+      />
+    </Paper>
   );
 }
 
