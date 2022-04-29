@@ -7,6 +7,10 @@ import CartContextProvider from "../components/CartContextProvider";
 import ErrorBoundary from "../components/ErrorBoundary";
 
 function MyApp({ Component, pageProps }) {
+  const [mobileDrawerOpen, setMobileDrawerOpen] = useState(false);
+  const handleDrawerToggle = () => {
+    setMobileDrawerOpen((state) => !state);
+  };
   return (
     <>
       <Head>
