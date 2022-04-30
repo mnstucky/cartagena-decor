@@ -10,6 +10,7 @@ import {
 } from "@mui/material";
 import { Menu, ShoppingCart } from "@mui/icons-material";
 import NavbarMenu from "./NavbarMenu";
+import Link from "next/link";
 
 interface Props {
   mobileDrawerOpen: boolean;
@@ -40,9 +41,11 @@ function Navbar({ mobileDrawerOpen, handleDrawerToggle, drawerWidth }: Props) {
           >
             <Menu />
           </IconButton>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            Cartagena Decor & Maran Caf&eacute;
-          </Typography>
+          <Link href={"/"}>
+            <Typography variant="h6" sx={{ flexGrow: 1 }}>
+              Cartagena Decor & Maran Caf&eacute;
+            </Typography>
+          </Link>
           <IconButton color="inherit">
             <ShoppingCart />
           </IconButton>

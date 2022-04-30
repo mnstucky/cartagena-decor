@@ -2,10 +2,10 @@ import { Grid, Typography } from "@mui/material";
 import { PortableText } from "@portabletext/react";
 import React from "react";
 import Hero from "../components/Hero";
-import useGetSanityData from "../services/useGetSanityData";
+import useGetSanityCDNData from "../services/useGetSanityCDNData";
 
 export default function Home() {
-  const { data } = useGetSanityData(
+  const { data } = useGetSanityCDNData(
     "*[_type == 'page' && title == 'Home'][0]",
     {},
     false
