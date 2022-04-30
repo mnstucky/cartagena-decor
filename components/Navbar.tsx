@@ -8,21 +8,27 @@ import {
   Box,
   Drawer,
 } from "@mui/material";
-import { Menu } from "@mui/icons-material";
-
-const drawerWidth = 240;
+import { Menu, ShoppingCart } from "@mui/icons-material";
+import NavbarMenu from "./NavbarMenu";
 
 interface Props {
   mobileDrawerOpen: boolean;
-  handleDrawerToggle: React.Dispatch<React.SetStateAction<boolean>>;
+  handleDrawerToggle: () => void;
+  drawerWidth: number;
 }
 
-function Navbar({ mobileDrawerOpen, handleDrawerToggle }: Props) {
+function Navbar({ mobileDrawerOpen, handleDrawerToggle, drawerWidth }: Props) {
   const container =
-    window !== undefined ? () => window.document.body : undefined;
+    typeof window !== "undefined" ? () => window.document.body : undefined;
   return (
     <>
-      <AppBar position="static">
+      <AppBar
+        position="fixed"
+        sx={{
+          width: { sm: `calc(100% - ${drawerWidth}px)` },
+          ml: { sm: `${drawerWidth}px` },
+        }}
+      >
         <Toolbar>
           <IconButton
             size="large"
@@ -30,21 +36,23 @@ function Navbar({ mobileDrawerOpen, handleDrawerToggle }: Props) {
             color="inherit"
             aria-label="open-menu"
             sx={{ mr: 2, display: { sm: "none" } }}
+            onClick={handleDrawerToggle}
           >
             <Menu />
           </IconButton>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             Cartagena Decor & Maran Caf&eacute;
           </Typography>
-          <Button color="inherit">Login</Button>
+          <IconButton color="inherit">
+            <ShoppingCart />
+          </IconButton>
         </Toolbar>
-      </AppBar>{" "}
+      </AppBar>
       <Box
         component="nav"
         sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
         aria-label="mailbox folders"
       >
-        {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
         <Drawer
           container={container}
           variant="temporary"
@@ -60,7 +68,9 @@ function Navbar({ mobileDrawerOpen, handleDrawerToggle }: Props) {
               width: drawerWidth,
             },
           }}
-        />
+        >
+          <NavbarMenu />
+        </Drawer>
         <Drawer
           variant="permanent"
           sx={{
@@ -71,7 +81,9 @@ function Navbar({ mobileDrawerOpen, handleDrawerToggle }: Props) {
             },
           }}
           open
-        />
+        >
+          <NavbarMenu />
+        </Drawer>
       </Box>
     </>
   );

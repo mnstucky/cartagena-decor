@@ -1,6 +1,6 @@
 import Head from "next/head";
-import React from "react";
-import { Container, CssBaseline } from "@mui/material";
+import React, { useState } from "react";
+import { Box, Container, CssBaseline } from "@mui/material";
 import { Provider } from "next-auth/client";
 import Navbar from "../components/Navbar";
 import CartContextProvider from "../components/CartContextProvider";
@@ -11,6 +11,7 @@ function MyApp({ Component, pageProps }) {
   const handleDrawerToggle = () => {
     setMobileDrawerOpen((state) => !state);
   };
+  const drawerWidth = 240;
   return (
     <>
       <Head>
@@ -30,10 +31,23 @@ function MyApp({ Component, pageProps }) {
         <CssBaseline />
         <Provider session={pageProps.session}>
           <ErrorBoundary>
-            <Navbar />
-            <Container style={{ paddingTop: '45px' }}>
-              <Component {...pageProps} />
-            </Container>
+            <Navbar
+              mobileDrawerOpen={mobileDrawerOpen}
+              handleDrawerToggle={handleDrawerToggle}
+              drawerWidth={drawerWidth}
+            />
+            <Box
+              sx={{
+                mt: "80px",
+                flexGrow: 1,
+                width: { sm: `calc(100% - ${drawerWidth}px)` },
+                ml: { sm: `${drawerWidth}px` },
+              }}
+            >
+              <Container>
+                <Component {...pageProps} />
+              </Container>
+            </Box>
           </ErrorBoundary>
         </Provider>
       </CartContextProvider>

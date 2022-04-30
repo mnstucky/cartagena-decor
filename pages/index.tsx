@@ -5,19 +5,25 @@ import Hero from "../components/Hero";
 import useGetSanityData from "../services/useGetSanityData";
 
 export default function Home() {
-  const { data } = useGetSanityData("*[_type == 'page' && title == 'Home'][0]", {}, false);
+  const { data } = useGetSanityData(
+    "*[_type == 'page' && title == 'Home'][0]",
+    {},
+    false
+  );
   return (
     <Grid container direction="column" spacing={2}>
-      <Hero />
+      <Grid item>
+        <Hero />
+      </Grid>
       <Grid container item justifyContent="center">
         <Typography variant="h3">
           Welcome to Cartagena Decor and Maran Caf&eacute;!
         </Typography>
       </Grid>
       {data && data.content && (
-      <Grid item>
-        <PortableText value={data.content} />
-      </Grid>
+        <Grid item>
+          <PortableText value={data.content} />
+        </Grid>
       )}
     </Grid>
   );
