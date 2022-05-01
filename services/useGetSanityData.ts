@@ -1,14 +1,18 @@
-import { useRef, useState, useEffect } from 'react';
+import { useRef, useState, useEffect } from "react";
 
-const sanityClient = require('@sanity/client');
+const sanityClient = require("@sanity/client");
 
 const client = sanityClient({
-  projectId: 'jgtmwbuh',
-  dataset: 'production',
-  apiVersion: '2022-04-20',
+  projectId: "jgtmwbuh",
+  dataset: "production",
+  apiVersion: "2022-04-20",
 });
 
-export default function useGetSanityData(query, params, needsRefresh) {
+export default function useGetSanityData(
+  query: string,
+  params: any,
+  needsRefresh: boolean
+) {
   const isMounted = useRef(false);
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);

@@ -1,4 +1,5 @@
-import { Button, Grid, TextField } from "@mui/material";
+import { Button, Grid, TextField, Typography } from "@mui/material";
+import { LoadingButton } from "@mui/lab";
 import React, { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { ContactFormState } from "../types";
@@ -16,11 +17,11 @@ function ContactForm() {
     handleSubmit,
     formState: { errors },
   } = useForm<ContactFormState>({ defaultValues: initialFormState });
-  const [APIresponse, setAPIResponse] = useState("");
+  const [submitMessage, setSubmitMessage] = useState("");
+  const [loading, setLoading] = useState(false);
   function onSubmit(event) {
-    event.preventDefault();
+    setLoading(true);
     const form = getValues();
-
     fetch("/api/email", {
       method: "POST",
       body: JSON.stringify({
@@ -35,20 +36,17 @@ function ContactForm() {
     })
       .then(async (res) => {
         if (res.ok) {
-          setAPIResponse("success");
+          setSubmitMessage("Thank you for contacting us! We will be in touch.");
         } else {
-          setAPIResponse("error");
+          setSubmitMessage("Something went wrong. Please try again later.");
         }
       })
       .catch((error) => {
         throw error;
+      })
+      .finally(() => {
+        setLoading(false);
       });
-  }
-  let submitMessage = "";
-  if (APIresponse === "success") {
-    submitMessage = "Thank you for contacting us! We will be in touch.";
-  } else if (APIresponse === "error") {
-    submitMessage = "Something went wrong. Please try again later.";
   }
   return (
     <Grid
@@ -70,6 +68,7 @@ function ContactForm() {
               label="Full Name"
               error={!!errors.name}
               fullWidth
+              required
             />
           )}
         />
@@ -86,6 +85,7 @@ function ContactForm() {
               label="Email Address"
               error={!!errors.email}
               fullWidth
+              required
             />
           )}
         />
@@ -104,12 +104,23 @@ function ContactForm() {
               fullWidth
               multiline
               minRows={10}
+              required
             />
           )}
         />
       </Grid>
       <Grid item>
-        <Button variant="contained">Submit</Button>
+        <LoadingButton
+          disabled={submitMessage !== ""}
+          onClick={() => handleSubmit(onSubmit)()}
+          variant="contained"
+          loading={loading}
+        >
+          Submit
+        </LoadingButton>
+      </Grid>
+      <Grid item>
+        <Typography>{submitMessage}</Typography>
       </Grid>
     </Grid>
   );

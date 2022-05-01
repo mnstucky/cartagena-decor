@@ -9,7 +9,11 @@ const client = sanityClient({
   useCdn: true,
 });
 
-export default function useGetSanityCDNData(query, params, needsRefresh) {
+export default function useGetSanityCDNData(
+  query: string,
+  params: any,
+  needsRefresh: boolean
+) {
   const isMounted = useRef(false);
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
