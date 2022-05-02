@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import ItemPane from "./ItemPane";
 import useFetch from "../services/useFetch";
 import Error from "./Error";
 import LoadingSpinner from "./LoadingSpinner";
@@ -13,42 +12,13 @@ import {
   CardMedia,
   CircularProgress,
   Grid,
+  IconButton,
   Typography,
 } from "@mui/material";
 import useGetSanityCDNData from "../services/useGetSanityCDNData";
 import { PortableText } from "@portabletext/react";
-
-type SanityImage = {
-  _type: "image";
-  asset: {
-    _ref: string;
-    _type: string;
-  };
-};
-
-type Category = {
-  title: string;
-  _type: "category";
-};
-
-type ProductVariant = {
-  images: SanityImage[];
-  price: number;
-  quantity: number;
-  title: string;
-  _type: "productVariant";
-};
-
-type Product = {
-  categories: Category[];
-  defaultProductVariant: ProductVariant;
-  description: any[];
-  features: any[];
-  slug: { current: string; _type: "slug" };
-  title: string;
-  variants: null | ProductVariant[];
-  imageUrl: string;
-};
+import { AddShoppingCart } from "@mui/icons-material";
+import { Category, Product } from "../types";
 
 interface Props {
   startingCategory?: string;
@@ -64,7 +34,7 @@ function ItemGrid({ startingCategory }: Props) {
     loading: boolean;
     error: boolean;
   } = useGetSanityData(
-    `*[_type == 'product']{title, defaultProductVariant, description, features, variants[]->, categories[]->, "imageUrl": defaultProductVariant.images[0].asset->url}`,
+    `*[_type == 'product']{title, slug, defaultProductVariant, description, features, variants[]->, categories[]->, "imageUrl": defaultProductVariant.images[0].asset->url}`,
     {},
     false
   );
@@ -97,29 +67,44 @@ function ItemGrid({ startingCategory }: Props) {
   if (error || categoriesError) {
     return <Error message="Sorry, products failed to load." />;
   }
+  console.log(items);
   return (
-    <Grid container>
+    <Grid container spacing={1}>
       {items.map((item) => (
-        <Card style={{ maxWidth: "400px" }}>
-          <CardMedia
-            component="img"
-            height="170"
-            image={item.imageUrl}
-            alt="product"
-          />
-          <CardContent>
-            <Typography gutterBottom variant="h5" component="div">
-              {item.title}
-            </Typography>
-            <Typography variant="body2" color="text.secondary">
-              <PortableText value={item.description} />
-            </Typography>
-          </CardContent>
-          <CardActions>
-            <Button size="small">Details</Button>
-            <Button size="small">Add to Cart</Button>
-          </CardActions>
-        </Card>
+        <Grid item>
+          <Card style={{ maxWidth: "400px" }}>
+            <CardMedia
+              component="img"
+              height="170"
+              image={item.imageUrl}
+              alt="product"
+            />
+            <CardContent>
+              <Typography gutterBottom variant="h5" component="div">
+                {item.title}
+              </Typography>
+              <Typography
+                variant="body2"
+                color="text.secondary"
+                component="div"
+              >
+                <PortableText value={item.description} />
+              </Typography>
+            </CardContent>
+            <CardActions>
+              <Grid container spacing={1} justifyContent="flex-end">
+                <Grid item>
+                  <Button size="small">Details</Button>
+                </Grid>
+                <Grid item>
+                  <IconButton size="small">
+                    <AddShoppingCart color="primary" />
+                  </IconButton>
+                </Grid>
+              </Grid>
+            </CardActions>
+          </Card>
+        </Grid>
       ))}
     </Grid>
   );

@@ -1,25 +1,14 @@
 import React, { useState, useEffect, useContext } from "react";
+import { ProductVariant } from "../types";
 import { CartContext } from "./CartContextProvider";
 
-function AddToCartButton({
-  item,
-  selection,
-  itemUrl,
-  setCartButtonVisibility,
-  quantity,
-  isDisabled,
-  setIsDisabled,
-}) {
+interface Props {
+  item: ProductVariant;
+  quantity?: number;
+}
+
+function AddToCartButton({ item, quantity = 1 }: Props) {
   const { cart, setCart } = useContext(CartContext);
-  const [buttonContent, setButtonContent] = useState("Add to Cart");
-  useEffect(() => {
-    if (selection !== "default") {
-      setIsDisabled(false);
-      setButtonContent("Add to Cart");
-    } else if (item.multiples.hasMultiples) {
-      setIsDisabled(true);
-    }
-  }, [selection]);
   function addToCart() {
     let updatedItem = false;
     const newCart = cart.map((cartItem) => {
