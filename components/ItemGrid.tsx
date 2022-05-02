@@ -5,8 +5,18 @@ import Error from "./Error";
 import LoadingSpinner from "./LoadingSpinner";
 import ControlledSelect from "./ControlledSelect";
 import useGetSanityData from "../services/useGetSanityData";
-import { CircularProgress, Grid } from "@mui/material";
+import {
+  Button,
+  Card,
+  CardActions,
+  CardContent,
+  CardMedia,
+  CircularProgress,
+  Grid,
+  Typography,
+} from "@mui/material";
 import useGetSanityCDNData from "../services/useGetSanityCDNData";
+import { PortableText } from "@portabletext/react";
 
 type SanityImage = {
   _type: "image";
@@ -37,6 +47,7 @@ type Product = {
   slug: { current: string; _type: "slug" };
   title: string;
   variants: null | ProductVariant[];
+  imageUrl: string;
 };
 
 interface Props {
@@ -48,8 +59,12 @@ function ItemGrid({ startingCategory }: Props) {
     data: items,
     loading,
     error,
+  }: {
+    data: Product[] | null;
+    loading: boolean;
+    error: boolean;
   } = useGetSanityData(
-    "*[_type == 'product']{title, defaultProductVariant, description, features, variants[]->, categories[]->}",
+    `*[_type == 'product']{title, defaultProductVariant, description, features, variants[]->, categories[]->, "imageUrl": defaultProductVariant.images[0].asset->url}`,
     {},
     false
   );
@@ -58,7 +73,7 @@ function ItemGrid({ startingCategory }: Props) {
     loading: categoriesLoading,
     error: categoriesError,
   }: {
-    data: Category[];
+    data: Category[] | null;
     loading: boolean;
     error: boolean;
   } = useGetSanityCDNData("*[_type == 'category']", {}, false);
@@ -83,36 +98,30 @@ function ItemGrid({ startingCategory }: Props) {
     return <Error message="Sorry, products failed to load." />;
   }
   return (
-    <div className="is-flex is-flex-direction-column">
-      <div className="is-flex is-flex-wrap-wrap is-justify-content-space-evenly">
-        {selectedCategory === "Coffee" && (
-          <iframe
-            width="560"
-            height="315"
-            src="https://www.youtube.com/embed/IFGh8k17370"
-            title="YouTube video player"
-            frameBorder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-            className="mb-3 mt-1"
+    <Grid container>
+      {items.map((item) => (
+        <Card style={{ maxWidth: "400px" }}>
+          <CardMedia
+            component="img"
+            height="170"
+            image={item.imageUrl}
+            alt="product"
           />
-        )}
-        {items.map((item) => {
-          if (!selectedCategory || selectedCategory === item.category) {
-            return (
-              <ItemPane
-                image={""}
-                name={item.name}
-                price={item.price}
-                url={item.url}
-                key={item.url}
-                setNeedsRefresh={false}
-              />
-            );
-          }
-        })}
-      </div>
-    </div>
+          <CardContent>
+            <Typography gutterBottom variant="h5" component="div">
+              {item.title}
+            </Typography>
+            <Typography variant="body2" color="text.secondary">
+              <PortableText value={item.description} />
+            </Typography>
+          </CardContent>
+          <CardActions>
+            <Button size="small">Details</Button>
+            <Button size="small">Add to Cart</Button>
+          </CardActions>
+        </Card>
+      ))}
+    </Grid>
   );
 }
 

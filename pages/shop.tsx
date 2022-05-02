@@ -11,9 +11,11 @@ function Shop() {
   return (
     <Grid container direction="column" spacing={2}>
       <Grid item>
-        <Typography>Shop</Typography>
+        <Typography variant="h3">Shop</Typography>
       </Grid>
-      <ItemGrid />
+      <Grid item container>
+        <ItemGrid />
+      </Grid>
     </Grid>
   );
 }
