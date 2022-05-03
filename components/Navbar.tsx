@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import {
   Button,
   Typography,
@@ -7,10 +7,12 @@ import {
   IconButton,
   Box,
   Drawer,
+  Badge,
 } from "@mui/material";
 import { Menu, ShoppingCart } from "@mui/icons-material";
 import NavbarMenu from "./NavbarMenu";
 import Link from "next/link";
+import { CartContext } from "./CartContextProvider";
 
 interface Props {
   mobileDrawerOpen: boolean;
@@ -19,6 +21,7 @@ interface Props {
 }
 
 function Navbar({ mobileDrawerOpen, handleDrawerToggle, drawerWidth }: Props) {
+  const { cart } = useContext(CartContext);
   const container =
     typeof window !== "undefined" ? () => window.document.body : undefined;
   return (
@@ -46,9 +49,13 @@ function Navbar({ mobileDrawerOpen, handleDrawerToggle, drawerWidth }: Props) {
               Cartagena Decor & Maran Caf&eacute;
             </Typography>
           </Link>
-          <IconButton color="inherit">
-            <ShoppingCart />
-          </IconButton>
+          <Badge badgeContent={cart.length} color="secondary">
+            <IconButton color="inherit">
+              <Link href={"/cart"}>
+                <ShoppingCart />
+              </Link>
+            </IconButton>
+          </Badge>
         </Toolbar>
       </AppBar>
       <Box

@@ -35,3 +35,13 @@ export type Product = {
   variants: null | ProductVariant[];
   imageUrl: string;
 };
+
+export type CartItem = {
+  product: ProductVariant;
+  quantity: number;
+};
+
+export type CartContextType = {
+  cart: CartItem[];
+  setCart?: React.Dispatch<React.SetStateAction<CartItem[]>>;
+};

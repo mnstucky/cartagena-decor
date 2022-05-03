@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import useFetch from "../services/useFetch";
 import Error from "./Error";
 import LoadingSpinner from "./LoadingSpinner";
@@ -19,12 +19,14 @@ import useGetSanityCDNData from "../services/useGetSanityCDNData";
 import { PortableText } from "@portabletext/react";
 import { AddShoppingCart } from "@mui/icons-material";
 import { Category, Product } from "../types";
+import { CartContext } from "./CartContextProvider";
 
 interface Props {
   startingCategory?: string;
 }
 
 function ItemGrid({ startingCategory }: Props) {
+  const { setCart } = useContext(CartContext);
   const {
     data: items,
     loading,
@@ -50,6 +52,14 @@ function ItemGrid({ startingCategory }: Props) {
   const [selectedCategory, setSelectedCategory] = useState(
     startingCategory || ""
   );
+
+  const addToCart = (item: Product) => {
+    setCart((cart) => [
+      ...cart,
+      { product: item.defaultProductVariant, quantity: 1 },
+    ]);
+  };
+
   if (loading || categoriesLoading) {
     return (
       <Grid
@@ -67,7 +77,6 @@ function ItemGrid({ startingCategory }: Props) {
   if (error || categoriesError) {
     return <Error message="Sorry, products failed to load." />;
   }
-  console.log(items);
   return (
     <Grid container spacing={1}>
       {items.map((item) => (
@@ -97,7 +106,7 @@ function ItemGrid({ startingCategory }: Props) {
                   <Button size="small">Details</Button>
                 </Grid>
                 <Grid item>
-                  <IconButton size="small">
+                  <IconButton onClick={() => addToCart(item)} size="small">
                     <AddShoppingCart color="primary" />
                   </IconButton>
                 </Grid>
