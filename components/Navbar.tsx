@@ -21,7 +21,7 @@ interface Props {
 }
 
 function Navbar({ mobileDrawerOpen, handleDrawerToggle, drawerWidth }: Props) {
-  const { cart } = useContext(CartContext);
+  const { cartSize } = useContext(CartContext);
   const container =
     typeof window !== "undefined" ? () => window.document.body : undefined;
   return (
@@ -49,7 +49,7 @@ function Navbar({ mobileDrawerOpen, handleDrawerToggle, drawerWidth }: Props) {
               Cartagena Decor & Maran Caf&eacute;
             </Typography>
           </Link>
-          <Badge badgeContent={cart.length} color="secondary">
+          <Badge badgeContent={cartSize} color="secondary">
             <IconButton color="inherit">
               <Link href={"/cart"}>
                 <ShoppingCart />

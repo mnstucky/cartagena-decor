@@ -26,7 +26,7 @@ interface Props {
 }
 
 function ItemGrid({ startingCategory }: Props) {
-  const { setCart } = useContext(CartContext);
+  const { addToCart } = useContext(CartContext);
   const {
     data: items,
     loading,
@@ -52,13 +52,6 @@ function ItemGrid({ startingCategory }: Props) {
   const [selectedCategory, setSelectedCategory] = useState(
     startingCategory || ""
   );
-
-  const addToCart = (item: Product) => {
-    setCart((cart) => [
-      ...cart,
-      { product: item.defaultProductVariant, quantity: 1 },
-    ]);
-  };
 
   if (loading || categoriesLoading) {
     return (
@@ -106,7 +99,10 @@ function ItemGrid({ startingCategory }: Props) {
                   <Button size="small">Details</Button>
                 </Grid>
                 <Grid item>
-                  <IconButton onClick={() => addToCart(item)} size="small">
+                  <IconButton
+                    onClick={() => addToCart(item.defaultProductVariant, 1)}
+                    size="small"
+                  >
                     <AddShoppingCart color="primary" />
                   </IconButton>
                 </Grid>

@@ -22,6 +22,7 @@ export type ProductVariant = {
   price: number;
   quantity: number;
   title: string;
+  slug: { current: string; _type: "slug" };
   _type: "productVariant";
 };
 
@@ -44,4 +45,6 @@ export type CartItem = {
 export type CartContextType = {
   cart: CartItem[];
   setCart?: React.Dispatch<React.SetStateAction<CartItem[]>>;
+  addToCart?: (product: ProductVariant, quantity: number) => void;
+  cartSize: number;
 };
