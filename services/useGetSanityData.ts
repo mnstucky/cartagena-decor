@@ -1,4 +1,5 @@
 import { useRef, useState, useEffect } from "react";
+import imageUrlBuilder from "@sanity/image-url";
 
 const sanityClient = require("@sanity/client");
 
@@ -40,4 +41,10 @@ export default function useGetSanityData(
   }, [needsRefresh]);
 
   return { data, error, loading };
+}
+
+const imageBuilder = imageUrlBuilder(client);
+
+export function getSanityImage(source) {
+  return imageBuilder.image(source);
 }

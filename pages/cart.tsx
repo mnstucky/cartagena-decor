@@ -8,6 +8,17 @@ import RemoveButton from "../components/RemoveButton";
 import { CartContext } from "../components/CartContextProvider";
 import CartImage from "../components/CartImage";
 import Error from "../components/Error";
+import {
+  Avatar,
+  Grid,
+  List,
+  ListItem,
+  ListItemAvatar,
+  ListItemButton,
+  ListItemText,
+  Typography,
+} from "@mui/material";
+import { getSanityImage } from "../services/useGetSanityData";
 
 const stripePromise = loadStripe(
   "pk_live_51JC8iGJpFLurhJIASqy8xOrD2zs7FaKAg4bPLOzVhEdYvtNxeRduyZqd4NmBefV5Iln6kmqmj1Lu9qeEXR48F7ny00Ifzbulua"
@@ -33,7 +44,32 @@ function Cart() {
       );
     }
   }
-  return null;
+  return (
+    <Grid container direction="column" spacing={2}>
+      <Grid item>
+        <Typography variant="h3">Cart</Typography>
+      </Grid>
+      <Grid item>
+        <List>
+          {cart.map((cartItem) => (
+            <ListItem key={cartItem.product.slug.current}>
+              <ListItemButton>
+                <ListItemAvatar>
+                  <Avatar
+                    alt={cartItem.product.title}
+                    src={getSanityImage(cartItem.product.images[0])
+                      .width(100)
+                      .url()}
+                  />
+                </ListItemAvatar>
+                <ListItemText primary={cartItem.product.title} />
+              </ListItemButton>
+            </ListItem>
+          ))}
+        </List>
+      </Grid>
+    </Grid>
+  );
 }
 
 export default Cart;

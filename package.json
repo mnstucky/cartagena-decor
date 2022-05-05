@@ -21,6 +21,7 @@
     "@mui/material": "^5.6.2",
     "@portabletext/react": "^1.0.6",
     "@sanity/client": "^3.3.0",
+    "@sanity/image-url": "^1.0.1",
     "@stripe/stripe-js": "^1.14.0",
     "aws-sdk": "^2.897.0",
     "flickity": "^2.2.2",
