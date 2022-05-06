@@ -16,6 +16,7 @@ import {
   ListItemAvatar,
   ListItemButton,
   ListItemText,
+  TextField,
   Typography,
 } from "@mui/material";
 import { getSanityImage } from "../services/useGetSanityData";
@@ -52,14 +53,27 @@ function Cart() {
       <Grid item>
         <List>
           {cart.map((cartItem) => (
-            <ListItem key={cartItem.product.slug.current}>
+            <ListItem
+              key={cartItem.product.slug.current}
+              alignItems="flex-start"
+              secondaryAction={
+                <TextField
+                  label="Quantity"
+                  sx={{ width: "6rem" }}
+                  value={cartItem.quantity + ""}
+                  type="number"
+                />
+              }
+            >
               <ListItemButton>
                 <ListItemAvatar>
                   <Avatar
                     alt={cartItem.product.title}
                     src={getSanityImage(cartItem.product.images[0])
-                      .width(100)
+                      .width(200)
                       .url()}
+                    variant="rounded"
+                    sx={{ height: "70px", width: "70px", mr: "1rem" }}
                   />
                 </ListItemAvatar>
                 <ListItemText primary={cartItem.product.title} />

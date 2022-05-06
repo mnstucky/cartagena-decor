@@ -17,7 +17,7 @@ import {
 } from "@mui/material";
 import useGetSanityCDNData from "../services/useGetSanityCDNData";
 import { PortableText } from "@portabletext/react";
-import { AddShoppingCart } from "@mui/icons-material";
+import { AddShoppingCart, Done } from "@mui/icons-material";
 import { Category, Product } from "../types";
 import { CartContext } from "./CartContextProvider";
 
@@ -52,6 +52,7 @@ function ItemGrid({ startingCategory }: Props) {
   const [selectedCategory, setSelectedCategory] = useState(
     startingCategory || ""
   );
+  const [addedItemIndices, setAddedItemIndices] = useState<number[]>([]);
 
   if (loading || categoriesLoading) {
     return (
@@ -72,8 +73,8 @@ function ItemGrid({ startingCategory }: Props) {
   }
   return (
     <Grid container spacing={1}>
-      {items.map((item) => (
-        <Grid item>
+      {items.map((item, index) => (
+        <Grid item key={index}>
           <Card style={{ maxWidth: "400px" }}>
             <CardMedia
               component="img"
@@ -100,10 +101,20 @@ function ItemGrid({ startingCategory }: Props) {
                 </Grid>
                 <Grid item>
                   <IconButton
-                    onClick={() => addToCart(item.defaultProductVariant, 1)}
+                    onClick={() => {
+                      addToCart(item.defaultProductVariant, 1);
+                      setAddedItemIndices((priorIndices) => [
+                        ...priorIndices,
+                        index,
+                      ]);
+                    }}
                     size="small"
                   >
-                    <AddShoppingCart color="primary" />
+                    {addedItemIndices.includes(index) ? (
+                      <Done color="primary" />
+                    ) : (
+                      <AddShoppingCart color="primary" />
+                    )}
                   </IconButton>
                 </Grid>
               </Grid>
