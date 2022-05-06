@@ -2,12 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { ProductVariant } from "../types";
 import { CartContext } from "./CartContextProvider";
 
-interface Props {
-  item: ProductVariant;
-  quantity?: number;
-}
-
-function AddToCartButton({ item, quantity = 1 }: Props) {
+function AddToCartButton({ item, quantity = 1 }) {
   const { cart, setCart } = useContext(CartContext);
   function addToCart() {
     let updatedItem = false;
