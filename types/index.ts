@@ -46,5 +46,7 @@ export type CartContextType = {
   cart: CartItem[];
   setCart?: React.Dispatch<React.SetStateAction<CartItem[]>>;
   addToCart?: (product: ProductVariant, quantity: number) => void;
+  removeFromCart?: (product: ProductVariant, quantity: number) => void;
   cartSize: number;
+  subtotal: number;
 };

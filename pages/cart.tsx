@@ -11,6 +11,7 @@ import Error from "../components/Error";
 import {
   Avatar,
   Grid,
+  IconButton,
   List,
   ListItem,
   ListItemAvatar,
@@ -20,13 +21,15 @@ import {
   Typography,
 } from "@mui/material";
 import { getSanityImage } from "../services/useGetSanityData";
+import { Add, Remove } from "@mui/icons-material";
 
 const stripePromise = loadStripe(
   "pk_live_51JC8iGJpFLurhJIASqy8xOrD2zs7FaKAg4bPLOzVhEdYvtNxeRduyZqd4NmBefV5Iln6kmqmj1Lu9qeEXR48F7ny00Ifzbulua"
 );
 
 function Cart() {
-  const { cart } = useContext(CartContext);
+  const { cart, subtotal, addToCart, removeFromCart } = useContext(CartContext);
+  const handleQuantityChange = (item, quantity) => {};
   async function handleCheckout() {
     const stripe = await stripePromise;
     const response = await fetch("/api/createcheckout", {
@@ -56,31 +59,44 @@ function Cart() {
             <ListItem
               key={cartItem.product.slug.current}
               alignItems="flex-start"
-              secondaryAction={
-                <TextField
-                  label="Quantity"
-                  sx={{ width: "6rem" }}
-                  value={cartItem.quantity + ""}
-                  type="number"
-                />
-              }
             >
-              <ListItemButton>
-                <ListItemAvatar>
-                  <Avatar
-                    alt={cartItem.product.title}
-                    src={getSanityImage(cartItem.product.images[0])
-                      .width(200)
-                      .url()}
-                    variant="rounded"
-                    sx={{ height: "70px", width: "70px", mr: "1rem" }}
-                  />
-                </ListItemAvatar>
-                <ListItemText primary={cartItem.product.title} />
-              </ListItemButton>
+              <ListItemAvatar>
+                <Avatar
+                  alt={cartItem.product.title}
+                  src={getSanityImage(cartItem.product.images[0])
+                    .width(200)
+                    .url()}
+                  variant="rounded"
+                  sx={{ height: "70px", width: "70px", mr: "1rem" }}
+                />
+              </ListItemAvatar>
+              <ListItemText primary={cartItem.product.title} />
+              <Grid item container justifyContent="flex-end">
+                <Grid
+                  item
+                  container
+                  style={{ width: "5rem" }}
+                  direction="column"
+                >
+                  <Typography>Quantity: {cartItem.quantity}</Typography>
+                  <Grid container item justifyContent="center">
+                    <IconButton onClick={() => addToCart(cartItem.product, 1)}>
+                      <Add />
+                    </IconButton>
+                    <IconButton
+                      onClick={() => removeFromCart(cartItem.product, 1)}
+                    >
+                      <Remove />
+                    </IconButton>
+                  </Grid>
+                </Grid>
+              </Grid>
             </ListItem>
           ))}
         </List>
+      </Grid>
+      <Grid item container justifyContent="flex-end">
+        <Typography variant="body1">Subtotal: ${subtotal}</Typography>
       </Grid>
     </Grid>
   );

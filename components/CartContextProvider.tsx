@@ -4,6 +4,7 @@ import { CartContextType, CartItem, ProductVariant } from "../types";
 export const CartContext = createContext<CartContextType>({
   cart: [],
   cartSize: 0,
+  subtotal: 0,
 });
 
 const CartContextProvider = (props) => {
@@ -43,8 +44,14 @@ const CartContextProvider = (props) => {
     }
   };
   const cartSize = cart.reduce((acc, cur) => acc + cur.quantity, 0);
+  const subtotal = cart.reduce(
+    (acc, cur) => acc + cur.quantity * cur.product.price,
+    0
+  );
   return (
-    <CartContext.Provider value={{ cart, setCart, addToCart, cartSize }}>
+    <CartContext.Provider
+      value={{ cart, setCart, addToCart, removeFromCart, cartSize, subtotal }}
+    >
       {props.children}
     </CartContext.Provider>
   );
