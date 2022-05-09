@@ -1,9 +1,11 @@
 import Head from "next/head";
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Box, Container, CssBaseline } from "@mui/material";
 import { Provider } from "next-auth/client";
 import Navbar from "../components/Navbar";
-import CartContextProvider from "../components/CartContextProvider";
+import CartContextProvider, {
+  CartContext,
+} from "../components/CartContextProvider";
 import ErrorBoundary from "../components/ErrorBoundary";
 
 function MyApp({ Component, pageProps }) {

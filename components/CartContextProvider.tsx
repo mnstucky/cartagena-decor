@@ -1,4 +1,4 @@
-import React, { useState, createContext } from "react";
+import React, { useState, createContext, useEffect } from "react";
 import { CartContextType, CartItem, ProductVariant } from "../types";
 
 export const CartContext = createContext<CartContextType>({
@@ -9,6 +9,9 @@ export const CartContext = createContext<CartContextType>({
 
 const CartContextProvider = (props) => {
   const [cart, setCart] = useState<CartItem[]>([]);
+  useEffect(() => {
+    if (cart) localStorage.setItem("cart", JSON.stringify(cart));
+  }, [cart]);
   const addToCart = (product: ProductVariant, quantity: number) => {
     const existingItemIdx = cart.findIndex(
       (oldItem) => oldItem.product.slug.current === product.slug.current

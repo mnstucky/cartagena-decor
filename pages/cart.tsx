@@ -1,23 +1,16 @@
 import React, { useContext } from "react";
-import Link from "next/link";
 import { loadStripe } from "@stripe/stripe-js";
-import DecrementCartButton from "../components/DecrementCartButton";
-import IncrementCartButton from "../components/IncrementCartButton";
-import Subtotal from "../components/Subtotal";
-import RemoveButton from "../components/RemoveButton";
 import { CartContext } from "../components/CartContextProvider";
-import CartImage from "../components/CartImage";
 import Error from "../components/Error";
 import {
   Avatar,
+  Divider,
   Grid,
   IconButton,
   List,
   ListItem,
   ListItemAvatar,
-  ListItemButton,
   ListItemText,
-  TextField,
   Typography,
 } from "@mui/material";
 import { getSanityImage } from "../services/useGetSanityData";
@@ -29,7 +22,6 @@ const stripePromise = loadStripe(
 
 function Cart() {
   const { cart, subtotal, addToCart, removeFromCart } = useContext(CartContext);
-  const handleQuantityChange = (item, quantity) => {};
   async function handleCheckout() {
     const stripe = await stripePromise;
     const response = await fetch("/api/createcheckout", {
@@ -56,42 +48,47 @@ function Cart() {
       <Grid item>
         <List>
           {cart.map((cartItem) => (
-            <ListItem
-              key={cartItem.product.slug.current}
-              alignItems="flex-start"
-            >
-              <ListItemAvatar>
-                <Avatar
-                  alt={cartItem.product.title}
-                  src={getSanityImage(cartItem.product.images[0])
-                    .width(200)
-                    .url()}
-                  variant="rounded"
-                  sx={{ height: "70px", width: "70px", mr: "1rem" }}
-                />
-              </ListItemAvatar>
-              <ListItemText primary={cartItem.product.title} />
-              <Grid item container justifyContent="flex-end">
-                <Grid
-                  item
-                  container
-                  style={{ width: "5rem" }}
-                  direction="column"
-                >
-                  <Typography>Quantity: {cartItem.quantity}</Typography>
-                  <Grid container item justifyContent="center">
-                    <IconButton onClick={() => addToCart(cartItem.product, 1)}>
-                      <Add />
-                    </IconButton>
-                    <IconButton
-                      onClick={() => removeFromCart(cartItem.product, 1)}
-                    >
-                      <Remove />
-                    </IconButton>
+            <>
+              <ListItem
+                key={cartItem.product.slug.current}
+                alignItems="flex-start"
+              >
+                <ListItemAvatar>
+                  <Avatar
+                    alt={cartItem.product.title}
+                    src={getSanityImage(cartItem.product.images[0])
+                      .width(200)
+                      .url()}
+                    variant="rounded"
+                    sx={{ height: "70px", width: "70px", mr: "1rem" }}
+                  />
+                </ListItemAvatar>
+                <ListItemText primary={cartItem.product.title} />
+                <Grid item container justifyContent="flex-end">
+                  <Grid
+                    item
+                    container
+                    style={{ width: "5rem" }}
+                    direction="column"
+                  >
+                    <Typography>Quantity: {cartItem.quantity}</Typography>
+                    <Grid container item justifyContent="center">
+                      <IconButton
+                        onClick={() => addToCart(cartItem.product, 1)}
+                      >
+                        <Add />
+                      </IconButton>
+                      <IconButton
+                        onClick={() => removeFromCart(cartItem.product, 1)}
+                      >
+                        <Remove />
+                      </IconButton>
+                    </Grid>
                   </Grid>
                 </Grid>
-              </Grid>
-            </ListItem>
+              </ListItem>
+              <Divider />
+            </>
           ))}
         </List>
       </Grid>

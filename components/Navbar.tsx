@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import {
   Button,
   Typography,
@@ -21,9 +21,18 @@ interface Props {
 }
 
 function Navbar({ mobileDrawerOpen, handleDrawerToggle, drawerWidth }: Props) {
-  const { cartSize } = useContext(CartContext);
+  const { cartSize, setCart } = useContext(CartContext);
   const container =
     typeof window !== "undefined" ? () => window.document.body : undefined;
+  // Reload cart from local storage on page refresh
+  useEffect(() => {
+    try {
+      const storedCart = JSON.parse(window.localStorage.getItem("cart"));
+      setCart(storedCart || []);
+    } catch (error) {
+      setCart([]);
+    }
+  }, []);
   return (
     <>
       <AppBar
