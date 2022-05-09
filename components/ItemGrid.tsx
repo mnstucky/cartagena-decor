@@ -22,10 +22,10 @@ import { Category, Product } from "../types";
 import { CartContext } from "./CartContextProvider";
 
 interface Props {
-  startingCategory?: string;
+  selectedCategory?: string;
 }
 
-function ItemGrid({ startingCategory }: Props) {
+function ItemGrid({ selectedCategory }: Props) {
   const { addToCart } = useContext(CartContext);
   const {
     data: items,
@@ -40,21 +40,17 @@ function ItemGrid({ startingCategory }: Props) {
     {},
     false
   );
-  const {
-    data: categories,
-    loading: categoriesLoading,
-    error: categoriesError,
-  }: {
-    data: Category[] | null;
-    loading: boolean;
-    error: boolean;
-  } = useGetSanityCDNData("*[_type == 'category']", {}, false);
-  const [selectedCategory, setSelectedCategory] = useState(
-    startingCategory || ""
-  );
   const [addedItemIndices, setAddedItemIndices] = useState<number[]>([]);
+  const filteredItems =
+    selectedCategory === "None"
+      ? items
+      : items?.filter((item) =>
+          item.categories.some(
+            (category) => category.title === selectedCategory
+          )
+        );
 
-  if (loading || categoriesLoading) {
+  if (loading) {
     return (
       <Grid
         container
@@ -68,12 +64,12 @@ function ItemGrid({ startingCategory }: Props) {
       </Grid>
     );
   }
-  if (error || categoriesError) {
+  if (error) {
     return <Error message="Sorry, products failed to load." />;
   }
   return (
     <Grid container spacing={1}>
-      {items.map((item, index) => (
+      {filteredItems.map((item, index) => (
         <Grid item key={index}>
           <Card style={{ maxWidth: "400px" }}>
             <CardMedia
