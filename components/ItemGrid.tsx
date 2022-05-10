@@ -71,30 +71,32 @@ function ItemGrid({ selectedCategory }: Props) {
     <Grid container spacing={1}>
       {filteredItems.map((item, index) => (
         <Grid item key={index}>
-          <Card style={{ maxWidth: "400px" }}>
+          <Card style={{ width: "300px", height: "100%" }}>
             <CardMedia
               component="img"
               height="170"
               image={item.imageUrl}
               alt="product"
             />
-            <CardContent>
-              <Typography gutterBottom variant="h5" component="div">
-                {item.title}
-              </Typography>
-              <Typography
-                variant="body2"
-                color="text.secondary"
-                component="div"
+            <Grid
+              item
+              container
+              direction="column"
+              sx={{ p: ".5rem", height: "auto" }}
+            >
+              <Grid item>
+                <Typography variant="h6" component="div">
+                  {item.title}
+                </Typography>
+              </Grid>
+              <Grid
+                item
+                xs
+                container
+                spacing={1}
+                alignItems="flex-end"
+                justifyContent="flex-end"
               >
-                <PortableText value={item.description} />
-              </Typography>
-            </CardContent>
-            <CardActions>
-              <Grid container spacing={1} justifyContent="flex-end">
-                <Grid item>
-                  <Button size="small">Details</Button>
-                </Grid>
                 <Grid item>
                   <IconButton
                     onClick={() => {
@@ -114,7 +116,7 @@ function ItemGrid({ selectedCategory }: Props) {
                   </IconButton>
                 </Grid>
               </Grid>
-            </CardActions>
+            </Grid>
           </Card>
         </Grid>
       ))}
